@@ -13,6 +13,10 @@ jobs:
   prepare:
     name: Prepare workflow
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
     outputs:
       continue: ${{ steps.continue.outputs.continue }}
       is-pr: ${{ steps.is-pr.outputs.is-pr }}
