@@ -2,5 +2,30 @@
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
 	"extends": [
 		"local>eliashaeussler/renovate-config"
-	]
+	],
+    "customManagers": [
+        {
+            "customType": "regex",
+            "managerFilePatterns": [
+                "/README.md$"
+            ],
+            "matchStrings": [
+                "uses: (?<depName>.*)/.github/[^@]+@(?<currentValue>.*)\\s"
+            ],
+            "datasourceTemplate": "github-digest",
+            "depTypeTemplate": "action",
+            "versioningTemplate": "github-actions"
+        }
+    ],
+    "packageRules": [
+        {
+            "matchManagers": [
+                "custom.regex"
+            ],
+            "matchDepNames": [
+                "eliashaeussler/gha"
+            ],
+            "pinDigests": true
+        }
+    ]
 }

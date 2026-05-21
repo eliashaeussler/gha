@@ -17,7 +17,7 @@ I won't provide support and don't accept pull requests for this repo.
 ```yaml
 steps:
   - name: 'Perform Composer checks'
-    uses: eliashaeussler/gha/.github/actions/composer-checks
+    uses: eliashaeussler/gha/.github/actions/composer-checks@main
 ```
 
 ### [Composer install](.github/actions/composer-install/action.yaml)
@@ -25,7 +25,7 @@ steps:
 ```yaml
 steps:
   - name: 'Install Composer packages'
-    uses: eliashaeussler/gha/.github/actions/composer-install
+    uses: eliashaeussler/gha/.github/actions/composer-install@main
     with:
       dependencies: 'locked'
       composer-options: '--no-dev'
@@ -36,7 +36,7 @@ steps:
 ```yaml
 steps:
   - name: 'Run Composer tests'
-    uses: eliashaeussler/gha/.github/actions/composer-install
+    uses: eliashaeussler/gha/.github/actions/composer-install@main
     with:
       command: 'test:unit'
 ```
@@ -46,7 +46,7 @@ steps:
 ```yaml
 steps:
   - name: 'Perform npm checks'
-    uses: eliashaeussler/gha/.github/actions/npm-checks
+    uses: eliashaeussler/gha/.github/actions/npm-checks@main
 ```
 
 ### [npm install](.github/actions/npm-install/action.yaml)
@@ -54,7 +54,7 @@ steps:
 ```yaml
 steps:
   - name: 'Install npm packages'
-    uses: eliashaeussler/gha/.github/actions/npm-install
+    uses: eliashaeussler/gha/.github/actions/npm-install@main
 ```
 
 ### [Setup node environment](.github/actions/setup-node/action.yaml)
@@ -62,7 +62,7 @@ steps:
 ```yaml
 steps:
   - name: 'Setup node'
-    uses: eliashaeussler/gha/.github/actions/setup-node
+    uses: eliashaeussler/gha/.github/actions/setup-node@main
     with:
       node-version: '24'
       cache: 'npm'
@@ -73,7 +73,7 @@ steps:
 ```yaml
 steps:
   - name: 'Setup PHP'
-    uses: eliashaeussler/gha/.github/actions/setup-php
+    uses: eliashaeussler/gha/.github/actions/setup-php@main
     with:
       php-version: '8.5'
       ini-file: 'production'
@@ -88,7 +88,7 @@ steps:
 ```yaml
 jobs:
   checks:
-    uses: eliashaeussler/gha/.github/workflows/checks.yaml
+    uses: eliashaeussler/gha/.github/workflows/checks.yaml@main
     with:
       # Composer
       composer: true
@@ -108,7 +108,7 @@ jobs:
 ```yaml
 jobs:
   tests:
-    uses: eliashaeussler/gha/.github/workflows/composer-tests.yaml
+    uses: eliashaeussler/gha/.github/workflows/composer-tests.yaml@main
     with:
       php-version: '8.5'
       dependencies: 'highest'
@@ -120,7 +120,7 @@ jobs:
 ```yaml
 jobs:
   test-coverage:
-    uses: eliashaeussler/gha/.github/workflows/composer-test-coverage.yaml
+    uses: eliashaeussler/gha/.github/workflows/composer-test-coverage.yaml@main
     with:
       command: 'test:unit:coverage'
       coverage-driver: 'xdebug'
@@ -132,7 +132,7 @@ jobs:
 ```yaml
 jobs:
   prepare:
-    uses: eliashaeussler/gha/.github/workflows/preparation.yaml
+    uses: eliashaeussler/gha/.github/workflows/preparation.yaml@main
 
   other:
     needs: [prepare]
