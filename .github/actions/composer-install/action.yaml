@@ -1,7 +1,7 @@
 name: 'Install Composer packages'
 
 inputs:
-  versions:
+  dependencies:
     description: 'Dependency versions to install (defaults to "locked")'
     required: false
     default: locked
@@ -18,6 +18,6 @@ runs:
     - name: 'Install Composer packages'
       uses: ramsey/composer-install@5c2bcf28d7b060ef3c601d7b476d5430a7b46c27 #v4
       with:
-        dependency-versions: ${{ inputs.versions }}
+        dependency-versions: ${{ inputs.dependencies }}
         composer-options: ${{ inputs.composer-options }}
         working-directory: ${{ inputs.working-directory }}
