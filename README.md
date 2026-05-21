@@ -27,6 +27,19 @@ steps:
       ghcr-token: ${{ secrets.GHCR_TOKEN }}
 ```
 
+### [Build PHAR with humbug/box](.github/actions/build-phar/action.yaml)
+
+```yaml
+steps:
+  - name: 'Build PHAR'
+    uses: eliashaeussler/gha/.github/actions/build-phar
+    with:
+      target-file: my-fancy-project.phar
+      build-dockerfile: true
+      gpg-key: ${{ secrets.GPG_KEY }}
+      gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
+```
+
 ### [Composer checks](.github/actions/composer-checks/action.yaml)
 
 ```yaml

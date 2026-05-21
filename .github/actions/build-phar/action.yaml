@@ -1,0 +1,65 @@
+name: 'Build PHAR with humbug/box'
+
+inputs:
+  target-file:
+    description: 'Path to target PHAR file'
+    required: true
+  php-version:
+    description: 'PHP version to use (defaults to "latest")'
+    default: latest
+  build-dockerfile:
+    description: 'Pass "true" to build an optional Dockerfile'
+  gpg-key:
+    description: 'Optional GPG key used to sign PHAR file'
+  gpg-passphrase:
+    description: 'Optional GPG phrase used to sign PHAR file'
+
+outputs:
+  artifact-name:
+    description: 'Name of the uploaded artifact'
+    value: phar
+
+runs:
+  using: composite
+  steps:
+    - name: 'Setup PHP'
+      uses: eliashaeussler/gha/.github/actions/setup-php@main
+      with:
+        php-version: ${{ inputs.php-version }}
+        tools: phive
+
+    - name: 'Install box'
+      run: phive install --trust-gpg-keys 2DF45277AEF09A2F humbug/box
+      shell: bash
+
+    - name: 'Install Composer dependencies'
+      uses: eliashaeussler/gha/.github/actions/composer-install@main
+      with:
+        composer-options: '--no-dev'
+        ignore-cache: true
+
+    - name: 'Compile PHAR'
+      run: ./tools/box compile ${{ inputs.build-dockerfile && '--with-docker' }}
+      shell: bash
+
+    - name: 'Import GPG key'
+      if: ${{ inputs.gpg-key }}
+      uses: crazy-max/ghaction-import-gpg@2dc316deee8e90f13e1a351ab510b4d5bc0c82cd # v7
+      with:
+        gpg_private_key: ${{ inputs.gpg-key }}
+        passphrase: ${{ inputs.gpg-passphrase }}
+
+    - name: 'Sign PHAR file'
+      if: ${{ inputs.gpg-key }}
+      run: gpg --armor --output ${{ inputs.target-file }}.asc --yes --detach-sig ${{ inputs.target-file }}
+      shell: bash
+
+    - name: 'Upload artifact'
+      id: artifact
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+      with:
+        name: phar
+        path: |
+          ${{ inputs.target-file }}
+          ${{ inputs.gpg-key && format('{0}.asc', inputs.target-file) }}
+          ${{ inputs.build-dockerfile && 'Dockerfile' }}
