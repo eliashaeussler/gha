@@ -43,8 +43,8 @@ jobs:
         env:
           COVERAGE_FILE: ${{ inputs.coverage-file }}
         run: |
-          dir="$(dirname '${COVERAGE_FILE}')"
-          file="$(basename '${COVERAGE_FILE}')"
+          dir=$(dirname "$COVERAGE_FILE")
+          file=$(basename "$COVERAGE_FILE")
           
           echo "path=$dir" >> $GITHUB_OUTPUT
           echo "file=$file" >> $GITHUB_OUTPUT
@@ -52,7 +52,7 @@ jobs:
       - name: 'Create coverage directory'
         env:
           COVERAGE_PATH: ${{ steps.coverage.outputs.path }}
-        run: mkdir -p "${COVERAGE_PATH}"
+        run: mkdir -p "$COVERAGE_PATH"
         shell: bash
 
       - name: 'Run tests'
