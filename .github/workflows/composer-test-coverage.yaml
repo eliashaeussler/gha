@@ -40,15 +40,19 @@ jobs:
 
       - name: 'Resolve coverage path'
         id: coverage
+        env:
+          COVERAGE_FILE: ${{ inputs.coverage-file }}
         run: |
-          dir="$(dirname '${{ inputs.coverage-file }}')"
-          file="$(basename '${{ inputs.coverage-file }}')"
+          dir="$(dirname '${COVERAGE_FILE}')"
+          file="$(basename '${COVERAGE_FILE}')"
           
           echo "path=$dir" >> $GITHUB_OUTPUT
           echo "file=$file" >> $GITHUB_OUTPUT
 
       - name: 'Create coverage directory'
-        run: mkdir -p "${{ steps.coverage.outputs.path }}"
+        env:
+          COVERAGE_PATH: ${{ steps.coverage.outputs.path }}
+        run: mkdir -p "${COVERAGE_PATH}"
         shell: bash
 
       - name: 'Run tests'

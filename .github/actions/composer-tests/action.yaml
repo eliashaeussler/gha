@@ -9,5 +9,7 @@ runs:
   using: composite
   steps:
     - name: 'Run tests'
-      run: composer ${{ inputs.command }}
+      env:
+        TEST_COMMAND: ${{ inputs.command }}
+      run: composer ${TEST_COMMAND}
       shell: bash
