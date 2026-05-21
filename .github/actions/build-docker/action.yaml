@@ -17,6 +17,9 @@ inputs:
     description: 'Optional username for DockerHub (if omitted, no push will be performed)'
   dockerhub-token:
     description: 'Optional access token for DockerHub (if omitted, no push will be performed)'
+  ghcr-username:
+    description: 'Optional username for GHCR (if omitted, no push will be performed)'
+    default: ${{ github.actor }}
   ghcr-token:
     description: 'Optional access token for GHCR (if omitted, no push will be performed)'
 
@@ -55,7 +58,7 @@ runs:
       uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4
       with:
         registry: ghcr.io
-        username: ${{ github.actor }}
+        username: ${{ inputs.ghcr-username }}
         password: ${{ inputs.ghcr-token }}
 
     - name: 'Build and push'
