@@ -1,0 +1,8 @@
+name: 'Perform Composer checks'
+
+runs:
+  using: composite
+  steps:
+    - name: 'Perform Composer checks'
+      run: composer ci
+      shell: bash

@@ -1,0 +1,8 @@
+name: 'Perform npm checks'
+
+runs:
+  using: composite
+  steps:
+    - name: 'Perform npm checks'
+      run: npm run ci
+      shell: bash
