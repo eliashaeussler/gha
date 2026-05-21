@@ -41,6 +41,17 @@ steps:
       command: 'test:unit'
 ```
 
+### [Check if workflow is from tag](.github/actions/is-tag/action.yaml)
+
+```yaml
+steps:
+  - name: 'Check tag'
+    id: is-tag
+    uses: eliashaeussler/gha/.github/actions/is-tag
+
+  - if: ${{ steps.is-tag.outputs.is-version == 'true' }}
+```
+
 ### [npm checks](.github/actions/npm-checks/action.yaml)
 
 ```yaml
