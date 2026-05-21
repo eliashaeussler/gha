@@ -1,0 +1,8 @@
+name: 'Audit npm packages'
+
+runs:
+  using: composite
+  steps:
+    - name: 'Audit npm packages'
+      run: npm audit
+      shell: bash

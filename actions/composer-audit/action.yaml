@@ -1,0 +1,8 @@
+name: 'Audit Composer packages'
+
+runs:
+  using: composite
+  steps:
+    - name: 'Audit Composer packages'
+      run: composer audit
+      shell: bash
