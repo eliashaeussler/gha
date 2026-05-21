@@ -1,90 +1,14 @@
 name: 'Run tests with Composer'
 
 inputs:
-  php-version:
-    description: 'PHP version to use (defaults to "latest")'
-    required: true
-    default: latest
-  dependencies:
-    description: 'Package manager cache to use (defaults to "npm")'
-    required: true
-    default: npm
   command:
     description: 'Composer command to execute'
     required: true
     default: 'test'
-  coverage:
-    description: 'Coverage driver to install (defaults to "none")'
-    required: false
-    default: 'none'
-  coverage-file:
-    description: 'Path to coverage report file'
-    required: false
-    default: '.build/coverage/clover.xml'
 
 runs:
   using: composite
   steps:
-    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-      with:
-        persist-credentials: false
-
-    - name: 'Setup PHP'
-      uses: ./.github/actions/setup-php
-      with:
-        php-version: ${{ inputs.php-version }}
-        coverage: ${{ inputs.coverage }}
-
-    - name: 'Install Composer packages'
-      uses: ./.github/actions/composer-install
-      with:
-        dependencies: ${{ inputs.dependencies }}
-
-    - name: 'Resolve coverage path'
-      id: coverage
-      if: ${{ inputs.coverage != 'none' }}
-      run: |
-        dir="$(dirname '${{ inputs.coverage-file }}')"
-        file="$(basename '${{ inputs.coverage-file }}')"
-        
-        echo "path=$dir" >> $GITHUB_OUTPUT
-        echo "file=$fike" >> $GITHUB_OUTPUT
-      shell: bash
-
-    - name: 'Create coverage directory'
-      if: ${{ inputs.coverage != 'none' }}
-      run: mkdir -p "${{ steps.coverage.outputs.path }}"
-      shell: bash
-
     - name: 'Run tests'
-      run: |
-        if [[ "${{ inputs.command }}" == "test" ]]; then
-          if [[ "${{ inputs.coverage }}" == "none" ]]; then
-            command="test"
-          else
-            command="test:unit"
-          fi
-        else
-          command="${{ inputs.command }}"
-        fi
-        
-        composer "$command"
+      run: composer ${{ inputs.command }}
       shell: bash
-
-    - name: 'Fix coverage path'
-      if: ${{ inputs.coverage != 'none' }}
-      working-directory: ${{ steps.coverage.outputs.path }}
-      run: |
-        repo="${{ github.repository }}"
-        repoName="${repo##*/}"
-        
-        sed -i "s#/home/runner/work/${repoName}/${repoName}#${{ github.workspace }}#g" "${{ steps.coverage.outputs.file }}"
-      shell: bash
-
-    - name: 'Upload coverage artifact'
-      if: ${{ inputs.coverage != 'none' }}
-      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
-      with:
-        name: coverage
-        path: ${{ inputs.coverage-file }}
-        retention-days: 7
