@@ -23,6 +23,6 @@ runs:
       with:
         php-version: ${{ inputs.php-version }}
         ini-file: ${{ inputs.ini-file }}
-        tools: composer:v2, ${{ inputs.tools }}
+        tools: ${{ inputs.tools }}
         coverage: ${{ inputs.coverage }}
         extensions: ${{ inputs.extensions }}
