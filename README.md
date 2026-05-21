@@ -6,7 +6,7 @@
 
 </div>
 
-This package contains some GitHub workflows ans actions for use in my
+This package contains some GitHub workflows and actions for use in my
 personal projects. It is not meant to be used anywhere else.
 I won't provide support and don't accept pull requests for this repo.
 
