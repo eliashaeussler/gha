@@ -108,6 +108,6 @@ jobs:
           results=$(jq -r '.runs.[0].results | length' "$ZIZMOR_OUTPUT_FILE")
           
           if [ "$results" -gt 0 ]; then
-            echo "::error title=zizmor analysis::The zizmor analysis has collected ${results} finding(s) in this repository."
+            echo "::error title=zizmor analysis::The zizmor analysis found ${results} issue(s) in this repository."
             exit 1
           fi
