@@ -1,0 +1,30 @@
+name: CI
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  prepare:
+    name: 'Prepare workflow'
+    uses: eliashaeussler/gha/.github/workflows/preparation.yaml@main
+
+  checks:
+    name: 'Checks'
+
+    needs: [prepare]
+    if: ${{ needs.prepare.outputs.continue == 'true' }}
+
+    permissions:
+      security-events: write
+
+    uses: eliashaeussler/gha/.github/workflows/checks.yaml@main
+    with:
+      composer: false
+      npm: false
