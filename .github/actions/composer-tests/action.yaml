@@ -3,8 +3,7 @@ name: 'Run tests with Composer'
 inputs:
   command:
     description: 'Composer command to execute'
-    required: true
-    default: 'test'
+    default: test
 
 runs:
   using: composite

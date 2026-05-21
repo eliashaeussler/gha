@@ -3,11 +3,9 @@ name: 'Setup Node environment'
 inputs:
   node-version:
     description: 'Node version to use (defaults to "lts/*")'
-    required: true
     default: 'lts/*'
   cache:
     description: 'Package manager cache to use (defaults to "npm")'
-    required: true
     default: npm
 
 runs:

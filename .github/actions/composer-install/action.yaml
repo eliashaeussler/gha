@@ -3,14 +3,11 @@ name: 'Install Composer packages'
 inputs:
   dependencies:
     description: 'Dependency versions to install (defaults to "locked")'
-    required: false
     default: locked
   composer-options:
     description: 'Additional command options'
-    required: false
   working-directory:
     description: 'Overwrite working directory'
-    required: false
 
 runs:
   using: composite

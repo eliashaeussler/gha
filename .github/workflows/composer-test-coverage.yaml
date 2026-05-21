@@ -4,17 +4,14 @@ on:
     inputs:
       command:
         description: 'Composer command to execute'
-        required: true
         default: 'test:coverage'
         type: string
       coverage-driver:
         description: 'Coverage driver to install (defaults to "pcov")'
-        required: true
         default: pcov
         type: string
       coverage-file:
         description: 'Path to coverage report file'
-        required: true
         default: '.build/coverage/clover.xml'
         type: string
 

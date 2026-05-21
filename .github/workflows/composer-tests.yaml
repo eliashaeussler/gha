@@ -4,27 +4,22 @@ on:
     inputs:
       php-version:
         description: 'PHP version to use (defaults to "latest")'
-        required: true
         default: latest
         type: string
       dependencies:
         description: 'Dependency versions to install (defaults to "locked")'
-        required: true
         default: locked
         type: string
       command:
         description: 'Composer command to execute'
-        required: true
         default: test
         type: string
       coverage-driver:
         description: 'Coverage driver to install (defaults to "none")'
-        required: false
         default: none
         type: string
       os:
         description: 'Operating system on which to run the workflow (defaults to "Ubuntu")'
-        required: false
         default: Ubuntu
         type: string
 

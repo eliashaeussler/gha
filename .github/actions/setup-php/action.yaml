@@ -3,22 +3,17 @@ name: 'Setup PHP environment'
 inputs:
   php-version:
     description: 'PHP version to use (defaults to "latest")'
-    required: true
     default: latest
   ini-file:
     description: 'php.ini file to use (defaults to "development")'
-    required: true
     default: development
   coverage:
     description: 'Coverage driver to install (defaults to "none")'
-    required: true
     default: none
   tools:
     description: 'Additional tools to install (comma-separated list)'
-    required: false
   extensions:
     description: 'Additional PHP extension to install (comma-separated list)'
-    required: false
 
 runs:
   using: composite
