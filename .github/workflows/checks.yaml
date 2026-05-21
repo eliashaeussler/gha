@@ -1,9 +1,9 @@
-name: 'CGL'
+name: 'Checks'
 on:
   workflow_call:
     inputs:
       # Composer
-      enable-composer-checks:
+      composer:
         description: 'Perform Composer checks (defaults to "true")'
         default: true
         type: boolean
@@ -13,7 +13,7 @@ on:
         type: string
 
       # npm
-      enable-npm-checks:
+      npm:
         description: 'Perform npm checks (defaults to "false")'
         default: false
         type: boolean
@@ -31,7 +31,7 @@ jobs:
     name: 'Perform Composer checks'
     runs-on: ubuntu-latest
 
-    if: ${{ inputs.enable-composer-checks }}
+    if: ${{ inputs.composer }}
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
@@ -53,7 +53,7 @@ jobs:
     name: 'Perform npm checks'
     runs-on: ubuntu-latest
 
-    if: ${{ inputs.enable-npm-checks }}
+    if: ${{ inputs.npm }}
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
