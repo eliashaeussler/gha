@@ -12,6 +12,21 @@ I won't provide support and don't accept pull requests for this repo.
 
 ## 📯 Actions
 
+### [Build Docker images](.github/actions/build-docker/action.yaml)
+
+```yaml
+steps:
+  - name: 'Build Docker'
+    uses: eliashaeussler/gha/.github/actions/build-docker
+    with:
+      images: |
+        eliashaeussler/my-fancy-project
+        ghcr.io/eliashaeussler/my-fancy-project
+      dockerhub-username: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerhub-token: ${{ secrets.DOCKERHUB_TOKEN }}
+      ghcr-token: ${{ secrets.GHCR_TOKEN }}
+```
+
 ### [Composer checks](.github/actions/composer-checks/action.yaml)
 
 ```yaml
