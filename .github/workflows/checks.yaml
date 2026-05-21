@@ -26,6 +26,16 @@ on:
         default: npm
         type: string
 
+      # Repository
+      repository:
+        description: 'Perform repository checks (defaults to "true")'
+        default: true
+        type: boolean
+      fail-on-zizmor-findings:
+        description: 'Fail if zizmor has found results (defaults to "true")'
+        default: true
+        type: boolean
+
 jobs:
   composer-checks:
     name: 'Perform Composer checks'
@@ -76,6 +86,8 @@ jobs:
     name: 'Perform repository checks'
     runs-on: ubuntu-latest
 
+    if: ${{ inputs.repository }}
+
     permissions:
       security-events: write
 
@@ -85,4 +97,17 @@ jobs:
           persist-credentials: false
 
       - name: 'Run zizmor'
+        id: zizmor
         uses: zizmorcore/zizmor-action@5f14fd08f7cf1cb1609c1e344975f152c7ee938d # v0.5.6
+
+      - name: 'Evaluate zizmor results'
+        if: ${{ inputs.fail-on-zizmor-findings }}
+        env:
+          ZIZMOR_OUTPUT_FILE: ${{ steps.zizmor.outputs.output-file }}
+        run: |
+          results=$(jq -r '.runs.[0].results | length' "$ZIZMOR_OUTPUT_FILE")
+          
+          if [ "$results" -gt 0 ]; then
+            echo "::error title=zizmor analysis::The zizmor analysis has collected ${results} finding(s) in this repository."
+            exit 1
+          fi
