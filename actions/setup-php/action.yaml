@@ -16,6 +16,9 @@ inputs:
   tools:
     description: 'Additional tools to install (comma-separated list)'
     required: false
+  extensions:
+    description: 'Additional PHP extension to install (comma-separated list)'
+    required: false
 
 runs:
   using: 'composite'
@@ -27,3 +30,4 @@ runs:
         ini-file: ${{ inputs.ini-file }}
         tools: composer:v2, ${{ inputs.tools }}
         coverage: ${{ inputs.coverage }}
+        extensions: ${{ inputs.extensions }}
