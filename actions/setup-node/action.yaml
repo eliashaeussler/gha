@@ -1,0 +1,20 @@
+name: 'Setup Node environment'
+
+inputs:
+  node-version:
+    description: 'Node version to use (defaults to "lts/*")'
+    required: true
+    default: 'lts/*'
+  cache:
+    description: 'Package manager cache to use (defaults to "npm")'
+    required: true
+    default: 'npm'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node
+      uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: ${{ inputs.cache }}
