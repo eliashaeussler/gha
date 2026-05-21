@@ -24,8 +24,8 @@ on:
         type: string
 
 jobs:
-  collect:
-    name: 'Collect test coverage'
+  test:
+    name: 'Run tests'
     runs-on: ${{ inputs.os }}-latest
 
     outputs:
@@ -39,16 +39,16 @@ jobs:
           persist-credentials: false
 
       - name: 'Setup PHP'
-        uses: ./.github/actions/setup-php
+        uses: eliashaeussler/gha/.github/actions/setup-php@main
         with:
           php-version: ${{ inputs.php-version }}
 
       - name: 'Install Composer packages'
-        uses: ./.github/actions/composer-install
+        uses: eliashaeussler/gha/.github/actions/composer-install@main
         with:
           dependencies: ${{ inputs.dependencies }}
 
       - name: 'Run tests'
-        uses: ./.github/actions/composer-tests
+        uses: eliashaeussler/gha/.github/actions/composer-tests@main
         with:
           command: ${{ inputs.command }}
