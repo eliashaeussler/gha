@@ -5,21 +5,17 @@ on:
       continue:
         description: 'Describes whether to continue current workflow execution ("true" on non-PR events and forks, "false" otherwise).'
         value: ${{ jobs.prepare.outputs.continue }}
-      is-pr:
-        description: 'Describes whether current workflow execution originates from a pull request event.'
-        value: ${{ jobs.prepare.outputs.is-pr }}
 
 jobs:
   prepare:
-    name: Prepare workflow
+    name: 'Prepare workflow'
     runs-on: ubuntu-latest
 
     outputs:
       continue: ${{ steps.continue.outputs.continue }}
-      is-pr: ${{ steps.is-pr.outputs.is-pr }}
 
     steps:
-      - name: Check whether to continue current workflow execution
+      - name: 'Check whether to continue current workflow execution'
         id: continue
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         with:
@@ -30,10 +26,3 @@ jobs:
             } else {
               core.setOutput('continue', true);
             }
-
-      - name: Check whether current workflow is from a pull request
-        id: is-pr
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
-        with:
-          script: |
-            core.setOutput('is-pr', context.eventName === 'pull_request');
