@@ -8,6 +8,8 @@ inputs:
     description: 'Additional command options'
   working-directory:
     description: 'Overwrite working directory'
+  ignore-cache:
+    description: 'Define whether to ignore caches'
 
 runs:
   using: composite
@@ -18,3 +20,4 @@ runs:
         dependency-versions: ${{ inputs.dependencies }}
         composer-options: ${{ inputs.composer-options }}
         working-directory: ${{ inputs.working-directory }}
+        ignore-cache: ${{ inputs.ignore-cache }}
