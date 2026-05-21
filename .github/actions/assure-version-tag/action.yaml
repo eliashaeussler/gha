@@ -1,0 +1,18 @@
+name: 'Assure current tag is a version tag'
+
+runs:
+  using: composite
+  steps:
+    - name: 'Check tag'
+      id: check-tag
+      uses: eliashaeussler/gha/.github/actions/is-tag@main
+
+    - name: 'Exit if tag is not a version tag'
+      if: ${{ steps.check-tag.outputs.is-tag == 'true' }}
+      env:
+        IS_VERSION: ${{ steps.check-tag.outputs.is-version }}
+      run: |
+        if [[ "$IS_VERSION" != "true" ]]; then
+          exit 1
+        fi
+      shell: bash

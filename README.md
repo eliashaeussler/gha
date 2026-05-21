@@ -12,6 +12,14 @@ I won't provide support and don't accept pull requests for this repo.
 
 ## 📯 Actions
 
+### [Assure current tag is a version tag](.github/actions/assure-version-tag/action.yaml)
+
+```yaml
+steps:
+  - name: 'Check tag'
+    uses: eliashaeussler/gha/.github/actions/assure-version-tag
+```
+
 ### [Build Docker images](.github/actions/build-docker/action.yaml)
 
 ```yaml
