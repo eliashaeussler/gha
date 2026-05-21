@@ -31,7 +31,7 @@ jobs:
     name: 'Perform Composer checks'
     runs-on: ubuntu-latest
 
-    if: ${{ inputs.enable-composer-checks == 'true' }}
+    if: ${{ inputs.enable-composer-checks }}
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
@@ -53,7 +53,7 @@ jobs:
     name: 'Perform npm checks'
     runs-on: ubuntu-latest
 
-    if: ${{ inputs.enable-npm-checks == 'true' }}
+    if: ${{ inputs.enable-npm-checks }}
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
