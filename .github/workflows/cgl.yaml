@@ -1,0 +1,95 @@
+name: 'CGL'
+on:
+  workflow_call:
+    inputs:
+      # Composer
+      enable-composer-checks:
+        description: 'Perform Composer checks (defaults to "true")'
+        default: true
+        type: boolean
+      php-version:
+        description: 'PHP version to use (defaults to "latest")'
+        default: latest
+        type: string
+
+      # npm
+      enable-npm-checks:
+        description: 'Perform npm checks (defaults to "false")'
+        default: false
+        type: boolean
+      node-version:
+        description: 'Node version to use (defaults to "lts/*")'
+        default: 'lts/*'
+        type: string
+      node-cache:
+        description: 'Package manager cache to use (defaults to "npm")'
+        default: npm
+        type: string
+
+jobs:
+  composer-checks:
+    name: 'Perform Composer checks'
+    runs-on: ubuntu-latest
+
+    if: ${{ inputs.enable-composer-checks == 'true' }}
+
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          persist-credentials: false
+
+      - name: 'Setup PHP'
+        uses: eliashaeussler/gha/.github/actions/setup-php@main
+        with:
+          php-version: ${{ inputs.php-version }}
+
+      - name: 'Install Composer packages'
+        uses: eliashaeussler/gha/.github/actions/composer-install@main
+
+      - name: 'Perform Composer checks'
+        uses: eliashaeussler/gha/.github/actions/composer-checks@main
+
+  npm-checks:
+    name: 'Perform npm checks'
+    runs-on: ubuntu-latest
+
+    if: ${{ inputs.enable-npm-checks == 'true' }}
+
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          persist-credentials: false
+
+      - name: 'Setup Node'
+        uses: eliashaeussler/gha/.github/actions/setup-node@main
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: ${{ inputs.node-cache }}
+
+      - name: 'Install npm packages'
+        uses: eliashaeussler/gha/.github/actions/npm-install@main
+
+      - name: 'Perform npm checks'
+        uses: eliashaeussler/gha/.github/actions/npm-checks@main
+
+  repo-checks:
+    name: 'Perform repository checks'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      security-events: write
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          persist-credentials: false
+
+      - name: 'Run zizmor'
+        uses: zizmorcore/zizmor-action@5f14fd08f7cf1cb1609c1e344975f152c7ee938d # v0.5.6
