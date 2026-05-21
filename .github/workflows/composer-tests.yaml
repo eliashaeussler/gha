@@ -28,9 +28,6 @@ jobs:
     name: 'Run tests'
     runs-on: ${{ inputs.os }}-latest
 
-    permissions:
-      contents: read
-
     outputs:
       coverage-path: ${{ steps.coverage.outputs.path }}
       coverage-file: ${{ steps.coverage.outputs.file }}
