@@ -13,7 +13,7 @@ permissions:
 jobs:
   prepare:
     name: 'Prepare workflow'
-    uses: eliashaeussler/gha/.github/workflows/preparation.yaml@main
+    uses: eliashaeussler/gha/.github/workflows/preparation.yaml@e64c74f290c39acc7cdc2fa125478d617b2acc1e # main
 
   checks:
     name: 'Checks'
@@ -24,7 +24,7 @@ jobs:
     permissions:
       security-events: write
 
-    uses: eliashaeussler/gha/.github/workflows/checks.yaml@main
+    uses: eliashaeussler/gha/.github/workflows/checks.yaml@e64c74f290c39acc7cdc2fa125478d617b2acc1e # main
     with:
       composer: false
       npm: false
