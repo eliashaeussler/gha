@@ -1,0 +1,44 @@
+name: 'Create GitHub release'
+
+inputs:
+  version:
+    description: 'The version to release'
+    default: ${{ github.ref_name }}
+  files:
+    description: 'Optional files to include as release assets'
+  artifact-name:
+    description: 'Optional name of an artifact whose files should be included as release assets'
+
+runs:
+  using: composite
+  steps:
+    - name: 'Check tag'
+      uses: eliashaeussler/gha/.github/actions/assure-version-tag@1f423fb498f1fdf7c3043f8340667f4e02f4004f # main
+      with:
+        tag-name: ${{ inputs.version }}
+
+    - name: 'Download artifact'
+      if: ${{ inputs.artifact-name }}
+      uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+      with:
+        name: ${{ inputs.artifact-name }}
+        path: artifact-download
+
+    - name: 'Create release'
+      env:
+        VERSION: ${{ inputs.version }}
+      run: |
+        files=""
+        
+        for file in $ADDITIONAL_FILES; do
+          files="${files} ${file}"
+        done
+        
+        if [ -d artifact-download ]; then
+          while IFS= read -r -d '' file; do
+            files="${files} ${file}"
+          done < <(find artifact-download -type f -print0)
+        fi
+        
+        gh release create "$VERSION" --generate-notes $files
+      shell: bash
