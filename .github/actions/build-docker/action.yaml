@@ -3,7 +3,7 @@ name: 'Build Docker images'
 inputs:
   images:
     description: 'Docker image names to build and push'
-    required: true
+    default: ${{ github.repository }}
   tag-name:
     description: 'Additional image tag name'
     default: ${{ github.ref_name }}
@@ -19,7 +19,7 @@ inputs:
     description: 'Optional access token for DockerHub (if omitted, no push will be performed)'
   ghcr-username:
     description: 'Optional username for GHCR (if omitted, no push will be performed)'
-    default: ${{ github.actor }}
+    default: ${{ github.repository_owner }}
   ghcr-token:
     description: 'Optional access token for GHCR (if omitted, no push will be performed)'
 
@@ -55,6 +55,7 @@ runs:
         password: ${{ inputs.dockerhub-token }}
 
     - name: 'Login to GHCR'
+      if: ${{ inputs.ghcr-username && inputs.ghcr-token }}
       uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4
       with:
         registry: ghcr.io
