@@ -1,0 +1,21 @@
+name: 'Build documentation'
+
+inputs:
+  command:
+    description: 'npm script to render pages'
+    default: docs
+
+runs:
+  using: composite
+  steps:
+    - name: 'Setup Node'
+      uses: eliashaeussler/gha/.github/actions/setup-node@main
+
+    - name: 'Install npm packages'
+      uses: eliashaeussler/gha/.github/actions/npm-install@main
+
+    - name: 'Render documentation'
+      env:
+        BUILD_COMMAND: ${{ inputs.build-command }}
+      run: npm run $BUILD_COMMAND
+      shell: bash
