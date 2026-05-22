@@ -1,4 +1,5 @@
 name: 'Composer tests'
+
 on:
   workflow_call:
     inputs:
