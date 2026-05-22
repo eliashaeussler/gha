@@ -12,7 +12,7 @@ inputs:
   gpg-key:
     description: 'Optional GPG key used to sign PHAR file'
   gpg-passphrase:
-    description: 'Optional GPG phrase used to sign PHAR file'
+    description: 'Optional GPG passphrase used to sign PHAR file'
 
 outputs:
   artifact-name:
@@ -55,7 +55,6 @@ runs:
       shell: bash
 
     - name: 'Upload artifact'
-      id: artifact
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
       with:
         name: phar
