@@ -1,5 +1,10 @@
 name: 'Check if workflow is from tag'
 
+inputs:
+  tag-name:
+    description: 'The tag name to check (defaults to the current ref_name)'
+    default: ${{ github.ref_name }}
+
 outputs:
   is-tag:
     description: 'Describes whether current workflow execution originates from a tag push event.'
@@ -15,7 +20,7 @@ runs:
       id: is-tag
       env:
         REF_TYPE: ${{ github.ref_type }}
-        REF_NAME: ${{ github.ref_name }}
+        REF_NAME: ${{ inputs.tag-name }}
       run: |
         if [[ "$REF_TYPE" != "tag" ]]; then
           echo "is-tag=false" >> $GITHUB_OUTPUT
