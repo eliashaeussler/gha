@@ -16,6 +16,6 @@ runs:
 
     - name: 'Render documentation'
       env:
-        BUILD_COMMAND: ${{ inputs.build-command }}
-      run: npm run $BUILD_COMMAND
+        BUILD_COMMAND: ${{ inputs.command }}
+      run: npm run "$BUILD_COMMAND"
       shell: bash
