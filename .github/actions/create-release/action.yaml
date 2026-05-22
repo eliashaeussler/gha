@@ -13,7 +13,7 @@ runs:
   using: composite
   steps:
     - name: 'Check tag'
-      uses: eliashaeussler/gha/.github/actions/assure-version-tag@39c628b44971acacc4dc85b97c2ab691cac204f5 # main
+      uses: eliashaeussler/gha/.github/actions/assure-version-tag@7d9e57a9d8d695347983845d128e83dff10bcde7 # main
       with:
         tag-name: ${{ inputs.version }}
 

@@ -49,15 +49,15 @@ jobs:
           persist-credentials: false
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@39c628b44971acacc4dc85b97c2ab691cac204f5 # main
+        uses: eliashaeussler/gha/.github/actions/setup-php@7d9e57a9d8d695347983845d128e83dff10bcde7 # main
         with:
           php-version: ${{ inputs.php-version }}
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@39c628b44971acacc4dc85b97c2ab691cac204f5 # main
+        uses: eliashaeussler/gha/.github/actions/composer-install@7d9e57a9d8d695347983845d128e83dff10bcde7 # main
 
       - name: 'Perform Composer checks'
-        uses: eliashaeussler/gha/.github/actions/composer-checks@39c628b44971acacc4dc85b97c2ab691cac204f5 # main
+        uses: eliashaeussler/gha/.github/actions/composer-checks@7d9e57a9d8d695347983845d128e83dff10bcde7 # main
 
   npm-checks:
     name: 'Perform npm checks'
@@ -71,16 +71,16 @@ jobs:
           persist-credentials: false
 
       - name: 'Setup Node'
-        uses: eliashaeussler/gha/.github/actions/setup-node@39c628b44971acacc4dc85b97c2ab691cac204f5 # main
+        uses: eliashaeussler/gha/.github/actions/setup-node@7d9e57a9d8d695347983845d128e83dff10bcde7 # main
         with:
           node-version: ${{ inputs.node-version }}
           cache: ${{ inputs.node-cache }}
 
       - name: 'Install npm packages'
-        uses: eliashaeussler/gha/.github/actions/npm-install@39c628b44971acacc4dc85b97c2ab691cac204f5 # main
+        uses: eliashaeussler/gha/.github/actions/npm-install@7d9e57a9d8d695347983845d128e83dff10bcde7 # main
 
       - name: 'Perform npm checks'
-        uses: eliashaeussler/gha/.github/actions/npm-checks@39c628b44971acacc4dc85b97c2ab691cac204f5 # main
+        uses: eliashaeussler/gha/.github/actions/npm-checks@7d9e57a9d8d695347983845d128e83dff10bcde7 # main
 
   repo-checks:
     name: 'Perform repository checks'
