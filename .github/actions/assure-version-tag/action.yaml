@@ -1,11 +1,18 @@
 name: 'Assure current tag is a version tag'
 
+inputs:
+  tag-name:
+    description: 'The tag name to check (defaults to the current ref_name)'
+    default: ${{ github.ref_name }}
+
 runs:
   using: composite
   steps:
     - name: 'Check tag'
       id: check-tag
       uses: eliashaeussler/gha/.github/actions/is-tag@main
+      with:
+        tag-name: ${{ inputs.tag-name }}
 
     - name: 'Exit if tag is not a version tag'
       if: ${{ steps.check-tag.outputs.is-tag == 'true' }}
