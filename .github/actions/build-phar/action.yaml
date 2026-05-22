@@ -51,7 +51,9 @@ runs:
 
     - name: 'Sign PHAR file'
       if: ${{ inputs.gpg-key }}
-      run: gpg --armor --output ${{ inputs.target-file }}.asc --yes --detach-sig ${{ inputs.target-file }}
+      env:
+        TARGET_FILE: ${{ inputs.target-file }}
+      run: gpg --armor --output "${TARGET_FILE}.asc" --yes --detach-sig "$TARGET_FILE"
       shell: bash
 
     - name: 'Upload artifact'
