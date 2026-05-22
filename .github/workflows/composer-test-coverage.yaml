@@ -31,12 +31,12 @@ jobs:
           persist-credentials: false
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@7d9e57a9d8d695347983845d128e83dff10bcde7 # main
+        uses: eliashaeussler/gha/.github/actions/setup-php@5f74a39c3bac2c38ddc8b0e9bedd5169d037a9de # main
         with:
           coverage: ${{ inputs.coverage-driver }}
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@7d9e57a9d8d695347983845d128e83dff10bcde7 # main
+        uses: eliashaeussler/gha/.github/actions/composer-install@5f74a39c3bac2c38ddc8b0e9bedd5169d037a9de # main
 
       - name: 'Resolve coverage path'
         id: coverage
@@ -56,7 +56,7 @@ jobs:
         shell: bash
 
       - name: 'Run tests'
-        uses: eliashaeussler/gha/.github/actions/composer-tests@7d9e57a9d8d695347983845d128e83dff10bcde7 # main
+        uses: eliashaeussler/gha/.github/actions/composer-tests@5f74a39c3bac2c38ddc8b0e9bedd5169d037a9de # main
         with:
           command: ${{ inputs.command }}
 
