@@ -1,0 +1,31 @@
+name: 'Deploy to GitHub pages'
+
+inputs:
+  build-command:
+    description: 'Optional npm build command to prebuild pages'
+  base-path:
+    description: 'Path to files which should be deployed'
+    default: docs
+
+outputs:
+  pages-url:
+    description: 'URL of the deployed page'
+    value: ${{ steps.deployment.outputs.page_url }}
+
+runs:
+  using: composite
+  steps:
+    - name: 'Build pages'
+      if: ${{ inputs.build-command }}
+      uses: eliashaeussler/gha/.github/actions/build-docs
+      with:
+        command: ${{ inputs.build-command }}
+
+    - name: 'Upload artifact'
+      uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5
+      with:
+        path: ${{ inputs.base-path }}
+
+    - name: 'Deploy to GitHub Pages'
+      id: deployment
+      uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5
