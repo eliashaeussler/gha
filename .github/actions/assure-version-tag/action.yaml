@@ -10,7 +10,7 @@ runs:
   steps:
     - name: 'Check tag'
       id: check-tag
-      uses: eliashaeussler/gha/.github/actions/is-tag@main
+      uses: eliashaeussler/gha/.github/actions/is-tag@4d61da867e244a11cc0d57fe25dca3fa2ec349df # main
       with:
         tag-name: ${{ inputs.tag-name }}
 
