@@ -5,7 +5,7 @@ runs:
   steps:
     - name: 'Check tag'
       id: check-tag
-      uses: eliashaeussler/gha/.github/actions/is-tag@main
+      uses: eliashaeussler/gha/.github/actions/is-tag@1f423fb498f1fdf7c3043f8340667f4e02f4004f # main
 
     - name: 'Exit if tag is not a version tag'
       if: ${{ steps.check-tag.outputs.is-tag == 'true' }}
