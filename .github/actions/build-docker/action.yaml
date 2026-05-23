@@ -71,7 +71,8 @@ runs:
             images="${REPO_NAME}"
           fi
           if [[ "$GHCR_ENABLED" == "true" ]]; then
-            images="${images} ghcr.io/${REPO_NAME}"
+            image="ghcr.io/${REPO_NAME}"
+            images="${images}\n${image}"
           fi
         fi
 
