@@ -4,6 +4,8 @@ inputs:
   php-version:
     description: 'PHP version to use (defaults to "latest")'
     default: latest
+  composer-version:
+    description: 'Composer version to use'
   ini-file:
     description: 'php.ini file to use (defaults to "development")'
     default: development
@@ -18,11 +20,26 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: 'Compile toolset'
+      id: tools
+      env:
+        COMPOSER_VERSION: ${{ inputs.composer-version }}
+        INPUT_TOOLS: ${{ inputs.tools }}
+      run: |
+        tools="$INPUT_TOOLS"
+
+        if [ -n "$COMPOSER_VERSION" ]; then
+          tools="${tools},composer:${COMPOSER_VERSION}"
+        fi
+
+        echo "tools=${tools}" >> $GITHUB_OUTPUT
+      shell: bash
+
     - name: 'Setup PHP'
       uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # v2
       with:
         php-version: ${{ inputs.php-version }}
         ini-file: ${{ inputs.ini-file }}
-        tools: ${{ inputs.tools }}
+        tools: ${{ steps.tools.outputs.tools }}
         coverage: ${{ inputs.coverage }}
         extensions: ${{ inputs.extensions }}
