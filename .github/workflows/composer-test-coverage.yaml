@@ -32,12 +32,12 @@ jobs:
           persist-credentials: false
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@main
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.1.0
         with:
           coverage: ${{ inputs.coverage-driver }}
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@main
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.1.0
 
       - name: 'Resolve coverage path'
         id: coverage
@@ -46,7 +46,7 @@ jobs:
         run: |
           dir=$(dirname "$COVERAGE_FILE")
           file=$(basename "$COVERAGE_FILE")
-          
+
           echo "path=$dir" >> $GITHUB_OUTPUT
           echo "file=$file" >> $GITHUB_OUTPUT
 
@@ -57,7 +57,7 @@ jobs:
         shell: bash
 
       - name: 'Run tests'
-        uses: eliashaeussler/gha/.github/actions/composer-tests@main
+        uses: eliashaeussler/gha/.github/actions/composer-tests@0.1.0
         with:
           command: ${{ inputs.command }}
 

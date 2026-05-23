@@ -13,7 +13,7 @@ runs:
   using: composite
   steps:
     - name: 'Check tag'
-      uses: eliashaeussler/gha/.github/actions/assure-version-tag@main
+      uses: eliashaeussler/gha/.github/actions/assure-version-tag@0.1.0
       with:
         tag-name: ${{ inputs.version }}
 
@@ -29,16 +29,16 @@ runs:
         VERSION: ${{ inputs.version }}
       run: |
         files=""
-        
+
         for file in $ADDITIONAL_FILES; do
           files="${files} ${file}"
         done
-        
+
         if [ -d artifact-download ]; then
           while IFS= read -r -d '' file; do
             files="${files} ${file}"
           done < <(find artifact-download -type f -print0)
         fi
-        
+
         gh release create "$VERSION" --generate-notes $files
       shell: bash

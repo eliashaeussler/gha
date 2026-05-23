@@ -50,15 +50,15 @@ jobs:
           persist-credentials: false
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@main
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.1.0
         with:
           php-version: ${{ inputs.php-version }}
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@main
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.1.0
 
       - name: 'Perform Composer checks'
-        uses: eliashaeussler/gha/.github/actions/composer-checks@main
+        uses: eliashaeussler/gha/.github/actions/composer-checks@0.1.0
 
   npm-checks:
     name: 'Perform npm checks'
@@ -72,16 +72,16 @@ jobs:
           persist-credentials: false
 
       - name: 'Setup Node'
-        uses: eliashaeussler/gha/.github/actions/setup-node@main
+        uses: eliashaeussler/gha/.github/actions/setup-node@0.1.0
         with:
           node-version: ${{ inputs.node-version }}
           cache: ${{ inputs.node-cache }}
 
       - name: 'Install npm packages'
-        uses: eliashaeussler/gha/.github/actions/npm-install@main
+        uses: eliashaeussler/gha/.github/actions/npm-install@0.1.0
 
       - name: 'Perform npm checks'
-        uses: eliashaeussler/gha/.github/actions/npm-checks@main
+        uses: eliashaeussler/gha/.github/actions/npm-checks@0.1.0
 
   repo-checks:
     name: 'Perform repository checks'
@@ -107,7 +107,7 @@ jobs:
           ZIZMOR_OUTPUT_FILE: ${{ steps.zizmor.outputs.output-file }}
         run: |
           results=$(jq -r '.runs.[0].results | length' "$ZIZMOR_OUTPUT_FILE")
-          
+
           if [ "$results" -gt 0 ]; then
             echo "::error title=zizmor analysis::The zizmor analysis found ${results} issue(s) in this repository."
             exit 1
