@@ -12,7 +12,7 @@ I won't provide support and don't accept pull requests for this repo.
 
 ## 📯 Actions
 
-### [Assure current tag is a version tag](.github/actions/assure-version-tag/action.yaml)
+### [Assure version tag](.github/actions/assure-version-tag/action.yaml)
 
 ```yaml
 steps:
@@ -35,7 +35,17 @@ steps:
       ghcr-token: ${{ secrets.GHCR_TOKEN }}
 ```
 
-### [Build PHAR with humbug/box](.github/actions/build-phar/action.yaml)
+### [Build docs](.github/actions/build-docs/action.yaml)
+
+```yaml
+steps:
+  - name: 'Build docs'
+    uses: eliashaeussler/gha/.github/actions/build-docs
+    with:
+      command: 'docs:build'
+```
+
+### [Build PHAR](.github/actions/build-phar/action.yaml)
 
 ```yaml
 steps:
@@ -75,6 +85,28 @@ steps:
     uses: eliashaeussler/gha/.github/actions/composer-install
     with:
       command: 'test:unit'
+```
+
+### [Create release](.github/actions/create-release/action.yaml)
+
+```yaml
+steps:
+  - name: 'Create release'
+    uses: eliashaeussler/gha/.github/actions/create-release
+    with:
+      version: '1.0.0'
+      files: 'release_1.0.0.zip'
+```
+
+### [Deploy to GitHub Pages](.github/actions/deploy-pages/action.yaml)
+
+```yaml
+steps:
+  - name: 'Deploy'
+    uses: eliashaeussler/gha/.github/actions/deploy-pages
+    with:
+      build-command: 'docs:build'
+      dist-path: '.build/docs'
 ```
 
 ### [Check if workflow is from tag](.github/actions/is-tag/action.yaml)
