@@ -9,10 +9,10 @@ runs:
   using: composite
   steps:
     - name: 'Setup Node'
-      uses: eliashaeussler/gha/.github/actions/setup-node@fix/token
+      uses: eliashaeussler/gha/.github/actions/setup-node@0.1.3
 
     - name: 'Install npm packages'
-      uses: eliashaeussler/gha/.github/actions/npm-install@fix/token
+      uses: eliashaeussler/gha/.github/actions/npm-install@0.1.3
 
     - name: 'Render documentation'
       env:

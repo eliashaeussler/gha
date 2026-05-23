@@ -43,18 +43,18 @@ jobs:
           persist-credentials: false
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@fix/token
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.1.3
         with:
           php-version: ${{ inputs.php-version }}
           composer-version: ${{ inputs.composer-version }}
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@fix/token
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.1.3
         with:
           dependencies: ${{ inputs.dependencies }}
           composer-options: ${{ inputs.composer-version && format('--with=composer/composer:~{0}.0', inputs.composer-version) }}
 
       - name: 'Run tests'
-        uses: eliashaeussler/gha/.github/actions/composer-tests@fix/token
+        uses: eliashaeussler/gha/.github/actions/composer-tests@0.1.3
         with:
           command: ${{ inputs.command }}
