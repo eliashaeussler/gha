@@ -40,16 +40,16 @@ jobs:
           persist-credentials: false
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.1.0
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.1.1
         with:
           php-version: ${{ inputs.php-version }}
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.1.0
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.1.1
         with:
           dependencies: ${{ inputs.dependencies }}
 
       - name: 'Run tests'
-        uses: eliashaeussler/gha/.github/actions/composer-tests@0.1.0
+        uses: eliashaeussler/gha/.github/actions/composer-tests@0.1.1
         with:
           command: ${{ inputs.command }}
