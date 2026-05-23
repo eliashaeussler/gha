@@ -27,5 +27,4 @@ jobs:
 
     uses: eliashaeussler/gha/.github/workflows/checks.yaml@main
     with:
-      composer: false
       npm: false

@@ -1,0 +1,10 @@
+filesToModify:
+  - path: '.github/workflows/*.yaml'
+    patterns:
+      - 'eliashaeussler/gha/[^@]+@{%version%}'
+  - path: '.github/actions/**/action.yaml'
+    patterns:
+      - 'eliashaeussler/gha/[^@]+@{%version%}'
+
+releaseOptions:
+  signTag: true

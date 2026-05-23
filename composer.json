@@ -1,0 +1,39 @@
+{
+	"name": "eliashaeussler/gha",
+	"description": "Reusable GitHub Actions & Workflows",
+	"license": "GPL-3.0-or-later",
+	"require-dev": {
+		"armin/editorconfig-cli": "^2.2",
+		"eliashaeussler/version-bumper": "^4.0",
+		"ergebnis/composer-normalize": "^2.52"
+	},
+	"config": {
+		"allow-plugins": {
+			"eliashaeussler/version-bumper": true,
+			"ergebnis/composer-normalize": true
+		},
+		"sort-packages": true
+	},
+	"scripts": {
+		"check": [
+			"@check:style"
+		],
+		"check:style": [
+			"@check:style:composer",
+			"@check:style:editorconfig"
+		],
+		"check:style:composer": "@fix:composer --dry-run",
+		"check:style:editorconfig": "ec",
+		"ci": [
+			"@composer validate",
+			"@composer audit",
+			"@check"
+		],
+		"fix": [
+			"@fix:composer",
+			"@fix:editorconfig"
+		],
+		"fix:composer": "@composer normalize",
+		"fix:editorconfig": "@check:style:editorconfig --fix"
+	}
+}
