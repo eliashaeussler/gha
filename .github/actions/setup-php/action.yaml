@@ -16,6 +16,9 @@ inputs:
     description: 'Additional tools to install (comma-separated list)'
   extensions:
     description: 'Additional PHP extension to install (comma-separated list)'
+  token:
+    description: 'GitHub token'
+    default: ${{ secrets.GITHUB_TOKEN }}
 
 runs:
   using: composite
@@ -37,6 +40,8 @@ runs:
 
     - name: 'Setup PHP'
       uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # v2
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
       with:
         php-version: ${{ inputs.php-version }}
         ini-file: ${{ inputs.ini-file }}
