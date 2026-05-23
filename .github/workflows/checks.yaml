@@ -50,15 +50,15 @@ jobs:
           persist-credentials: false
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@main
+        uses: eliashaeussler/gha/.github/actions/setup-php@fix/token
         with:
           php-version: ${{ inputs.php-version }}
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@main
+        uses: eliashaeussler/gha/.github/actions/composer-install@fix/token
 
       - name: 'Perform Composer checks'
-        uses: eliashaeussler/gha/.github/actions/composer-checks@main
+        uses: eliashaeussler/gha/.github/actions/composer-checks@fix/token
 
   npm-checks:
     name: 'Perform npm checks'
@@ -72,16 +72,16 @@ jobs:
           persist-credentials: false
 
       - name: 'Setup Node'
-        uses: eliashaeussler/gha/.github/actions/setup-node@main
+        uses: eliashaeussler/gha/.github/actions/setup-node@fix/token
         with:
           node-version: ${{ inputs.node-version }}
           cache: ${{ inputs.node-cache }}
 
       - name: 'Install npm packages'
-        uses: eliashaeussler/gha/.github/actions/npm-install@main
+        uses: eliashaeussler/gha/.github/actions/npm-install@fix/token
 
       - name: 'Perform npm checks'
-        uses: eliashaeussler/gha/.github/actions/npm-checks@main
+        uses: eliashaeussler/gha/.github/actions/npm-checks@fix/token
 
   repo-checks:
     name: 'Perform repository checks'
