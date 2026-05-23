@@ -64,26 +64,28 @@ runs:
         DOCKERHUB_ENABLED: ${{ steps.dockerhub.outputs.enabled }}
         GHCR_ENABLED: ${{ steps.ghcr.outputs.enabled }}
       run: |
-        images="$INPUT_IMAGES"
-
-        if [ -z "$images" ]; then
+        if [ -n "$images" ]; then
+          echo "custom=${INPUT_IMAGES}" >> $GITHUB_OUTPUT
+        else
           if [[ "$DOCKERHUB_ENABLED" == "true" ]]; then
-            images="${REPO_NAME}"
+            image="$REPO_NAME"
+            echo "dockerhub=${image}" >> $GITHUB_OUTPUT
           fi
           if [[ "$GHCR_ENABLED" == "true" ]]; then
             image="ghcr.io/${REPO_NAME}"
-            images="${images}\n${image}"
+            echo "ghcr=${image}" >> $GITHUB_OUTPUT
           fi
         fi
-
-        echo "images=${images}" >> $GITHUB_OUTPUT
       shell: bash
 
     - name: 'Generate image metadata'
       id: meta
       uses: docker/metadata-action@80c7e94dd9b9319bd5eb7a0e0fe9291e23a2a2e9 # v6
       with:
-        images: ${{ steps.images.outputs.images }}
+        images: |
+          ${{ steps.images.outputs.custom }}
+          ${{ steps.images.outputs.dockerhub }}
+          ${{ steps.images.outputs.ghcr }}
         tags: |
           type=raw,value=latest,enable=${{ github.event_name != 'workflow_dispatch' }}
           type=semver,pattern={{version}}
