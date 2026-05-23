@@ -3,7 +3,6 @@ name: 'Build Docker images'
 inputs:
   images:
     description: 'Docker image names to build and push'
-    default: ${{ github.repository }}
   tag-name:
     description: 'Additional image tag name'
     default: ${{ github.ref_name }}
@@ -18,7 +17,7 @@ inputs:
   dockerhub-token:
     description: 'Optional access token for DockerHub (if omitted, no push will be performed)'
   ghcr-username:
-    description: 'Optional username for GHCR (if omitted, no push will be performed)'
+    description: 'Username for GHCR'
     default: ${{ github.repository_owner }}
   ghcr-token:
     description: 'Optional access token for GHCR (if omitted, no push will be performed)'
@@ -31,11 +30,59 @@ outputs:
 runs:
   using: composite
   steps:
+    - name: 'Check DockerHub'
+      id: dockerhub
+      env:
+        DOCKERHUB_USERNAME: ${{ inputs.dockerhub-username }}
+        DOCKERHUB_TOKEN: ${{ inputs.dockerhub-token }}
+      run: |
+        if [ -n "$DOCKERHUB_USERNAME" ] && [ -n "$DOCKERHUB_TOKEN" ]; then
+          echo "enabled=true" >> $GITHUB_OUTPUT
+        else
+          echo "enabled=false" >> $GITHUB_OUTPUT
+        fi
+      shell: bash
+
+    - name: 'Check GHCR'
+      id: ghcr
+      env:
+        GHCR_USERNAME: ${{ inputs.ghcr-username }}
+        GHCR_TOKEN: ${{ inputs.ghcr-token }}
+      run: |
+        if [ -n "$GHCR_USERNAME" ] && [ -n "$GHCR_TOKEN" ]; then
+          echo "enabled=true" >> $GITHUB_OUTPUT
+        else
+          echo "enabled=false" >> $GITHUB_OUTPUT
+        fi
+      shell: bash
+
+    - name: 'Determine Docker images'
+      id: images
+      env:
+        INPUT_IMAGES: ${{ inputs.images }}
+        REPO_NAME: ${{ github.repository }}
+        DOCKERHUB_ENABLED: ${{ steps.dockerhub.outputs.enabled }}
+        GHCR_ENABLED: ${{ steps.ghcr.outputs.enabled }}
+      run: |
+        images="$INPUT_IMAGES"
+
+        if [ -z "$images" ]; then
+          if [[ "$DOCKERHUB_ENABLED" == "true ]]; then
+            images="${REPO_NAME}"
+          fi
+          if [[ "$GHCR_ENABLED" == "true ]]; then
+            images="${images} ghcr.io/${REPO_NAME}"
+          fi
+        fi
+
+        echo "images=${images}" >> $GITHUB_OUTPUT
+      shell: bash
+
     - name: 'Generate image metadata'
       id: meta
       uses: docker/metadata-action@80c7e94dd9b9319bd5eb7a0e0fe9291e23a2a2e9 # v6
       with:
-        images: ${{ inputs.images }}
+        images: ${{ steps.images.outputs.images }}
         tags: |
           type=raw,value=latest,enable=${{ github.event_name != 'workflow_dispatch' }}
           type=semver,pattern={{version}}
@@ -48,14 +95,14 @@ runs:
       uses: docker/setup-buildx-action@d7f5e7f509e45cec5c76c4d5afdd7de93d0b3df5 # v4
 
     - name: 'Login to Docker Hub'
-      if: ${{ inputs.dockerhub-username && inputs.dockerhub-token }}
+      if: ${{ steps.dockerhub.outputs.enabled == 'true' }}
       uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4
       with:
         username: ${{ inputs.dockerhub-username }}
         password: ${{ inputs.dockerhub-token }}
 
     - name: 'Login to GHCR'
-      if: ${{ inputs.ghcr-username && inputs.ghcr-token }}
+      if: ${{ steps.ghcr.outputs.enabled == 'true' }}
       uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4
       with:
         registry: ghcr.io
