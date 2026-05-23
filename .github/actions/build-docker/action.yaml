@@ -67,10 +67,10 @@ runs:
         images="$INPUT_IMAGES"
 
         if [ -z "$images" ]; then
-          if [[ "$DOCKERHUB_ENABLED" == "true ]]; then
+          if [[ "$DOCKERHUB_ENABLED" == "true" ]]; then
             images="${REPO_NAME}"
           fi
-          if [[ "$GHCR_ENABLED" == "true ]]; then
+          if [[ "$GHCR_ENABLED" == "true" ]]; then
             images="${images} ghcr.io/${REPO_NAME}"
           fi
         fi
