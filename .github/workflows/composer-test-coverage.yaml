@@ -7,23 +7,52 @@ on:
         description: 'Composer command to execute'
         default: 'test:coverage'
         type: string
-      coverage-driver:
+      driver:
         description: 'Coverage driver to install (defaults to "pcov")'
         default: pcov
         type: string
-      coverage-file:
+      cobertura-file:
         description: 'Path to coverage report file'
-        default: '.build/coverage/clover.xml'
+        default: '.build/coverage/cobertura.xml'
         type: string
 
 jobs:
+  prepare:
+    name: 'Prepare workflow'
+    runs-on: ubuntu-latest
+
+    outputs:
+      continue: ${{ steps.continue.outputs.continue }}
+
+    steps:
+      - name: 'Check if workflows is from fork PR'
+        id: is-fork
+        uses: eliashaeussler/gha/.github/actions/is-fork@main
+
+      - name: 'Check whether to continue current workflow execution'
+        id: continue
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          IS_DEFAULT_REPO: ${{ steps.is-fork.outputs.is-fork != 'true' }}
+        run: |
+          if [[ "$EVENT_NAME" == "push" ]]; then
+            echo "continue=true" >> $GITHUB_OUTPUT
+          elif [[ "$EVENT_NAME" == "pull_request" ]]; then
+            echo "continue=${IS_ORIGINAL_REPO}" >> $GITHUB_OUTPUT
+          else
+            echo "continue=false" >> $GITHUB_OUTPUT
+          fi
+
   collect:
     name: 'Collect test coverage'
     runs-on: ubuntu-latest
 
+    needs: [prepare]
+    if: ${{ needs.prepare.outputs.continue == 'true' }}
+
     outputs:
       coverage-path: ${{ steps.coverage.outputs.path }}
-      coverage-file: ${{ steps.coverage.outputs.file }}
+      cobertura-file: ${{ steps.coverage.outputs.file }}
 
     steps:
       - name: 'Checkout'
@@ -34,7 +63,7 @@ jobs:
       - name: 'Setup PHP'
         uses: eliashaeussler/gha/.github/actions/setup-php@main
         with:
-          coverage: ${{ inputs.coverage-driver }}
+          coverage: ${{ inputs.driver }}
 
       - name: 'Install Composer packages'
         uses: eliashaeussler/gha/.github/actions/composer-install@main
@@ -42,7 +71,7 @@ jobs:
       - name: 'Resolve coverage path'
         id: coverage
         env:
-          COVERAGE_FILE: ${{ inputs.coverage-file }}
+          COVERAGE_FILE: ${{ inputs.cobertura-file }}
         run: |
           dir=$(dirname "$COVERAGE_FILE")
           file=$(basename "$COVERAGE_FILE")
@@ -65,7 +94,7 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: coverage
-          path: ${{ inputs.coverage-file }}
+          path: ${{ inputs.cobertura-file }}
           retention-days: 7
 
   report:
@@ -73,6 +102,11 @@ jobs:
     runs-on: ubuntu-latest
 
     needs: [collect]
+
+    permissions:
+      code-quality: write
+      contents: read
+      pull-requests: read
 
     steps:
       - name: 'Checkout'
@@ -86,7 +120,9 @@ jobs:
         with:
           name: coverage
 
-      - name: 'Coveralls report'
-        uses: coverallsapp/github-action@5cbfd81b66ca5d10c19b062c04de0199c215fb6e # v2
+      - name: 'Upload coverage report'
+        uses: actions/upload-code-coverage@b51da2c3c1b23e04d2d6477cfc34350b1f5cd3e9 # v1
         with:
-          file: ${{ steps.download.outputs.download-path }}/${{ needs.collect.outputs.coverage-file }}
+          file: ${{ steps.download.outputs.download-path }}/${{ needs.collect.outputs.cobertura-file }}
+          language: PHP
+          label: 'code-coverage/php'

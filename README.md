@@ -211,10 +211,15 @@ jobs:
 jobs:
   test-coverage:
     uses: eliashaeussler/gha/.github/workflows/composer-test-coverage.yaml
+
+    permissions:
+      contents: read
+      code-quality: write
+
     with:
-      command: 'test:unit:coverage'
-      coverage-driver: 'xdebug'
-      coverage-file: '.Build/coverage/_merged/clover.xml'
+      command: 'test:coverage:unit'
+      driver: 'xdebug'
+      cobertura-file: '.Build/coverage/_merged/cobertura.xml'
 ```
 
 ### [Preparation](.github/workflows/preparation.yaml)
