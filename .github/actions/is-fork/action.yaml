@@ -1,0 +1,21 @@
+name: 'Check if workflow is executed from fork PR'
+
+outputs:
+  is-fork:
+    description: 'Describes whether current workflow execution originates from a fork PR.'
+    value: ${{ steps.is-fork.outputs.is-fork }}
+
+runs:
+  using: composite
+  steps:
+    - name: 'Check if workflow is from fork PR'
+      id: is-fork
+      uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
+      with:
+        script: |
+          if (context.eventName === 'pull_request') {
+            const payload = context.payload.pull_request;
+            core.setOutput('is-fork', payload.head.repo.full_name !== payload.base.repo.full_name);
+          } else {
+            core.setOutput('is-fork', false);
+          }
