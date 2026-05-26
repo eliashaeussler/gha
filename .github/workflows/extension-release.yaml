@@ -44,7 +44,7 @@ jobs:
           persist-credentials: false
 
       - name: 'Check tag'
-        uses: eliashaeussler/gha/.github/actions/assure-version-tag@feature/typo3
+        uses: eliashaeussler/gha/.github/actions/assure-version-tag@0.2.0
         with:
           tag-name: ${{ inputs.extension-version }}
 
@@ -70,14 +70,14 @@ jobs:
           fi
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@feature/typo3
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.2.0
         with:
           php-version: ${{ inputs.php-version }}
           tools: typo3/tailor
 
       - name: 'Install Composer dependencies'
         if: ${{ steps.bundler.outputs.enabled == 'true' }}
-        uses: eliashaeussler/gha/.github/actions/composer-install@feature/typo3
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.2.0
         with:
           ignore-cache: true
 
@@ -129,7 +129,7 @@ jobs:
 
       - name: 'Create release'
         id: release
-        uses: eliashaeussler/gha/.github/actions/create-release@feature/typo3 # 0.1.3
+        uses: eliashaeussler/gha/.github/actions/create-release@0.2.0
         with:
           version: ${{ inputs.extension-version }}
           artifact-name: ${{ needs.artefact.outputs.extension-artifact-name }}
@@ -156,7 +156,7 @@ jobs:
           name: ${{ needs.artefact.outputs.extension-artifact-name }}
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@feature/typo3
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.2.0
         with:
           php-version: ${{ inputs.php-version }}
           tools: typo3/tailor

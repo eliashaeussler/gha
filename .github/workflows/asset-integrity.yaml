@@ -81,12 +81,12 @@ jobs:
           persist-credentials: false
 
       - name: 'Setup Node'
-        uses: eliashaeussler/gha/.github/actions/setup-node@feature/typo3
+        uses: eliashaeussler/gha/.github/actions/setup-node@0.2.0
         with:
           base-path: ${{ inputs.base-path }}
 
       - name: 'Install npm packages'
-        uses: eliashaeussler/gha/.github/actions/npm-install@feature/typo3
+        uses: eliashaeussler/gha/.github/actions/npm-install@0.2.0
         with:
           base-path: ${{ inputs.base-path }}
 
@@ -98,7 +98,7 @@ jobs:
 
       - name: 'Check if workflow is from Renovate'
         id: is-renovate
-        uses: eliashaeussler/gha/.github/actions/is-renovate@feature/typo3
+        uses: eliashaeussler/gha/.github/actions/is-renovate@0.2.0
 
       - name: 'Fail on integrity mismatch'
         if: ${{ steps.is-renovate.outputs.is-renovate == 'false' }}
