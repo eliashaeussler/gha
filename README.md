@@ -109,6 +109,17 @@ steps:
       dist-path: '.build/docs'
 ```
 
+### [Check if workflow is from fork PR](.github/actions/is-fork/action.yaml)
+
+```yaml
+steps:
+  - name: 'Check fork'
+    id: is-fork
+    uses: eliashaeussler/gha/.github/actions/is-fork
+
+  - if: ${{ steps.is-fork.outputs.is-fork == 'true' }}
+```
+
 ### [Check if workflow is from tag](.github/actions/is-tag/action.yaml)
 
 ```yaml

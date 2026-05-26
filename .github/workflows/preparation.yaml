@@ -16,14 +16,18 @@ jobs:
       continue: ${{ steps.continue.outputs.continue }}
 
     steps:
+      - name: 'Check if workflows is from fork PR'
+        id: is-fork
+        uses: eliashaeussler/gha/.github/actions/is-fork@feature/is-fork
+
       - name: 'Check whether to continue current workflow execution'
         id: continue
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
-        with:
-          script: |
-            if (context.eventName === 'pull_request') {
-              const payload = context.payload.pull_request;
-              core.setOutput('continue', payload.base.repo.owner.login !== payload.head.repo.owner.login);
-            } else {
-              core.setOutput('continue', true);
-            }
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          IS_FORK: ${{ steps.is-fork.outputs.is-fork }}
+        run: |
+          if [[ "$EVENT_NAME" == "pull_request" ]]; then
+            echo "continue=${IS_FORK}" >> $GITHUB_OUTPUT
+          else
+            echo "continue=true" >> $GITHUB_OUTPUT
+          fi
