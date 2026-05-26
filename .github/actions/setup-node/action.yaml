@@ -7,6 +7,9 @@ inputs:
   cache:
     description: 'Package manager cache to use (defaults to "npm")'
     default: npm
+  base-path:
+    description: 'Path to package.json (defaults to project directory)'
+    default: .
 
 runs:
   using: composite
@@ -16,3 +19,4 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
         cache: ${{ inputs.cache }}
+        cache-dependency-path: ${{ inputs.base-path }}/package-lock.json

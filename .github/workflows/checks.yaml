@@ -26,6 +26,10 @@ on:
         description: 'Package manager cache to use (defaults to "npm")'
         default: npm
         type: string
+      assets-path:
+        description: 'Base path to assets (defaults to project directory)'
+        default: .
+        type: string
 
       # Repository
       repository:
@@ -45,20 +49,21 @@ jobs:
     if: ${{ inputs.composer }}
 
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - name: 'Checkout'
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           persist-credentials: false
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.1.4
+        uses: eliashaeussler/gha/.github/actions/setup-php@feature/typo3
         with:
           php-version: ${{ inputs.php-version }}
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.1.4
+        uses: eliashaeussler/gha/.github/actions/composer-install@feature/typo3
 
       - name: 'Perform Composer checks'
-        uses: eliashaeussler/gha/.github/actions/composer-checks@0.1.4
+        uses: eliashaeussler/gha/.github/actions/composer-checks@feature/typo3
 
   npm-checks:
     name: 'Perform npm checks'
@@ -67,21 +72,27 @@ jobs:
     if: ${{ inputs.npm }}
 
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - name: 'Checkout'
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           persist-credentials: false
 
       - name: 'Setup Node'
-        uses: eliashaeussler/gha/.github/actions/setup-node@0.1.4
+        uses: eliashaeussler/gha/.github/actions/setup-node@feature/typo3
         with:
           node-version: ${{ inputs.node-version }}
           cache: ${{ inputs.node-cache }}
+          base-path: ${{ inputs.assets-path }}
 
       - name: 'Install npm packages'
-        uses: eliashaeussler/gha/.github/actions/npm-install@0.1.4
+        uses: eliashaeussler/gha/.github/actions/npm-install@feature/typo3
+        with:
+          base-path: ${{ inputs.assets-path }}
 
       - name: 'Perform npm checks'
-        uses: eliashaeussler/gha/.github/actions/npm-checks@0.1.4
+        uses: eliashaeussler/gha/.github/actions/npm-checks@feature/typo3
+        with:
+          base-path: ${{ inputs.assets-path }}
 
   repo-checks:
     name: 'Perform repository checks'
@@ -93,7 +104,8 @@ jobs:
       security-events: write
 
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - name: 'Checkout'
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           persist-credentials: false
 
