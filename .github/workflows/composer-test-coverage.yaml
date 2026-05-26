@@ -15,6 +15,9 @@ on:
         description: 'Path to coverage report file'
         default: '.build/coverage/clover.xml'
         type: string
+      boot-mysql:
+        description: 'Define whether to boot MySQL service'
+        type: boolean
 
 jobs:
   collect:
@@ -25,6 +28,12 @@ jobs:
       coverage-path: ${{ steps.coverage.outputs.path }}
       coverage-file: ${{ steps.coverage.outputs.file }}
 
+    env:
+      typo3DatabaseName: typo3
+      typo3DatabaseHost: 127.0.0.1
+      typo3DatabaseUsername: root
+      typo3DatabasePassword: root
+
     steps:
       - name: 'Checkout'
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
@@ -32,12 +41,16 @@ jobs:
           persist-credentials: false
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.1.4
+        uses: eliashaeussler/gha/.github/actions/setup-php@feature/typo3
         with:
           coverage: ${{ inputs.coverage-driver }}
 
+      - name: 'Start MySQL'
+        if: ${{ inputs.boot-mysql }}
+        run: sudo /etc/init.d/mysql start
+
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.1.4
+        uses: eliashaeussler/gha/.github/actions/composer-install@feature/typo3
 
       - name: 'Resolve coverage path'
         id: coverage
@@ -57,7 +70,7 @@ jobs:
         shell: bash
 
       - name: 'Run tests'
-        uses: eliashaeussler/gha/.github/actions/composer-tests@0.1.4
+        uses: eliashaeussler/gha/.github/actions/composer-tests@feature/typo3
         with:
           command: ${{ inputs.command }}
 

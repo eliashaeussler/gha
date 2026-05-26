@@ -120,6 +120,17 @@ steps:
   - if: ${{ steps.is-fork.outputs.is-fork == 'true' }}
 ```
 
+### [Check if workflow is from Renovate](.github/actions/is-renovate/action.yaml)
+
+```yaml
+steps:
+  - name: 'Check Renovate'
+    id: is-renovate
+    uses: eliashaeussler/gha/.github/actions/is-renovate
+
+  - if: ${{ steps.is-renovate.outputs.is-renovate == 'true' }}
+```
+
 ### [Check if workflow is from tag](.github/actions/is-tag/action.yaml)
 
 ```yaml
@@ -173,6 +184,21 @@ steps:
 
 ## ✂️ Workflows
 
+### [Asset integrity](.github/workflows/asset-integrity.yaml)
+
+```yaml
+jobs:
+  asset-integrity:
+    secrets:
+      ASSETS_TOKEN: ${{ secrets.REBUILD_ASSETS_TOKEN }}
+
+    uses: eliashaeussler/gha/.github/workflows/asset-integrity.yaml
+
+  other:
+    needs: [asset-integrity]
+    if: ${{ needs.asset-integrity.outputs.rebuilt == 'true' }}
+```
+
 ### [Checks](.github/workflows/checks.yaml)
 
 ```yaml
@@ -217,6 +243,17 @@ jobs:
       coverage-file: '.Build/coverage/_merged/clover.xml'
 ```
 
+### [Merge branch](.github/workflows/merge.yaml)
+
+```yaml
+jobs:
+  merge:
+    secrets:
+      MERGE_TOKEN: ${{ secrets.MERGE_TOKEN }}
+
+    uses: eliashaeussler/gha/.github/workflows/merge-branch.yaml
+```
+
 ### [Preparation](.github/workflows/preparation.yaml)
 
 ```yaml
@@ -227,6 +264,19 @@ jobs:
   other:
     needs: [prepare]
     if: ${{ needs.prepare.outputs.continue == 'true' }}
+```
+
+### [TYPO3 extension release](.github/workflows/extension-release.yaml)
+
+```yaml
+jobs:
+  release:
+    secrets:
+      TYPO3_API_TOKEN: ${{ secrets.TYPO3_API_TOKEN }}
+
+    uses: eliashaeussler/gha/.github/workflows/extension-release.yaml
+    with:
+      packaging-excludes-file: Build/packaging_exclude.php
 ```
 
 ## ⭐ License

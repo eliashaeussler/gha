@@ -1,8 +1,15 @@
 name: 'Perform npm checks'
 
+inputs:
+  base-path:
+    description: 'Path to package.json (defaults to project directory)'
+    default: .
+
 runs:
   using: composite
   steps:
     - name: 'Perform npm checks'
-      run: npm run ci
+      env:
+        BASE_PATH: ${{ inputs.base-path }}
+      run: npm --prefix "$BASE_PATH" run ci
       shell: bash

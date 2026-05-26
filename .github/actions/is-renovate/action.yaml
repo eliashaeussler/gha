@@ -1,0 +1,31 @@
+name: 'Check if workflow is created by Renovate'
+
+outputs:
+  is-renovate:
+    description: 'Describes whether current workflow is executed by Renovate'
+    value: ${{ steps.is-renovate.outputs.is-renovate }}
+
+runs:
+  using: composite
+  steps:
+    - name: 'Check if workflow is from Renovate'
+      id: is-renovate
+      env:
+        ACTOR: ${{ github.actor }}
+        EVENT_NAME: ${{ github.event_name }}
+        TRIGGERER: ${{ github.event.pull_request.user.login }}
+      run: |
+        if [[ "$EVENT_NAME" == "pull_request" ]]; then
+          if [[ "$TRIGGERER" == "renovate[bot]" ]]; then
+            echo "is-renovate=true" >> $GITHUB_OUTPUT
+          else
+            echo "is-renovate=false" >> $GITHUB_OUTPUT
+          fi
+        else
+          if [[ "$ACTOR" == "renovate[bot]" ]]; then
+            echo "is-renovate=true" >> $GITHUB_OUTPUT
+          else
+            echo "is-renovate=false" >> $GITHUB_OUTPUT
+          fi
+        fi
+      shell: bash

@@ -17,7 +17,7 @@ runs:
   steps:
     - name: 'Build pages'
       if: ${{ inputs.build-command }}
-      uses: eliashaeussler/gha/.github/actions/build-docs@0.1.4
+      uses: eliashaeussler/gha/.github/actions/build-docs@feature/typo3
       with:
         command: ${{ inputs.build-command }}
 

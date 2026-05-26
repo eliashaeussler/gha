@@ -10,6 +10,9 @@ on:
       composer-version:
         description: 'Composer version to use'
         type: string
+      typo3-version:
+        description: 'TYPO3 version to use'
+        type: string
       dependencies:
         description: 'Dependency versions to install (defaults to "locked")'
         default: locked
@@ -18,23 +21,24 @@ on:
         description: 'Composer command to execute'
         default: test
         type: string
-      coverage-driver:
-        description: 'Coverage driver to install (defaults to "none")'
-        default: none
-        type: string
       os:
         description: 'Operating system on which to run the workflow (defaults to "Ubuntu")'
         default: Ubuntu
         type: string
+      boot-mysql:
+        description: 'Define whether to boot MySQL service'
+        type: boolean
 
 jobs:
   test:
     name: 'Run tests'
     runs-on: ${{ inputs.os }}-latest
 
-    outputs:
-      coverage-path: ${{ steps.coverage.outputs.path }}
-      coverage-file: ${{ steps.coverage.outputs.file }}
+    env:
+      typo3DatabaseName: typo3
+      typo3DatabaseHost: 127.0.0.1
+      typo3DatabaseUsername: root
+      typo3DatabasePassword: root
 
     steps:
       - name: 'Checkout'
@@ -43,18 +47,24 @@ jobs:
           persist-credentials: false
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.1.4
+        uses: eliashaeussler/gha/.github/actions/setup-php@feature/typo3
         with:
           php-version: ${{ inputs.php-version }}
           composer-version: ${{ inputs.composer-version }}
 
+      - name: 'Start MySQL'
+        if: ${{ inputs.boot-mysql }}
+        run: sudo /etc/init.d/mysql start
+
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.1.4
+        uses: eliashaeussler/gha/.github/actions/composer-install@feature/typo3
         with:
           dependencies: ${{ inputs.dependencies }}
-          composer-options: ${{ inputs.composer-version && format('--with=composer/composer:~{0}.0', inputs.composer-version) }}
+          composer-options: >-
+            ${{ inputs.composer-version && format('--with=composer/composer:~{0}.0', inputs.composer-version) }}
+            ${{ inputs.typo3-version && format('--with=typo3/cms-core:~{0}.0', inputs.typo3-version) }}
 
       - name: 'Run tests'
-        uses: eliashaeussler/gha/.github/actions/composer-tests@0.1.4
+        uses: eliashaeussler/gha/.github/actions/composer-tests@feature/typo3
         with:
           command: ${{ inputs.command }}

@@ -1,0 +1,69 @@
+name: 'Merge branch'
+
+on:
+  workflow_call:
+    secrets:
+      MERGE_TOKEN:
+        description: 'GitHub token used to merge branches'
+        required: true
+
+    inputs:
+      commit-author-name:
+        description: 'Author name used for the merge commit'
+        default: 'Elias Häußler'
+        type: string
+      commit-author-email:
+        description: 'Author email used for the merge commit'
+        default: 'elias@haeussler.dev'
+        type: string
+
+env:
+  COMMIT_AUTHOR_NAME: ${{ inputs.commit-author-name }}
+  COMMIT_AUTHOR_EMAIL: ${{ inputs.commit-author-email }}
+  CURRENT_BRANCH: ${{ github.ref_name }}
+  DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+
+jobs:
+  prepare:
+    name: 'Prepare workflow execution'
+    runs-on: ubuntu-latest
+
+    if: ${{ env.CURRENT_BRANCH != env.DEFAULT_BRANCH }}
+
+    outputs:
+      continue: ${{ steps.is-renovate.outputs.is-renovate == 'false' }}
+
+    steps:
+      - name: 'Check if workflow is from Renovate'
+        id: is-renovate
+        uses: eliashaeussler/gha/.github/actions/is-renovate@feature/typo3
+
+  merge:
+    name: 'Merge current branch into default branch'
+    runs-on: ubuntu-latest
+
+    needs: [prepare]
+    if: ${{ needs.prepare.outputs.continue == 'true' }}
+
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          token: ${{ secrets.MERGE_TOKEN }}
+          # Must be true, otherwise new commits cannot be pushed
+          persist-credentials: true
+
+      - name: 'Prepare Git environment'
+        run: |
+          git config user.email "$COMMIT_AUTHOR_EMAIL"
+          git config user.name "$COMMIT_AUTHOR_NAME"
+
+      - name: 'Merge changes into default branch'
+        run: |
+          git fetch origin "$DEFAULT_BRANCH"
+          git checkout "$DEFAULT_BRANCH"
+          git merge --no-ff --no-edit "$CURRENT_BRANCH"
+          git push origin "$DEFAULT_BRANCH"
+
+      - name: 'Delete merged branch'
+        run: git push origin --delete "$CURRENT_BRANCH"

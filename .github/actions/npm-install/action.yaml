@@ -1,8 +1,15 @@
 name: 'Install npm packages'
 
+inputs:
+  base-path:
+    description: 'Path to package.json (defaults to project directory)'
+    default: .
+
 runs:
   using: composite
   steps:
     - name: 'Install npm packages'
-      run: npm ci
+      env:
+        BASE_PATH: ${{ inputs.base-path }}
+      run: npm --prefix "$BASE_PATH" ci
       shell: bash
