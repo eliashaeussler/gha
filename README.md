@@ -243,6 +243,19 @@ jobs:
       coverage-file: '.Build/coverage/_merged/clover.xml'
 ```
 
+### [Crowdin](.github/workflows/crowdin.yaml)
+
+```yaml
+jobs:
+  crowdin:
+    secrets:
+      CROWDIN_TOKEN: ${{ secrets.CROWDIN_TOKEN }}
+
+    uses: eliashaeussler/gha/.github/workflows/crowdin.yaml
+    with:
+      project-id: 12345
+```
+
 ### [Merge branch](.github/workflows/merge.yaml)
 
 ```yaml
@@ -251,7 +264,7 @@ jobs:
     secrets:
       MERGE_TOKEN: ${{ secrets.MERGE_TOKEN }}
 
-    uses: eliashaeussler/gha/.github/workflows/merge-branch.yaml
+    uses: eliashaeussler/gha/.github/workflows/merge.yaml
 ```
 
 ### [Preparation](.github/workflows/preparation.yaml)
