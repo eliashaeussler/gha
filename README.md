@@ -3,6 +3,7 @@
 # Reusable GitHub Actions & Workflows
 
 [![CGL](https://img.shields.io/github/actions/workflow/status/eliashaeussler/gha/ci.yaml?label=CI&logo=github)](https://github.com/eliashaeussler/gha/actions/workflows/ci.yaml)
+[![GitHub Release](https://img.shields.io/github/v/release/eliashaeussler/gha?sort=semver&logo=github&label=Release)](https://github.com/eliashaeussler/gha/releases/latest)
 
 </div>
 
