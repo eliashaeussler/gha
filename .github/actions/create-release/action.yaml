@@ -21,7 +21,7 @@ runs:
   using: composite
   steps:
     - name: 'Check tag'
-      uses: eliashaeussler/gha/.github/actions/assure-version-tag@0.2.2
+      uses: eliashaeussler/gha/.github/actions/assure-version-tag@0.2.3
       with:
         tag-name: ${{ inputs.version }}
 
