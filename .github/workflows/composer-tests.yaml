@@ -47,7 +47,7 @@ jobs:
           persist-credentials: false
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.2.0
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.2.1
         with:
           php-version: ${{ inputs.php-version }}
           composer-version: ${{ inputs.composer-version }}
@@ -57,7 +57,7 @@ jobs:
         run: sudo /etc/init.d/mysql start
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.2.0
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.2.1
         with:
           dependencies: ${{ inputs.dependencies }}
           composer-options: >-
@@ -65,6 +65,6 @@ jobs:
             ${{ inputs.typo3-version && format('--with=typo3/cms-core:~{0}.0', inputs.typo3-version) }}
 
       - name: 'Run tests'
-        uses: eliashaeussler/gha/.github/actions/composer-tests@0.2.0
+        uses: eliashaeussler/gha/.github/actions/composer-tests@0.2.1
         with:
           command: ${{ inputs.command }}

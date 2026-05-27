@@ -41,7 +41,7 @@ jobs:
           persist-credentials: false
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.2.0
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.2.1
         with:
           coverage: ${{ inputs.coverage-driver }}
 
@@ -50,7 +50,7 @@ jobs:
         run: sudo /etc/init.d/mysql start
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.2.0
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.2.1
 
       - name: 'Resolve coverage path'
         id: coverage
@@ -70,7 +70,7 @@ jobs:
         shell: bash
 
       - name: 'Run tests'
-        uses: eliashaeussler/gha/.github/actions/composer-tests@0.2.0
+        uses: eliashaeussler/gha/.github/actions/composer-tests@0.2.1
         with:
           command: ${{ inputs.command }}
 
