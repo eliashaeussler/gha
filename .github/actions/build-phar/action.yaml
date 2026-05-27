@@ -64,3 +64,4 @@ runs:
           ${{ inputs.target-file }}
           ${{ inputs.gpg-key && format('{0}.asc', inputs.target-file) }}
           ${{ inputs.build-dockerfile && 'Dockerfile' }}
+        if-no-files-found: error

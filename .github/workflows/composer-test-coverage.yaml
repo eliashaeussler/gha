@@ -80,6 +80,7 @@ jobs:
           name: coverage
           path: ${{ inputs.coverage-file }}
           retention-days: 7
+          if-no-files-found: error
 
   report:
     name: 'Report test coverage'
