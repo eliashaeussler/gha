@@ -32,7 +32,7 @@ on:
     outputs:
       rebuilt:
         description: 'Describes whether assets files have been rebuilt and committed'
-        value: ${{ jobs.rebuild.outputs.rebuilt }}
+        value: ${{ jobs.rebuild.outputs.rebuilt || 'false' }}
 
 env:
   BASE_PATH: ${{ inputs.base-path }}
