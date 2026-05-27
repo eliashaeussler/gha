@@ -36,7 +36,7 @@ jobs:
     steps:
       - name: 'Check if workflow is from Renovate'
         id: is-renovate
-        uses: eliashaeussler/gha/.github/actions/is-renovate@0.2.1
+        uses: eliashaeussler/gha/.github/actions/is-renovate@0.2.2
 
   merge:
     name: 'Merge current branch into default branch'
