@@ -1,0 +1,123 @@
+name: 'TYPO3 tests'
+
+on:
+  workflow_call:
+    inputs:
+      php-version:
+        description: 'PHP version to use (defaults to "latest")'
+        default: latest
+        type: string
+      typo3-version:
+        description: 'TYPO3 version to use'
+        required: true
+        type: string
+      dependencies:
+        description: 'Dependency versions to install (defaults to "locked")'
+        default: locked
+        type: string
+      ddev-version:
+        description: 'DDEV version to use (defaults to "latest")'
+        default: latest
+        type: string
+      acceptance-report-path:
+        description: 'Path to acceptance reports'
+        default: Build/tests/log/acceptance-reports
+        type: string
+
+jobs:
+  test:
+    name: 'Run tests'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout'
+        uses: eliashaeussler/gha/.github/actions/checkout@0.3.2
+
+      - name: 'Lookup testsuites'
+        id: testsuites
+        run: |
+          commands="$(composer list --format json)"
+
+          function hasCommand() {
+            echo "$commands" | jq -r "if (.commands | map(select(.name == \"$1\")) | length) == 0 then \"false\" else \"true\" end"
+          }
+
+          echo "acceptance=$(hasCommand 'test:acceptance')" >> $GITHUB_OUTPUT
+          echo "functional=$(hasCommand 'test:functional')" >> $GITHUB_OUTPUT
+          echo "unit=$(hasCommand 'test:unit')" >> $GITHUB_OUTPUT
+
+      - name: 'Determine execution context'
+        id: context
+        env:
+          HAS_ACCEPTANCE_TESTS: ${{ steps.testsuites.outputs.acceptance }}
+        run: |
+          if [[ "$HAS_ACCEPTANCE_TESTS" == "true" ]]; then
+            command="ddev composer"
+            useDdev="true"
+          else
+            command="composer"
+            useDdev="false"
+          fi
+
+          echo "command=${command}" >> $GITHUB_OUTPUT
+          echo "use-ddev=${useDdev}" >> $GITHUB_OUTPUT
+
+      - name: 'Setup PHP'
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.2.3
+        with:
+          php-version: ${{ inputs.php-version }}
+
+      - name: 'Setup DDEV'
+        if: ${{ steps.context.outputs.use-ddev == 'true' }}
+        uses: ddev/github-action-setup-ddev@fdf2f5c97943bae638f31df6df86f1defa6210c0 # v1
+        with:
+          version: ${{ inputs.ddev-version }}
+          autostart: false
+
+      - name: 'Configure and start DDEV'
+        if: ${{ steps.context.outputs.use-ddev == 'true' }}
+        env:
+          PHP_VERSION: ${{ inputs.php-version }}
+        run: |
+          ddev config --php-version="$PHP_VERSION"
+          ddev start
+
+      - name: 'Install Composer packages (without plugins)'
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.2.3
+        with:
+          dependencies: ${{ inputs.dependencies }}
+          composer-options: '--with=typo3/cms-core:~${{ inputs.typo3-version }}.0 --no-plugins --no-scripts'
+
+      - name: 'Install Composer packages (with plugins)'
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.2.3
+
+      - name: 'Run functional tests'
+        if: ${{ steps.testsuites.outputs.functional == 'true' }}
+        env:
+          COMMAND: ${{ steps.context.outputs.command }}
+        run: '$COMMAND test:functional'
+
+      - name: 'Run unit tests'
+        if: ${{ steps.testsuites.outputs.unit == 'true' }}
+        env:
+          COMMAND: ${{ steps.context.outputs.command }}
+        run: '$COMMAND test:unit'
+
+      - name: 'Run acceptance tests'
+        if: ${{ steps.testsuites.outputs.acceptance == 'true' }}
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4
+        with:
+          max_attempts: 3
+          retry_on: error
+          timeout_minutes: 10
+          command: '${{ steps.context.outputs.command }} test:acceptance'
+          new_command_on_retry: '${{ steps.context.outputs.command }} test:acceptance -- -g failed'
+
+      - name: 'Save acceptance reports'
+        if: ${{ steps.testsuites.outputs.acceptance == 'true' && failure() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: acceptance-reports-${{ inputs.php-version }}-${{ inputs.typo3-version }}-${{ inputs.dependencies }}
+          path: |
+            ${{ inputs.acceptance-report-path }}
+            var/log/typo3_*.log
