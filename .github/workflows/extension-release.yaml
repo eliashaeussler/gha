@@ -108,6 +108,7 @@ jobs:
         with:
           name: extension-artefact
           path: tailor-version-artefact/${{ steps.extension.outputs.artefact }}
+          if-no-files-found: error
 
   release:
     name: 'Create release'
