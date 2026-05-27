@@ -1,0 +1,45 @@
+name: Crowdin
+
+on:
+  workflow_call:
+    secrets:
+      CROWDIN_TOKEN:
+        description: 'Personal Crowdin token used to upload language sources'
+        required: true
+
+    inputs:
+      project-id:
+        description: 'Crowdin project ID'
+        required: true
+        type: number
+      config-file:
+        description: 'Path to crowdin.yaml'
+        default: '.crowdin.yaml'
+        type: string
+      branch-name:
+        description: 'Crowdin branch name (defaults to "main")'
+        default: main
+        type: string
+
+jobs:
+  sync:
+    name: 'Synchronize with Corwdin'
+    runs-on: ubuntu-latest
+
+    if: ${{ github.ref_name == github.event.repository.default_branch }}
+
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          persist-credentials: false
+
+      - name: 'Upload sources'
+        uses: crowdin/github-action@8868a33591d21088edfc398968173a3b98d51706 # v2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          config: ${{ inputs.config-file }}
+          project_id: ${{ inputs.project-id }}
+          token: ${{ secrets.CROWDIN_TOKEN }}
+          crowdin_branch_name: ${{ inputs.branch-name }}
