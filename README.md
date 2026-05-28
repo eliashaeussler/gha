@@ -16,12 +16,28 @@ I won't provide support and don't accept pull requests for this repo.
 ### [Assure version tag](.github/actions/assure-version-tag/action.yaml)
 
 ```yaml
+uses: eliashaeussler/gha/.github/actions/assure-version-tag@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
+
+```yaml
 steps:
   - name: 'Check tag'
     uses: eliashaeussler/gha/.github/actions/assure-version-tag@0.3.4
 ```
 
+</details>
+
 ### [Build Docker images](.github/actions/build-docker/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/build-docker@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 steps:
@@ -36,7 +52,16 @@ steps:
       ghcr-token: ${{ secrets.GHCR_TOKEN }}
 ```
 
+</details>
+
 ### [Build docs](.github/actions/build-docs/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/build-docs@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 steps:
@@ -46,7 +71,16 @@ steps:
       command: 'docs:build'
 ```
 
+</details>
+
 ### [Build PHAR](.github/actions/build-phar/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/build-phar@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 steps:
@@ -59,7 +93,16 @@ steps:
       gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
 ```
 
+</details>
+
 ### [Checkout](.github/actions/checkout/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/checkout@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 steps:
@@ -67,7 +110,16 @@ steps:
     uses: eliashaeussler/gha/.github/actions/checkout@0.3.4
 ```
 
+</details>
+
 ### [Composer checks](.github/actions/composer-checks/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/composer-checks@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 steps:
@@ -75,7 +127,16 @@ steps:
     uses: eliashaeussler/gha/.github/actions/composer-checks@0.3.4
 ```
 
+</details>
+
 ### [Composer install](.github/actions/composer-install/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/composer-install@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 steps:
@@ -86,7 +147,16 @@ steps:
       composer-options: '--no-dev'
 ```
 
+</details>
+
 ### [Composer tests](.github/actions/composer-tests/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/composer-install@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 steps:
@@ -96,7 +166,16 @@ steps:
       command: 'test:unit'
 ```
 
+</details>
+
 ### [Deploy to GitHub Pages](.github/actions/deploy-pages/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/deploy-pages@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 steps:
@@ -107,7 +186,16 @@ steps:
       dist-path: '.build/docs'
 ```
 
+</details>
+
 ### [Check if workflow is from fork PR](.github/actions/is-fork/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/is-fork@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 steps:
@@ -118,7 +206,16 @@ steps:
   - if: ${{ steps.is-fork.outputs.is-fork == 'true' }}
 ```
 
+</details>
+
 ### [Check if workflow is from Renovate](.github/actions/is-renovate/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/is-renovate@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 steps:
@@ -129,7 +226,16 @@ steps:
   - if: ${{ steps.is-renovate.outputs.is-renovate == 'true' }}
 ```
 
+</details>
+
 ### [Check if workflow is from tag](.github/actions/is-tag/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/is-tag@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 steps:
@@ -140,7 +246,16 @@ steps:
   - if: ${{ steps.is-tag.outputs.is-version == 'true' }}
 ```
 
+</details>
+
 ### [npm checks](.github/actions/npm-checks/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/npm-checks@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 steps:
@@ -148,7 +263,16 @@ steps:
     uses: eliashaeussler/gha/.github/actions/npm-checks@0.3.4
 ```
 
+</details>
+
 ### [npm install](.github/actions/npm-install/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/npm-install@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 steps:
@@ -156,7 +280,16 @@ steps:
     uses: eliashaeussler/gha/.github/actions/npm-install@0.3.4
 ```
 
+</details>
+
 ### [Setup node environment](.github/actions/setup-node/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/setup-node@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 steps:
@@ -167,7 +300,16 @@ steps:
       cache: 'npm'
 ```
 
+</details>
+
 ### [Setup PHP environment](.github/actions/setup-php/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/setup-php@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 steps:
@@ -180,9 +322,18 @@ steps:
       tools: 'typo3/tailor'
 ```
 
+</details>
+
 ## ✂️ Workflows
 
 ### [Asset integrity](.github/workflows/asset-integrity.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/workflows/asset-integrity.yaml@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 jobs:
@@ -197,7 +348,16 @@ jobs:
     if: ${{ needs.asset-integrity.outputs.rebuilt == 'true' }}
 ```
 
+</details>
+
 ### [Checks](.github/workflows/checks.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/workflows/checks.yaml@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 jobs:
@@ -217,7 +377,16 @@ jobs:
       repository: true
 ```
 
+</details>
+
 ### [Composer tests](.github/workflows/composer-tests.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/workflows/composer-tests.yaml@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 jobs:
@@ -229,7 +398,16 @@ jobs:
       command: 'test:unit'
 ```
 
+</details>
+
 ### [Composer test coverage](.github/workflows/composer-test-coverage.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/workflows/composer-test-coverage.yaml@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 jobs:
@@ -241,7 +419,16 @@ jobs:
       coverage-file: '.Build/coverage/_merged/clover.xml'
 ```
 
+</details>
+
 ### [Crowdin](.github/workflows/crowdin.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/workflows/crowdin.yaml@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 jobs:
@@ -254,7 +441,16 @@ jobs:
       project-id: 12345
 ```
 
+</details>
+
 ### [GitHub release](.github/workflows/github-release.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/workflows/extension-release.yaml@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 jobs:
@@ -268,7 +464,16 @@ jobs:
       files: 'release_1.0.0.zip'
 ```
 
+</details>
+
 ### [Merge branch](.github/workflows/merge.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/workflows/merge.yaml@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 jobs:
@@ -279,7 +484,16 @@ jobs:
     uses: eliashaeussler/gha/.github/workflows/merge.yaml@0.3.4
 ```
 
+</details>
+
 ### [Preparation](.github/workflows/preparation.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/workflows/preparation.yaml@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 jobs:
@@ -291,7 +505,16 @@ jobs:
     if: ${{ needs.prepare.outputs.continue == 'true' }}
 ```
 
+</details>
+
 ### [TYPO3 extension release](.github/workflows/extension-release.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/workflows/extension-release.yaml@0.3.4
+```
+
+<details>
+<summary>Full example</summary>
 
 ```yaml
 jobs:
@@ -303,6 +526,8 @@ jobs:
     with:
       packaging-excludes-file: Build/packaging_exclude.php
 ```
+
+</details>
 
 ## ⭐ License
 
