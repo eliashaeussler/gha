@@ -37,10 +37,10 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@task/ddev
+        uses: eliashaeussler/gha/.github/actions/checkout@0.3.6
 
       - name: 'Check tag'
-        uses: eliashaeussler/gha/.github/actions/assure-version-tag@task/ddev
+        uses: eliashaeussler/gha/.github/actions/assure-version-tag@0.3.6
         with:
           tag-name: ${{ inputs.version }}
 
