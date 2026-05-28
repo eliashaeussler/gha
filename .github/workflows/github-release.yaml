@@ -1,0 +1,76 @@
+name: 'GitHub Release'
+
+on:
+  workflow_call:
+    secrets:
+      RELEASE_TOKEN:
+        description: 'GitHub token used to create the release'
+        required: false
+
+    inputs:
+      version:
+        description: 'The version to release'
+        default: ${{ github.ref_name }}
+        type: string
+      files:
+        description: 'Optional files to include as release assets'
+        type: string
+      artifact-name:
+        description: 'Optional name of an artifact whose files should be included as release assets'
+        type: string
+
+    outputs:
+      url:
+        description: 'HTML URL of the release'
+        value: ${{ jobs.release.outputs.url }}
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: 'Create release'
+    runs-on: ubuntu-latest
+
+    if: ${{ github.event_name == 'workflow_call' }}
+
+    outputs:
+      url: ${{ steps.release.outputs.url }}
+
+    steps:
+      - name: 'Checkout'
+        uses: eliashaeussler/gha/.github/actions/checkout@0.2.4
+
+      - name: 'Check tag'
+        uses: eliashaeussler/gha/.github/actions/assure-version-tag@0.2.4
+        with:
+          tag-name: ${{ inputs.version }}
+
+      - name: 'Download artifact'
+        if: ${{ inputs.artifact-name }}
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: ${{ inputs.artifact-name }}
+          path: artifact-download
+
+      - name: 'Create release'
+        id: release
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          files=""
+
+          for file in $ADDITIONAL_FILES; do
+            files="${files} ${file}"
+          done
+
+          if [ -d artifact-download ]; then
+            while IFS= read -r -d '' file; do
+              files="${files} ${file}"
+            done < <(find artifact-download -type f -print0)
+          fi
+
+          url="$(gh release create "$VERSION" --generate-notes $files)"
+
+          echo "url=${url}" >> $GITHUB_OUTPUT

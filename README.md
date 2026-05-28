@@ -96,17 +96,6 @@ steps:
       command: 'test:unit'
 ```
 
-### [Create release](.github/actions/create-release/action.yaml)
-
-```yaml
-steps:
-  - name: 'Create release'
-    uses: eliashaeussler/gha/.github/actions/create-release@0.2.4
-    with:
-      version: '1.0.0'
-      files: 'release_1.0.0.zip'
-```
-
 ### [Deploy to GitHub Pages](.github/actions/deploy-pages/action.yaml)
 
 ```yaml
@@ -263,6 +252,20 @@ jobs:
     uses: eliashaeussler/gha/.github/workflows/crowdin.yaml@0.2.4
     with:
       project-id: 12345
+```
+
+### [GitHub release](.github/workflows/github-release.yaml)
+
+```yaml
+jobs:
+  release:
+    secrets:
+      RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+
+    uses: eliashaeussler/gha/.github/workflows/extension-release.yaml@0.2.4
+    with:
+      version: '1.0.0'
+      files: 'release_1.0.0.zip'
 ```
 
 ### [Merge branch](.github/workflows/merge.yaml)

@@ -5,20 +5,11 @@ on:
     tags:
       - '*'
 
-env:
-  REF_NAME: ${{ github.ref_name }}
-
 permissions:
   contents: write
 
 jobs:
   release:
     name: 'Create release'
-    runs-on: ubuntu-latest
 
-    steps:
-      - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.2.4
-
-      - name: 'Create release'
-        uses: eliashaeussler/gha/.github/actions/create-release@0.2.4
+    uses: eliashaeussler/gha/.github/workflows/github-release.yaml@feature/release
