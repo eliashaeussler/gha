@@ -59,6 +59,7 @@ jobs:
           echo "use-ddev=${useDdev}" >> $GITHUB_OUTPUT
 
       - name: 'Setup PHP'
+        if: ${{ steps.context.outputs.use-ddev == 'false' }}
         uses: eliashaeussler/gha/.github/actions/setup-php@0.3.4
         with:
           coverage: pcov
