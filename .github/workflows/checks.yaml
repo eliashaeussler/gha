@@ -50,18 +50,18 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.3.5
+        uses: eliashaeussler/gha/.github/actions/checkout@task/ddev
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.3.5
+        uses: eliashaeussler/gha/.github/actions/setup-php@task/ddev
         with:
           php-version: ${{ inputs.php-version }}
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.3.5
+        uses: eliashaeussler/gha/.github/actions/composer-install@task/ddev
 
       - name: 'Perform Composer checks'
-        uses: eliashaeussler/gha/.github/actions/composer-checks@0.3.5
+        uses: eliashaeussler/gha/.github/actions/composer-checks@task/ddev
 
   npm-checks:
     name: 'Perform npm checks'
@@ -71,22 +71,22 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.3.5
+        uses: eliashaeussler/gha/.github/actions/checkout@task/ddev
 
       - name: 'Setup Node'
-        uses: eliashaeussler/gha/.github/actions/setup-node@0.3.5
+        uses: eliashaeussler/gha/.github/actions/setup-node@task/ddev
         with:
           node-version: ${{ inputs.node-version }}
           cache: ${{ inputs.node-cache }}
           base-path: ${{ inputs.assets-path }}
 
       - name: 'Install npm packages'
-        uses: eliashaeussler/gha/.github/actions/npm-install@0.3.5
+        uses: eliashaeussler/gha/.github/actions/npm-install@task/ddev
         with:
           base-path: ${{ inputs.assets-path }}
 
       - name: 'Perform npm checks'
-        uses: eliashaeussler/gha/.github/actions/npm-checks@0.3.5
+        uses: eliashaeussler/gha/.github/actions/npm-checks@task/ddev
         with:
           base-path: ${{ inputs.assets-path }}
 
@@ -101,7 +101,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.3.5
+        uses: eliashaeussler/gha/.github/actions/checkout@task/ddev
 
       - name: 'Run zizmor'
         id: zizmor
