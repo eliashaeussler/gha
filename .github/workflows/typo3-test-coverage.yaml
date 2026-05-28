@@ -1,0 +1,158 @@
+name: 'TYPO3 test coverage'
+
+on:
+  workflow_call:
+    inputs:
+      ddev-version:
+        description: 'DDEV version to use (defaults to "latest")'
+        default: latest
+        type: string
+      acceptance-report-path:
+        description: 'Path to acceptance reports'
+        default: Build/tests/log/acceptance-reports
+        type: string
+      coverage-file:
+        description: 'Path to coverage report file'
+        default: Build/tests/coverage/clover.xml
+        type: string
+
+jobs:
+  collect:
+    name: 'Collect test coverage'
+    runs-on: ubuntu-latest
+
+    outputs:
+      coverage-path: ${{ steps.coverage.outputs.path }}
+      coverage-file: ${{ steps.coverage.outputs.file }}
+
+    steps:
+      - name: 'Checkout'
+        uses: eliashaeussler/gha/.github/actions/checkout@0.3.2
+
+      - name: 'Lookup testsuites'
+        id: testsuites
+        run: |
+          function hasCommand() {
+            composer list --format json | jq -r "if (.commands | map(select(.name == \"$1\")) | length) == 0 then \"false\" else \"true\" end"
+          }
+
+          echo "acceptance=$(hasCommand 'test:acceptance:coverage')" >> $GITHUB_OUTPUT
+          echo "functional=$(hasCommand 'test:functional:coverage')" >> $GITHUB_OUTPUT
+          echo "unit=$(hasCommand 'test:unit:coverage')" >> $GITHUB_OUTPUT
+
+      - name: 'Determine execution context'
+        id: context
+        env:
+          HAS_ACCEPTANCE_TESTS: ${{ steps.testsuites.outputs.acceptance }}
+        run: |
+          if [[ "$HAS_ACCEPTANCE_TESTS" == "true" ]]; then
+            command="ddev composer"
+            useDdev="true"
+          else
+            command="composer"
+            useDdev="false"
+          fi
+
+          echo "command=${command}" >> $GITHUB_OUTPUT
+          echo "use-ddev=${useDdev}" >> $GITHUB_OUTPUT
+
+      - name: 'Setup PHP'
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.2.3
+        with:
+          coverage: pcov
+
+      - name: 'Setup DDEV'
+        if: ${{ steps.context.outputs.use-ddev == 'true' }}
+        uses: ddev/github-action-setup-ddev@fdf2f5c97943bae638f31df6df86f1defa6210c0 # v1
+        with:
+          version: ${{ inputs.ddev-version }}
+          autostart: false
+
+      - name: 'Configure and start DDEV'
+        if: ${{ steps.context.outputs.use-ddev == 'true' }}
+        run: |
+          ddev config --auto
+          ddev start
+
+      - name: 'Install Composer packages'
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.2.3
+
+      - name: 'Resolve coverage path'
+        id: coverage
+        env:
+          COVERAGE_FILE: ${{ inputs.coverage-file }}
+        run: |
+          dir=$(dirname "$COVERAGE_FILE")
+          file=$(basename "$COVERAGE_FILE")
+
+          echo "path=$dir" >> $GITHUB_OUTPUT
+          echo "file=$file" >> $GITHUB_OUTPUT
+
+      - name: 'Create coverage directory'
+        env:
+          COVERAGE_PATH: ${{ steps.coverage.outputs.path }}
+        run: mkdir -p "$COVERAGE_PATH"
+
+      - name: 'Run functional tests'
+        if: ${{ steps.testsuites.outputs.functional == 'true' }}
+        env:
+          COMMAND: ${{ steps.context.outputs.command }}
+        run: '$COMMAND test:functional:coverage'
+
+      - name: 'Run unit tests'
+        if: ${{ steps.testsuites.outputs.unit == 'true' }}
+        env:
+          COMMAND: ${{ steps.context.outputs.command }}
+        run: '$COMMAND test:unit:coverage'
+
+      - name: 'Run acceptance tests'
+        if: ${{ steps.testsuites.outputs.acceptance == 'true' }}
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4
+        with:
+          max_attempts: 3
+          retry_on: error
+          timeout_minutes: 10
+          command: '${{ steps.context.outputs.command }} test:acceptance:coverage'
+
+      - name: 'Merge coverage reports'
+        env:
+          COMMAND: ${{ steps.context.outputs.command }}
+        run: '$COMMAND test:merge-coverage'
+
+      - name: 'Save acceptance reports'
+        if: ${{ steps.testsuites.outputs.acceptance == 'true' && failure() }}
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: acceptance-reports-coverage
+          path: |
+            ${{ inputs.acceptance-report-path }}
+            var/log/typo3_*.log
+
+      - name: 'Upload coverage artifact'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: coverage
+          path: ${{ inputs.coverage-file }}
+          retention-days: 7
+          if-no-files-found: error
+
+  report:
+    name: 'Report test coverage'
+    runs-on: ubuntu-latest
+
+    needs: [collect]
+
+    steps:
+      - name: 'Checkout'
+        uses: eliashaeussler/gha/.github/actions/checkout@0.3.2
+
+      - name: 'Download coverage artifact'
+        id: download
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: coverage
+
+      - name: 'Coveralls report'
+        uses: coverallsapp/github-action@5cbfd81b66ca5d10c19b062c04de0199c215fb6e # v2
+        with:
+          file: ${{ steps.download.outputs.download-path }}/${{ needs.collect.outputs.coverage-file }}
