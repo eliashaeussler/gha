@@ -65,7 +65,6 @@ jobs:
         env:
           COVERAGE_PATH: ${{ steps.coverage.outputs.path }}
         run: mkdir -p "$COVERAGE_PATH"
-        shell: bash
 
       - name: 'Run tests'
         uses: eliashaeussler/gha/.github/actions/composer-tests@0.3.2
