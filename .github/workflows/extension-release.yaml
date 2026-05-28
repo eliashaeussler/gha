@@ -110,26 +110,16 @@ jobs:
 
   release:
     name: 'Create release'
-    runs-on: ubuntu-latest
 
     needs: [artefact]
 
     permissions:
       contents: write
 
-    outputs:
-      url: ${{ steps.release.outputs.release-url }}
-
-    steps:
-      - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.2.4
-
-      - name: 'Create release'
-        id: release
-        uses: eliashaeussler/gha/.github/actions/create-release@0.2.4
-        with:
-          version: ${{ inputs.extension-version }}
-          artifact-name: ${{ needs.artefact.outputs.extension-artifact-name }}
+    uses: eliashaeussler/gha/.github/workflows/github-release.yaml@feature/release
+    with:
+      version: ${{ inputs.extension-version }}
+      artifact-name: ${{ needs.artefact.outputs.extension-artifact-name }}
 
   publish:
     name: 'Publish on TER'
