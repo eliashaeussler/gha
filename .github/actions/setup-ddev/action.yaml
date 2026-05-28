@@ -1,0 +1,25 @@
+name: 'Setup DDEV'
+
+inputs:
+  ddev-version:
+    description: 'DDEV version to use (defaults to "latest")'
+    default: latest
+  php-version:
+    description: 'PHP version to use'
+
+runs:
+  using: composite
+  steps:
+    - name: 'Setup DDEV'
+      uses: ddev/github-action-setup-ddev@fdf2f5c97943bae638f31df6df86f1defa6210c0 # v1
+      with:
+        version: ${{ inputs.ddev-version }}
+        autostart: false
+
+    - name: 'Configure and start DDEV'
+      env:
+        DDEV_ARGS: ${{ case(inputs.php-version != '', format('--php-version={0}', inputs.php-version), '--auto') }}
+      run: |
+        ddev config $DDEV_ARGS
+        ddev start
+      shell: bash

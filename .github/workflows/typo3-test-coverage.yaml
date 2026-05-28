@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.3.5
+        uses: eliashaeussler/gha/.github/actions/checkout@task/ddev
 
       - name: 'Lookup testsuites'
         id: testsuites
@@ -59,26 +59,18 @@ jobs:
           echo "use-ddev=${useDdev}" >> $GITHUB_OUTPUT
 
       - name: 'Setup PHP'
-        if: ${{ steps.context.outputs.use-ddev == 'false' }}
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.3.5
+        uses: eliashaeussler/gha/.github/actions/setup-php@task/ddev
         with:
           coverage: pcov
 
       - name: 'Setup DDEV'
         if: ${{ steps.context.outputs.use-ddev == 'true' }}
-        uses: ddev/github-action-setup-ddev@fdf2f5c97943bae638f31df6df86f1defa6210c0 # v1
+        uses: eliashaeussler/gha/.github/actions/setup-ddev@task/ddev
         with:
-          version: ${{ inputs.ddev-version }}
-          autostart: false
-
-      - name: 'Configure and start DDEV'
-        if: ${{ steps.context.outputs.use-ddev == 'true' }}
-        run: |
-          ddev config --auto
-          ddev start
+          ddev-version: ${{ inputs.ddev-version }}
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.3.5
+        uses: eliashaeussler/gha/.github/actions/composer-install@task/ddev
 
       - name: 'Resolve coverage path'
         id: coverage
@@ -100,13 +92,13 @@ jobs:
         if: ${{ steps.testsuites.outputs.functional == 'true' }}
         env:
           COMMAND: ${{ steps.context.outputs.command }}
-        run: '$COMMAND test:functional:coverage'
+        run: $COMMAND test:functional:coverage
 
       - name: 'Run unit tests'
         if: ${{ steps.testsuites.outputs.unit == 'true' }}
         env:
           COMMAND: ${{ steps.context.outputs.command }}
-        run: '$COMMAND test:unit:coverage'
+        run: $COMMAND test:unit:coverage
 
       - name: 'Run acceptance tests'
         if: ${{ steps.testsuites.outputs.acceptance == 'true' }}
@@ -120,7 +112,7 @@ jobs:
       - name: 'Merge coverage reports'
         env:
           COMMAND: ${{ steps.context.outputs.command }}
-        run: '$COMMAND test:merge-coverage'
+        run: $COMMAND test:merge-coverage
 
       - name: 'Fix coverage path'
         if: ${{ steps.context.outputs.use-ddev == 'true' }}
@@ -155,7 +147,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.3.5
+        uses: eliashaeussler/gha/.github/actions/checkout@task/ddev
 
       - name: 'Download coverage artifact'
         id: download
