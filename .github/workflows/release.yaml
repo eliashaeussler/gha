@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@task/harden
+        uses: eliashaeussler/gha/.github/actions/checkout@0.2.4
 
       - name: 'Create release'
-        uses: eliashaeussler/gha/.github/actions/create-release@0.2.3
+        uses: eliashaeussler/gha/.github/actions/create-release@0.2.4
