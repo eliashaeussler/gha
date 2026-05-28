@@ -121,14 +121,22 @@ jobs:
           COMMAND: ${{ steps.context.outputs.command }}
         run: '$COMMAND test:merge-coverage'
 
+      - name: 'Fix coverage path'
+        if: ${{ steps.context.outputs.use-ddev == 'true' }}
+        working-directory: ${{ steps.coverage.outputs.path }}
+        env:
+          COVERAGE_FILE: ${{ steps.coverage.outputs.file }}
+          GH_WORKSPACE: ${{ github.workspace }}
+        run: sed -i "s#/var/www/html#${GH_WORKSPACE}#g" "$COVERAGE_FILE"
+
       - name: 'Save acceptance reports'
         if: ${{ steps.testsuites.outputs.acceptance == 'true' && failure() }}
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: acceptance-reports-coverage
           path: |
-            ${{ inputs.acceptance-report-path }}
-            var/log/typo3_*.log
+            ${{ steps.coverage.outputs.path }}
+            var/log
 
       - name: 'Upload coverage artifact'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
