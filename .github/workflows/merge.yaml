@@ -47,7 +47,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        uses: eliashaeussler/gha/.github/actions/checkout@task/harden
         with:
           token: ${{ secrets.MERGE_TOKEN }}
           # Must be true, otherwise new commits cannot be pushed
