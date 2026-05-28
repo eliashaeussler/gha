@@ -32,8 +32,10 @@ jobs:
       - name: 'Lookup testsuites'
         id: testsuites
         run: |
+          commands="$(composer list --format json)"
+
           function hasCommand() {
-            composer list --format json | jq -r "if (.commands | map(select(.name == \"$1\")) | length) == 0 then \"false\" else \"true\" end"
+            echo "$commands" | jq -r "if (.commands | map(select(.name == \"$1\")) | length) == 0 then \"false\" else \"true\" end"
           }
 
           echo "acceptance=$(hasCommand 'test:acceptance:coverage')" >> $GITHUB_OUTPUT
