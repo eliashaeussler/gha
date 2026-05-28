@@ -78,7 +78,9 @@ jobs:
           ddev start
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.3.5
+        env:
+          COMMAND: ${{ steps.context.outputs.command }}
+        run: $COMMAND install
 
       - name: 'Resolve coverage path'
         id: coverage
@@ -100,13 +102,13 @@ jobs:
         if: ${{ steps.testsuites.outputs.functional == 'true' }}
         env:
           COMMAND: ${{ steps.context.outputs.command }}
-        run: '$COMMAND test:functional:coverage'
+        run: $COMMAND test:functional:coverage
 
       - name: 'Run unit tests'
         if: ${{ steps.testsuites.outputs.unit == 'true' }}
         env:
           COMMAND: ${{ steps.context.outputs.command }}
-        run: '$COMMAND test:unit:coverage'
+        run: $COMMAND test:unit:coverage
 
       - name: 'Run acceptance tests'
         if: ${{ steps.testsuites.outputs.acceptance == 'true' }}
@@ -120,7 +122,7 @@ jobs:
       - name: 'Merge coverage reports'
         env:
           COMMAND: ${{ steps.context.outputs.command }}
-        run: '$COMMAND test:merge-coverage'
+        run: $COMMAND test:merge-coverage
 
       - name: 'Fix coverage path'
         if: ${{ steps.context.outputs.use-ddev == 'true' }}
