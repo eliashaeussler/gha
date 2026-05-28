@@ -32,8 +32,6 @@ jobs:
     name: 'Create release'
     runs-on: ubuntu-latest
 
-    if: ${{ github.event_name == 'workflow_call' }}
-
     outputs:
       url: ${{ steps.release.outputs.url }}
 
