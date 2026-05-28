@@ -59,6 +59,14 @@ steps:
       gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
 ```
 
+### [Checkout](.github/actions/checkout/action.yaml)
+
+```yaml
+steps:
+  - name: 'Checkout'
+    uses: eliashaeussler/gha/.github/actions/checkout@0.2.3
+```
+
 ### [Composer checks](.github/actions/composer-checks/action.yaml)
 
 ```yaml

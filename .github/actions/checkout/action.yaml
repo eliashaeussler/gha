@@ -1,0 +1,28 @@
+name: 'Checkout'
+
+inputs:
+  token:
+    description: 'GitHub token'
+    default: ${{ github.token }}
+  fetch-depth:
+    description: 'Number of commits to fetch (defaults to "1")'
+    default: '1'
+  persist-credentials:
+    description: 'Whether to configure the token or SSH key with the local git config (defaults to "false")'
+    default: 'false'
+
+runs:
+  using: composite
+  steps:
+    - name: 'Harden Runner'
+      uses: step-security/harden-runner@f808768d1510423e83855289c910610ca9b43176 # v2.17.0
+      with:
+        egress-policy: audit
+        token: ${{ inputs.token }}
+
+    - name: 'Checkout'
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      with:
+        token: ${{ inputs.token }}
+        fetch-depth: ${{ inputs.fetch-depth }}
+        persist-credentials: ${{ inputs.persist-credentials }}

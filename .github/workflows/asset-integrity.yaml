@@ -48,10 +48,9 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        uses: eliashaeussler/gha/.github/actions/checkout@task/harden
         with:
           token: ${{ secrets.ASSETS_TOKEN }}
-          persist-credentials: false
           fetch-depth: 2
 
       - name: 'Check modified assets'
@@ -75,10 +74,9 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        uses: eliashaeussler/gha/.github/actions/checkout@task/harden
         with:
           token: ${{ secrets.ASSETS_TOKEN }}
-          persist-credentials: false
 
       - name: 'Setup Node'
         uses: eliashaeussler/gha/.github/actions/setup-node@0.2.3

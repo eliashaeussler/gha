@@ -39,9 +39,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-        with:
-          persist-credentials: false
+        uses: eliashaeussler/gha/.github/actions/checkout@task/harden
 
       - name: 'Check tag'
         uses: eliashaeussler/gha/.github/actions/assure-version-tag@0.2.3
@@ -124,9 +122,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-        with:
-          persist-credentials: false
+        uses: eliashaeussler/gha/.github/actions/checkout@task/harden
 
       - name: 'Create release'
         id: release
@@ -146,9 +142,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-        with:
-          persist-credentials: false
+        uses: eliashaeussler/gha/.github/actions/checkout@task/harden
 
       - name: 'Download extension artefact'
         id: download
