@@ -22,11 +22,6 @@ inputs:
   ghcr-token:
     description: 'Optional access token for GHCR (if omitted, no push will be performed)'
 
-outputs:
-  artifact-name:
-    description: 'Name of the uploaded artifact'
-    value: phar
-
 runs:
   using: composite
   steps:
