@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.3.2
+        uses: eliashaeussler/gha/.github/actions/checkout@0.3.3
 
       - name: 'Lookup testsuites'
         id: testsuites
@@ -57,7 +57,7 @@ jobs:
           echo "use-ddev=${useDdev}" >> $GITHUB_OUTPUT
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.2.3
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.3.3
         with:
           coverage: pcov
 
@@ -75,7 +75,7 @@ jobs:
           ddev start
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.2.3
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.3.3
 
       - name: 'Resolve coverage path'
         id: coverage
@@ -144,7 +144,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.3.2
+        uses: eliashaeussler/gha/.github/actions/checkout@0.3.3
 
       - name: 'Download coverage artifact'
         id: download
