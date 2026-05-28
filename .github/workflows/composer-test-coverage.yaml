@@ -36,10 +36,10 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.3.4
+        uses: eliashaeussler/gha/.github/actions/checkout@0.3.5
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.3.4
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.3.5
         with:
           coverage: ${{ inputs.coverage-driver }}
 
@@ -48,7 +48,7 @@ jobs:
         run: sudo /etc/init.d/mysql start
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.3.4
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.3.5
 
       - name: 'Resolve coverage path'
         id: coverage
@@ -67,7 +67,7 @@ jobs:
         run: mkdir -p "$COVERAGE_PATH"
 
       - name: 'Run tests'
-        uses: eliashaeussler/gha/.github/actions/composer-tests@0.3.4
+        uses: eliashaeussler/gha/.github/actions/composer-tests@0.3.5
         with:
           command: ${{ inputs.command }}
 
@@ -87,7 +87,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.3.4
+        uses: eliashaeussler/gha/.github/actions/checkout@0.3.5
 
       - name: 'Download coverage artifact'
         id: download
