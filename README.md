@@ -16,7 +16,7 @@ I won't provide support and don't accept pull requests for this repo.
 ### [Assure version tag](.github/actions/assure-version-tag/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/assure-version-tag@0.3.7
+uses: eliashaeussler/gha/.github/actions/assure-version-tag@0.3.8
 ```
 
 <details>
@@ -25,7 +25,7 @@ uses: eliashaeussler/gha/.github/actions/assure-version-tag@0.3.7
 ```yaml
 steps:
   - name: 'Check tag'
-    uses: eliashaeussler/gha/.github/actions/assure-version-tag@0.3.7
+    uses: eliashaeussler/gha/.github/actions/assure-version-tag@0.3.8
 ```
 
 </details>
@@ -33,7 +33,7 @@ steps:
 ### [Build Docker images](.github/actions/build-docker/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/build-docker@0.3.7
+uses: eliashaeussler/gha/.github/actions/build-docker@0.3.8
 ```
 
 <details>
@@ -42,7 +42,7 @@ uses: eliashaeussler/gha/.github/actions/build-docker@0.3.7
 ```yaml
 steps:
   - name: 'Build Docker'
-    uses: eliashaeussler/gha/.github/actions/build-docker@0.3.7
+    uses: eliashaeussler/gha/.github/actions/build-docker@0.3.8
     with:
       images: |
         eliashaeussler/my-fancy-project
@@ -57,7 +57,7 @@ steps:
 ### [Build docs](.github/actions/build-docs/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/build-docs@0.3.7
+uses: eliashaeussler/gha/.github/actions/build-docs@0.3.8
 ```
 
 <details>
@@ -66,7 +66,7 @@ uses: eliashaeussler/gha/.github/actions/build-docs@0.3.7
 ```yaml
 steps:
   - name: 'Build docs'
-    uses: eliashaeussler/gha/.github/actions/build-docs@0.3.7
+    uses: eliashaeussler/gha/.github/actions/build-docs@0.3.8
     with:
       command: 'docs:build'
 ```
@@ -76,7 +76,7 @@ steps:
 ### [Build PHAR](.github/actions/build-phar/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/build-phar@0.3.7
+uses: eliashaeussler/gha/.github/actions/build-phar@0.3.8
 ```
 
 <details>
@@ -85,7 +85,7 @@ uses: eliashaeussler/gha/.github/actions/build-phar@0.3.7
 ```yaml
 steps:
   - name: 'Build PHAR'
-    uses: eliashaeussler/gha/.github/actions/build-phar@0.3.7
+    uses: eliashaeussler/gha/.github/actions/build-phar@0.3.8
     with:
       target-file: my-fancy-project.phar
       build-dockerfile: true
@@ -98,7 +98,7 @@ steps:
 ### [Checkout](.github/actions/checkout/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/checkout@0.3.7
+uses: eliashaeussler/gha/.github/actions/checkout@0.3.8
 ```
 
 <details>
@@ -107,7 +107,7 @@ uses: eliashaeussler/gha/.github/actions/checkout@0.3.7
 ```yaml
 steps:
   - name: 'Checkout'
-    uses: eliashaeussler/gha/.github/actions/checkout@0.3.7
+    uses: eliashaeussler/gha/.github/actions/checkout@0.3.8
 ```
 
 </details>
@@ -115,7 +115,7 @@ steps:
 ### [Composer checks](.github/actions/composer-checks/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/composer-checks@0.3.7
+uses: eliashaeussler/gha/.github/actions/composer-checks@0.3.8
 ```
 
 <details>
@@ -124,7 +124,7 @@ uses: eliashaeussler/gha/.github/actions/composer-checks@0.3.7
 ```yaml
 steps:
   - name: 'Perform Composer checks'
-    uses: eliashaeussler/gha/.github/actions/composer-checks@0.3.7
+    uses: eliashaeussler/gha/.github/actions/composer-checks@0.3.8
 ```
 
 </details>
@@ -132,7 +132,7 @@ steps:
 ### [Composer install](.github/actions/composer-install/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/composer-install@0.3.7
+uses: eliashaeussler/gha/.github/actions/composer-install@0.3.8
 ```
 
 <details>
@@ -141,7 +141,7 @@ uses: eliashaeussler/gha/.github/actions/composer-install@0.3.7
 ```yaml
 steps:
   - name: 'Install Composer packages'
-    uses: eliashaeussler/gha/.github/actions/composer-install@0.3.7
+    uses: eliashaeussler/gha/.github/actions/composer-install@0.3.8
     with:
       dependencies: 'locked'
       composer-options: '--no-dev'
@@ -152,7 +152,7 @@ steps:
 ### [Composer tests](.github/actions/composer-tests/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/composer-install@0.3.7
+uses: eliashaeussler/gha/.github/actions/composer-install@0.3.8
 ```
 
 <details>
@@ -161,7 +161,7 @@ uses: eliashaeussler/gha/.github/actions/composer-install@0.3.7
 ```yaml
 steps:
   - name: 'Run Composer tests'
-    uses: eliashaeussler/gha/.github/actions/composer-install@0.3.7
+    uses: eliashaeussler/gha/.github/actions/composer-install@0.3.8
     with:
       command: 'test:unit'
 ```
@@ -171,7 +171,7 @@ steps:
 ### [Deploy to GitHub Pages](.github/actions/deploy-pages/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/deploy-pages@0.3.7
+uses: eliashaeussler/gha/.github/actions/deploy-pages@0.3.8
 ```
 
 <details>
@@ -180,7 +180,7 @@ uses: eliashaeussler/gha/.github/actions/deploy-pages@0.3.7
 ```yaml
 steps:
   - name: 'Deploy'
-    uses: eliashaeussler/gha/.github/actions/deploy-pages@0.3.7
+    uses: eliashaeussler/gha/.github/actions/deploy-pages@0.3.8
     with:
       build-command: 'docs:build'
       dist-path: '.build/docs'
@@ -191,7 +191,7 @@ steps:
 ### [Check if workflow is from fork PR](.github/actions/is-fork/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/is-fork@0.3.7
+uses: eliashaeussler/gha/.github/actions/is-fork@0.3.8
 ```
 
 <details>
@@ -201,7 +201,7 @@ uses: eliashaeussler/gha/.github/actions/is-fork@0.3.7
 steps:
   - name: 'Check fork'
     id: is-fork
-    uses: eliashaeussler/gha/.github/actions/is-fork@0.3.7
+    uses: eliashaeussler/gha/.github/actions/is-fork@0.3.8
 
   - if: ${{ steps.is-fork.outputs.is-fork == 'true' }}
 ```
@@ -211,7 +211,7 @@ steps:
 ### [Check if workflow is from Renovate](.github/actions/is-renovate/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/is-renovate@0.3.7
+uses: eliashaeussler/gha/.github/actions/is-renovate@0.3.8
 ```
 
 <details>
@@ -221,7 +221,7 @@ uses: eliashaeussler/gha/.github/actions/is-renovate@0.3.7
 steps:
   - name: 'Check Renovate'
     id: is-renovate
-    uses: eliashaeussler/gha/.github/actions/is-renovate@0.3.7
+    uses: eliashaeussler/gha/.github/actions/is-renovate@0.3.8
 
   - if: ${{ steps.is-renovate.outputs.is-renovate == 'true' }}
 ```
@@ -231,7 +231,7 @@ steps:
 ### [Check if workflow is from tag](.github/actions/is-tag/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/is-tag@0.3.7
+uses: eliashaeussler/gha/.github/actions/is-tag@0.3.8
 ```
 
 <details>
@@ -241,7 +241,7 @@ uses: eliashaeussler/gha/.github/actions/is-tag@0.3.7
 steps:
   - name: 'Check tag'
     id: is-tag
-    uses: eliashaeussler/gha/.github/actions/is-tag@0.3.7
+    uses: eliashaeussler/gha/.github/actions/is-tag@0.3.8
 
   - if: ${{ steps.is-tag.outputs.is-version == 'true' }}
 ```
@@ -251,7 +251,7 @@ steps:
 ### [npm checks](.github/actions/npm-checks/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/npm-checks@0.3.7
+uses: eliashaeussler/gha/.github/actions/npm-checks@0.3.8
 ```
 
 <details>
@@ -260,7 +260,7 @@ uses: eliashaeussler/gha/.github/actions/npm-checks@0.3.7
 ```yaml
 steps:
   - name: 'Perform npm checks'
-    uses: eliashaeussler/gha/.github/actions/npm-checks@0.3.7
+    uses: eliashaeussler/gha/.github/actions/npm-checks@0.3.8
 ```
 
 </details>
@@ -268,7 +268,7 @@ steps:
 ### [npm install](.github/actions/npm-install/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/npm-install@0.3.7
+uses: eliashaeussler/gha/.github/actions/npm-install@0.3.8
 ```
 
 <details>
@@ -277,7 +277,7 @@ uses: eliashaeussler/gha/.github/actions/npm-install@0.3.7
 ```yaml
 steps:
   - name: 'Install npm packages'
-    uses: eliashaeussler/gha/.github/actions/npm-install@0.3.7
+    uses: eliashaeussler/gha/.github/actions/npm-install@0.3.8
 ```
 
 </details>
@@ -285,7 +285,7 @@ steps:
 ### [Setup node environment](.github/actions/setup-node/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/setup-node@0.3.7
+uses: eliashaeussler/gha/.github/actions/setup-node@0.3.8
 ```
 
 <details>
@@ -294,7 +294,7 @@ uses: eliashaeussler/gha/.github/actions/setup-node@0.3.7
 ```yaml
 steps:
   - name: 'Setup node'
-    uses: eliashaeussler/gha/.github/actions/setup-node@0.3.7
+    uses: eliashaeussler/gha/.github/actions/setup-node@0.3.8
     with:
       node-version: '24'
       cache: 'npm'
@@ -305,7 +305,7 @@ steps:
 ### [Setup DDEV](.github/actions/setup-ddev/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/setup-ddev@0.3.7
+uses: eliashaeussler/gha/.github/actions/setup-ddev@0.3.8
 ```
 
 <details>
@@ -314,7 +314,7 @@ uses: eliashaeussler/gha/.github/actions/setup-ddev@0.3.7
 ```yaml
 steps:
   - name: 'Setup DDEV'
-    uses: eliashaeussler/gha/.github/actions/setup-ddev@0.3.7
+    uses: eliashaeussler/gha/.github/actions/setup-ddev@0.3.8
     with:
       php-version: '8.5'
       ddev-version: '1.25.2'
@@ -325,7 +325,7 @@ steps:
 ### [Setup PHP environment](.github/actions/setup-php/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/setup-php@0.3.7
+uses: eliashaeussler/gha/.github/actions/setup-php@0.3.8
 ```
 
 <details>
@@ -334,7 +334,7 @@ uses: eliashaeussler/gha/.github/actions/setup-php@0.3.7
 ```yaml
 steps:
   - name: 'Setup PHP'
-    uses: eliashaeussler/gha/.github/actions/setup-php@0.3.7
+    uses: eliashaeussler/gha/.github/actions/setup-php@0.3.8
     with:
       php-version: '8.5'
       ini-file: 'production'
@@ -349,7 +349,7 @@ steps:
 ### [Asset integrity](.github/workflows/asset-integrity.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/asset-integrity.yaml@0.3.7
+uses: eliashaeussler/gha/.github/workflows/asset-integrity.yaml@0.3.8
 ```
 
 <details>
@@ -361,7 +361,7 @@ jobs:
     secrets:
       ASSETS_TOKEN: ${{ secrets.REBUILD_ASSETS_TOKEN }}
 
-    uses: eliashaeussler/gha/.github/workflows/asset-integrity.yaml@0.3.7
+    uses: eliashaeussler/gha/.github/workflows/asset-integrity.yaml@0.3.8
 
   other:
     needs: [asset-integrity]
@@ -373,7 +373,7 @@ jobs:
 ### [Checks](.github/workflows/checks.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/checks.yaml@0.3.7
+uses: eliashaeussler/gha/.github/workflows/checks.yaml@0.3.8
 ```
 
 <details>
@@ -382,7 +382,7 @@ uses: eliashaeussler/gha/.github/workflows/checks.yaml@0.3.7
 ```yaml
 jobs:
   checks:
-    uses: eliashaeussler/gha/.github/workflows/checks.yaml@0.3.7
+    uses: eliashaeussler/gha/.github/workflows/checks.yaml@0.3.8
     with:
       # Composer
       composer: true
@@ -402,7 +402,7 @@ jobs:
 ### [Composer tests](.github/workflows/composer-tests.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/composer-tests.yaml@0.3.7
+uses: eliashaeussler/gha/.github/workflows/composer-tests.yaml@0.3.8
 ```
 
 <details>
@@ -411,7 +411,7 @@ uses: eliashaeussler/gha/.github/workflows/composer-tests.yaml@0.3.7
 ```yaml
 jobs:
   tests:
-    uses: eliashaeussler/gha/.github/workflows/composer-tests.yaml@0.3.7
+    uses: eliashaeussler/gha/.github/workflows/composer-tests.yaml@0.3.8
     with:
       php-version: '8.5'
       dependencies: 'highest'
@@ -423,7 +423,7 @@ jobs:
 ### [Composer test coverage](.github/workflows/composer-test-coverage.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/composer-test-coverage.yaml@0.3.7
+uses: eliashaeussler/gha/.github/workflows/composer-test-coverage.yaml@0.3.8
 ```
 
 <details>
@@ -432,7 +432,7 @@ uses: eliashaeussler/gha/.github/workflows/composer-test-coverage.yaml@0.3.7
 ```yaml
 jobs:
   test-coverage:
-    uses: eliashaeussler/gha/.github/workflows/composer-test-coverage.yaml@0.3.7
+    uses: eliashaeussler/gha/.github/workflows/composer-test-coverage.yaml@0.3.8
     with:
       command: 'test:unit:coverage'
       coverage-driver: 'xdebug'
@@ -444,7 +444,7 @@ jobs:
 ### [Crowdin](.github/workflows/crowdin.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/crowdin.yaml@0.3.7
+uses: eliashaeussler/gha/.github/workflows/crowdin.yaml@0.3.8
 ```
 
 <details>
@@ -456,7 +456,7 @@ jobs:
     secrets:
       CROWDIN_TOKEN: ${{ secrets.CROWDIN_TOKEN }}
 
-    uses: eliashaeussler/gha/.github/workflows/crowdin.yaml@0.3.7
+    uses: eliashaeussler/gha/.github/workflows/crowdin.yaml@0.3.8
     with:
       project-id: 12345
 ```
@@ -466,7 +466,7 @@ jobs:
 ### [GitHub release](.github/workflows/github-release.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/extension-release.yaml@0.3.7
+uses: eliashaeussler/gha/.github/workflows/extension-release.yaml@0.3.8
 ```
 
 <details>
@@ -478,7 +478,7 @@ jobs:
     secrets:
       RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
-    uses: eliashaeussler/gha/.github/workflows/extension-release.yaml@0.3.7
+    uses: eliashaeussler/gha/.github/workflows/extension-release.yaml@0.3.8
     with:
       version: '1.0.0'
       files: 'release_1.0.0.zip'
@@ -489,7 +489,7 @@ jobs:
 ### [Merge branch](.github/workflows/merge.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/merge.yaml@0.3.7
+uses: eliashaeussler/gha/.github/workflows/merge.yaml@0.3.8
 ```
 
 <details>
@@ -501,7 +501,7 @@ jobs:
     secrets:
       MERGE_TOKEN: ${{ secrets.MERGE_TOKEN }}
 
-    uses: eliashaeussler/gha/.github/workflows/merge.yaml@0.3.7
+    uses: eliashaeussler/gha/.github/workflows/merge.yaml@0.3.8
 ```
 
 </details>
@@ -509,7 +509,7 @@ jobs:
 ### [Preparation](.github/workflows/preparation.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/preparation.yaml@0.3.7
+uses: eliashaeussler/gha/.github/workflows/preparation.yaml@0.3.8
 ```
 
 <details>
@@ -518,7 +518,7 @@ uses: eliashaeussler/gha/.github/workflows/preparation.yaml@0.3.7
 ```yaml
 jobs:
   prepare:
-    uses: eliashaeussler/gha/.github/workflows/preparation.yaml@0.3.7
+    uses: eliashaeussler/gha/.github/workflows/preparation.yaml@0.3.8
 
   other:
     needs: [prepare]
@@ -530,7 +530,7 @@ jobs:
 ### [TYPO3 extension release](.github/workflows/extension-release.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/extension-release.yaml@0.3.7
+uses: eliashaeussler/gha/.github/workflows/extension-release.yaml@0.3.8
 ```
 
 <details>
@@ -542,7 +542,7 @@ jobs:
     secrets:
       TYPO3_API_TOKEN: ${{ secrets.TYPO3_API_TOKEN }}
 
-    uses: eliashaeussler/gha/.github/workflows/extension-release.yaml@0.3.7
+    uses: eliashaeussler/gha/.github/workflows/extension-release.yaml@0.3.8
     with:
       packaging-excludes-file: Build/packaging_exclude.php
 ```
