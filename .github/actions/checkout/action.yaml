@@ -26,14 +26,19 @@ runs:
         token: ${{ inputs.token }}
         allowed-endpoints: >
           artifacts.setup-php.com:443
+          auth.docker.io:443
           cdn.jsdelivr.net:443
           coveralls.io:443
           dl.cloudsmith.io:443
           getcomposer.org:443
+          ghcr.io:443
+          keys.openpgp.org:443
           packagist.org:443
           phar.io:443
           pkg-containers.githubusercontent.com:443
+          production.cloudfront.docker.com:443
           raw.githubusercontent.com:443
+          registry-1.docker.io:443
           registry.npmjs.org:443
           release-assets.githubusercontent.com:443
           repo.packagist.org:443
