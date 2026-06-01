@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.4.0
+        uses: eliashaeussler/gha/.github/actions/checkout@fix/endpoints
 
       - name: 'Lookup testsuites'
         id: testsuites
@@ -59,18 +59,18 @@ jobs:
           echo "use-ddev=${useDdev}" >> $GITHUB_OUTPUT
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.4.0
+        uses: eliashaeussler/gha/.github/actions/setup-php@fix/endpoints
         with:
           coverage: pcov
 
       - name: 'Setup DDEV'
         if: ${{ steps.context.outputs.use-ddev == 'true' }}
-        uses: eliashaeussler/gha/.github/actions/setup-ddev@0.4.0
+        uses: eliashaeussler/gha/.github/actions/setup-ddev@fix/endpoints
         with:
           ddev-version: ${{ inputs.ddev-version }}
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.4.0
+        uses: eliashaeussler/gha/.github/actions/composer-install@fix/endpoints
 
       - name: 'Resolve coverage path'
         id: coverage
@@ -147,7 +147,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.4.0
+        uses: eliashaeussler/gha/.github/actions/checkout@fix/endpoints
 
       - name: 'Download coverage artifact'
         id: download

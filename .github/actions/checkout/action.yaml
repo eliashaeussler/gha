@@ -13,6 +13,8 @@ inputs:
   egress-policy:
     description: 'Policy for outbound traffic (defaults to "block")'
     default: block
+  allowed-endpoints:
+    description: 'List of allowed outbound endpoints'
 
 runs:
   using: composite
@@ -22,6 +24,19 @@ runs:
       with:
         egress-policy: ${{ inputs.egress-policy }}
         token: ${{ inputs.token }}
+        allowed-endpoints: >
+          artifacts.setup-php.com:443
+          cdn.jsdelivr.net:443
+          dl.cloudsmith.io:443
+          getcomposer.org:443
+          packagist.org:443
+          pkg-containers.githubusercontent.com:443
+          raw.githubusercontent.com:443
+          registry.npmjs.org:443
+          release-assets.githubusercontent.com:443
+          repo.packagist.org:443
+          setup-php.com:443
+          ${{ inputs.allowed-endpoints }}
 
     - name: 'Checkout'
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
