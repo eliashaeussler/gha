@@ -108,6 +108,9 @@ uses: eliashaeussler/gha/.github/actions/checkout@0.3.8
 steps:
   - name: 'Checkout'
     uses: eliashaeussler/gha/.github/actions/checkout@0.3.8
+    with:
+      fetch-depth: 0
+      egress-policy: audit
 ```
 
 </details>

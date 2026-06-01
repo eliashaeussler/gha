@@ -10,6 +10,9 @@ inputs:
   persist-credentials:
     description: 'Whether to configure the token or SSH key with the local git config (defaults to "false")'
     default: 'false'
+  egress-policy:
+    description: 'Policy for outbound traffic (defaults to "block")'
+    default: block
 
 runs:
   using: composite
@@ -17,7 +20,7 @@ runs:
     - name: 'Harden Runner'
       uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
       with:
-        egress-policy: audit
+        egress-policy: ${{ inputs.egress-policy }}
         token: ${{ inputs.token }}
 
     - name: 'Checkout'
