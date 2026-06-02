@@ -17,7 +17,7 @@ runs:
   steps:
     - name: 'Build pages'
       if: ${{ inputs.build-command }}
-      uses: eliashaeussler/gha/.github/actions/build-docs@0.4.5
+      uses: eliashaeussler/gha/.github/actions/build-docs@task/endpoints
       with:
         command: ${{ inputs.build-command }}
 

@@ -19,34 +19,28 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: 'Determine allowed endpoints'
+      id: endpoints
+      run: |
+        filename="$(realpath "${GITHUB_ACTION_PATH}/../../config/allowed-endpoints.txt")"
+
+        if [ ! -f "$filename" ]; then
+          echo "::error::Config file for allowed endpoints could not be found."
+          exit 1
+        fi
+
+        endpoints="$(cat "$filename" | tr '\n' ' ')"
+        echo "endpoints=${endpoints}" >> $GITHUB_OUTPUT
+      shell: bash
+
     - name: 'Harden Runner'
       uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+      if: ${{ success() }}
       with:
         egress-policy: ${{ inputs.egress-policy }}
         token: ${{ inputs.token }}
         allowed-endpoints: >
-          _pgpkey-https._tcp.keys.openpgp.org
-          api.typo3.org:443
-          artifacts.setup-php.com:443
-          auth.docker.io:443
-          cdn.jsdelivr.net:443
-          coveralls.io:443
-          dl.cloudsmith.io:443
-          docs.typo3.org:443
-          extensions.typo3.org:443
-          getcomposer.org:443
-          ghcr.io:443
-          keys.openpgp.org:443
-          packagist.org:443
-          phar.io:443
-          pkg-containers.githubusercontent.com:443
-          production.cloudfront.docker.com:443
-          raw.githubusercontent.com:443
-          registry-1.docker.io:443
-          registry.npmjs.org:443
-          release-assets.githubusercontent.com:443
-          repo.packagist.org:443
-          setup-php.com:443
+          ${{ steps.endpoints.outputs.endpoints }}
           ${{ inputs.allowed-endpoints }}
 
     - name: 'Checkout'

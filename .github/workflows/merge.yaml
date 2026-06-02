@@ -37,7 +37,7 @@ jobs:
     steps:
       - name: 'Check if workflow is from Renovate'
         id: is-renovate
-        uses: eliashaeussler/gha/.github/actions/is-renovate@0.4.5
+        uses: eliashaeussler/gha/.github/actions/is-renovate@task/endpoints
 
   merge:
     name: 'Merge current branch into default branch'
@@ -48,7 +48,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.4.5
+        uses: eliashaeussler/gha/.github/actions/checkout@task/endpoints
         with:
           token: ${{ secrets.MERGE_TOKEN }}
           # Must be true, otherwise new commits cannot be pushed
