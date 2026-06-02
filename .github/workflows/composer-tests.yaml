@@ -28,6 +28,9 @@ on:
       boot-mysql:
         description: 'Define whether to boot MySQL service'
         type: boolean
+      allowed-endpoints:
+        description: 'List of allowed outbound endpoints'
+        type: string
 
 jobs:
   test:
@@ -43,6 +46,8 @@ jobs:
     steps:
       - name: 'Checkout'
         uses: eliashaeussler/gha/.github/actions/checkout@0.4.6
+        with:
+          allowed-endpoints: ${{ inputs.allowed-endpoints }}
 
       - name: 'Setup PHP'
         uses: eliashaeussler/gha/.github/actions/setup-php@0.4.6
