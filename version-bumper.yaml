@@ -1,3 +1,6 @@
+presets:
+  - typo3-commit-guidelines
+
 filesToModify:
   - &file
     path: '.github/workflows/*.yaml'
