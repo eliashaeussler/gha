@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.4.4
+        uses: eliashaeussler/gha/.github/actions/checkout@0.4.5
 
       - name: 'Lookup testsuites'
         id: testsuites
@@ -63,25 +63,25 @@ jobs:
           echo "use-ddev=${useDdev}" >> $GITHUB_OUTPUT
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.4.4
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.4.5
         with:
           php-version: ${{ inputs.php-version }}
 
       - name: 'Setup DDEV'
         if: ${{ steps.context.outputs.use-ddev == 'true' }}
-        uses: eliashaeussler/gha/.github/actions/setup-ddev@0.4.4
+        uses: eliashaeussler/gha/.github/actions/setup-ddev@0.4.5
         with:
           ddev-version: ${{ inputs.ddev-version }}
           php-version: ${{ inputs.php-version }}
 
       - name: 'Install Composer packages (without plugins)'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.4.4
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.4.5
         with:
           dependencies: ${{ inputs.dependencies }}
           composer-options: '--with=typo3/cms-core:~${{ inputs.typo3-version }}.0 --no-plugins --no-scripts'
 
       - name: 'Install Composer packages (with plugins)'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.4.4
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.4.5
 
       - name: 'Run functional tests'
         if: ${{ steps.testsuites.outputs.functional == 'true' }}
