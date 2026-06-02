@@ -25,6 +25,7 @@ runs:
         egress-policy: ${{ inputs.egress-policy }}
         token: ${{ inputs.token }}
         allowed-endpoints: >
+          _pgpkey-https._tcp.keys.openpgp.org
           api.typo3.org:443
           artifacts.setup-php.com:443
           auth.docker.io:443
