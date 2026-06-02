@@ -2,12 +2,17 @@ presets:
   - typo3-commit-guidelines
 
 filesToModify:
+  # GitHub workflows
   - &file
     path: '.github/workflows/*.yaml'
     patterns:
       - 'eliashaeussler/gha/[^@]+@{%version%}'
+
+  # GitHub actions
   - <<: *file
     path: '.github/actions/**/action.yaml'
+
+  # README code examples
   - <<: *file
     path: 'README.md'
 
