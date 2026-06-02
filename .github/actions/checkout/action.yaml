@@ -32,6 +32,7 @@ runs:
           auth.docker.io:443
           cdn.jsdelivr.net:443
           coveralls.io:443
+          ddev.com:443
           dl.cloudsmith.io:443
           docs.typo3.org:443
           extensions.typo3.org:443
