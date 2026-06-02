@@ -39,10 +39,10 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.4.3
+        uses: eliashaeussler/gha/.github/actions/checkout@0.4.4
 
       - name: 'Check tag'
-        uses: eliashaeussler/gha/.github/actions/assure-version-tag@0.4.3
+        uses: eliashaeussler/gha/.github/actions/assure-version-tag@0.4.4
         with:
           tag-name: ${{ inputs.extension-version }}
 
@@ -68,14 +68,14 @@ jobs:
           fi
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.4.3
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.4.4
         with:
           php-version: ${{ inputs.php-version }}
           tools: typo3/tailor
 
       - name: 'Install Composer dependencies'
         if: ${{ steps.bundler.outputs.enabled == 'true' }}
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.4.3
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.4.4
         with:
           ignore-cache: true
 
@@ -116,7 +116,7 @@ jobs:
     permissions:
       contents: write
 
-    uses: eliashaeussler/gha/.github/workflows/github-release.yaml@0.4.3
+    uses: eliashaeussler/gha/.github/workflows/github-release.yaml@0.4.4
     with:
       version: ${{ inputs.extension-version }}
       artifact-name: ${{ needs.artefact.outputs.extension-artifact-name }}
@@ -132,7 +132,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.4.3
+        uses: eliashaeussler/gha/.github/actions/checkout@0.4.4
 
       - name: 'Download extension artefact'
         id: download
@@ -141,7 +141,7 @@ jobs:
           name: ${{ needs.artefact.outputs.extension-artifact-name }}
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.4.3
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.4.4
         with:
           php-version: ${{ inputs.php-version }}
           tools: typo3/tailor
