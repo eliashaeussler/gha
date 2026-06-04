@@ -21,7 +21,7 @@ on:
 
 jobs:
   prepare:
-    name: 'Prepare workflow execution'
+    name: 'Prepare tests'
 
     permissions:
       contents: read

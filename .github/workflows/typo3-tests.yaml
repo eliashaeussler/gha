@@ -29,7 +29,7 @@ on:
 
 jobs:
   prepare:
-    name: 'Prepare test execution'
+    name: 'Prepare tests'
 
     permissions:
       contents: read
