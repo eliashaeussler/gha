@@ -25,30 +25,80 @@ runs:
         egress-policy: ${{ inputs.egress-policy }}
         token: ${{ inputs.token }}
         allowed-endpoints: >
+          _http._tcp.azure.archive.ubuntu.com:443
+          _http._tcp.deb.debian.org:443
+          _http._tcp.packages.blackfire.io:443
+          _https._tcp.apt.postgresql.org:443
+          _https._tcp.archive.mariadb.org:443
+          _https._tcp.archive.ubuntu.com:443
+          _https._tcp.dl.cloudsmith.io:443
+          _https._tcp.dl.google.com:443
+          _https._tcp.esm.ubuntu.com:443
+          _https._tcp.motd.ubuntu.com:443
+          _https._tcp.packages.microsoft.com:443
+          _https._tcp.packages.sury.org:443
+          _https._tcp.ppa.launchpadcontent.net:443
+          _https._tcp.security.ubuntu.com:443
           _pgpkey-https._tcp.keys.openpgp.org:443
+          accounts.google.com:443
+          android.clients.google.com:443
           api.crowdin.com:443
+          api.github.com:443
           api.typo3.org:443
+          apt.postgresql.org:443
+          archive.mariadb.org:443
+          archive.ubuntu.com:443
+          artifacts.php-ubuntu.setup-php.com:443
           artifacts.setup-php.com:443
           auth.docker.io:443
+          azure.archive.ubuntu.com:443
+          azure.archive.ubuntu.com:80
           cdn.jsdelivr.net:443
+          clients2.google.com:443
+          clients2.google.com:80
+          content-autofill.googleapis.com:443
           coveralls.io:443
           ddev.com:443
+          ddev.github.io:443
+          deb.debian.org:443
+          deb.debian.org:80
+          debian.map.fastlydns.net:80
           dl.cloudsmith.io:443
+          dl.google.com:443
           docs.typo3.org:443
+          edgedl.me.gvt1.com:80
+          esm.ubuntu.com:443
           extensions.typo3.org:443
           getcomposer.org:443
           ghcr.io:443
+          github.com:443
+          google.com:443
           keys.openpgp.org:443
+          motd.ubuntu.com:443
+          mtalk.google.com:443
+          mtalk.google.com:5228
+          one.one.one.one:443
+          optimizationguide-pa.googleapis.com:443
+          packages.blackfire.io:443
+          packages.blackfire.io:80
+          packages.microsoft.com:443
+          packages.sury.org:443
           packagist.org:443
           phar.io:443
           pkg-containers.githubusercontent.com:443
+          ppa.launchpadcontent.net:443
           production.cloudfront.docker.com:443
           raw.githubusercontent.com:443
           registry-1.docker.io:443
           registry.npmjs.org:443
           release-assets.githubusercontent.com:443
           repo.packagist.org:443
+          security.ubuntu.com:443
           setup-php.com:443
+          telemetry.sury.org:443
+          update.googleapis.com:443
+          update.traefik.io:443
+          www.google.com:443
           ${{ inputs.allowed-endpoints }}
 
     - name: 'Checkout'
