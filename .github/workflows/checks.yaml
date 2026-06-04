@@ -50,18 +50,18 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.4.9
+        uses: eliashaeussler/gha/.github/actions/checkout@0.5.0
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.4.9
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.5.0
         with:
           php-version: ${{ inputs.php-version }}
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.4.9
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.5.0
 
       - name: 'Perform Composer checks'
-        uses: eliashaeussler/gha/.github/actions/composer-checks@0.4.9
+        uses: eliashaeussler/gha/.github/actions/composer-checks@0.5.0
 
   npm-checks:
     name: 'Perform npm checks'
@@ -71,22 +71,22 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.4.9
+        uses: eliashaeussler/gha/.github/actions/checkout@0.5.0
 
       - name: 'Setup Node'
-        uses: eliashaeussler/gha/.github/actions/setup-node@0.4.9
+        uses: eliashaeussler/gha/.github/actions/setup-node@0.5.0
         with:
           node-version: ${{ inputs.node-version }}
           cache: ${{ inputs.node-cache }}
           base-path: ${{ inputs.assets-path }}
 
       - name: 'Install npm packages'
-        uses: eliashaeussler/gha/.github/actions/npm-install@0.4.9
+        uses: eliashaeussler/gha/.github/actions/npm-install@0.5.0
         with:
           base-path: ${{ inputs.assets-path }}
 
       - name: 'Perform npm checks'
-        uses: eliashaeussler/gha/.github/actions/npm-checks@0.4.9
+        uses: eliashaeussler/gha/.github/actions/npm-checks@0.5.0
         with:
           base-path: ${{ inputs.assets-path }}
 
@@ -101,7 +101,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.4.9
+        uses: eliashaeussler/gha/.github/actions/checkout@0.5.0
 
       - name: 'Run zizmor'
         id: zizmor

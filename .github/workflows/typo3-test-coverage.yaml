@@ -26,7 +26,7 @@ jobs:
     permissions:
       contents: read
 
-    uses: eliashaeussler/gha/.github/workflows/typo3-test-preparation.yaml@0.4.9
+    uses: eliashaeussler/gha/.github/workflows/typo3-test-preparation.yaml@0.5.0
 
   collect:
     name: 'Collect test coverage'
@@ -40,24 +40,24 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.4.9
+        uses: eliashaeussler/gha/.github/actions/checkout@0.5.0
         with:
           egress-policy: ${{ case(needs.prepare.outputs.has-acceptance-tests == 'true', 'audit', 'block') }}
           allowed-endpoints: ${{ inputs.allowed-endpoints }}
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.4.9
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.5.0
         with:
           coverage: ${{ case(needs.prepare.outputs.use-ddev == 'true', 'none', 'pcov') }}
 
       - name: 'Setup DDEV'
         if: ${{ needs.prepare.outputs.use-ddev == 'true' }}
-        uses: eliashaeussler/gha/.github/actions/setup-ddev@0.4.9
+        uses: eliashaeussler/gha/.github/actions/setup-ddev@0.5.0
         with:
           ddev-version: ${{ inputs.ddev-version }}
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.4.9
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.5.0
 
       - name: 'Resolve coverage path'
         id: coverage
@@ -134,7 +134,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.4.9
+        uses: eliashaeussler/gha/.github/actions/checkout@0.5.0
 
       - name: 'Download coverage artifact'
         id: download

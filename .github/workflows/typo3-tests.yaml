@@ -34,7 +34,7 @@ jobs:
     permissions:
       contents: read
 
-    uses: eliashaeussler/gha/.github/workflows/typo3-test-preparation.yaml@0.4.9
+    uses: eliashaeussler/gha/.github/workflows/typo3-test-preparation.yaml@0.5.0
 
   test:
     name: 'Run tests'
@@ -44,31 +44,31 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.4.9
+        uses: eliashaeussler/gha/.github/actions/checkout@0.5.0
         with:
           egress-policy: ${{ case(needs.prepare.outputs.has-acceptance-tests == 'true', 'audit', 'block') }}
           allowed-endpoints: ${{ inputs.allowed-endpoints }}
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.4.9
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.5.0
         with:
           php-version: ${{ inputs.php-version }}
 
       - name: 'Setup DDEV'
         if: ${{ needs.prepare.outputs.use-ddev == 'true' }}
-        uses: eliashaeussler/gha/.github/actions/setup-ddev@0.4.9
+        uses: eliashaeussler/gha/.github/actions/setup-ddev@0.5.0
         with:
           ddev-version: ${{ inputs.ddev-version }}
           php-version: ${{ inputs.php-version }}
 
       - name: 'Install Composer packages (without plugins)'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.4.9
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.5.0
         with:
           dependencies: ${{ inputs.dependencies }}
           composer-options: '--with=typo3/cms-core:~${{ inputs.typo3-version }}.0 --no-plugins --no-scripts'
 
       - name: 'Install Composer packages (with plugins)'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.4.9
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.5.0
 
       - name: 'Run functional tests'
         if: ${{ needs.prepare.outputs.has-functional-tests == 'true' }}
