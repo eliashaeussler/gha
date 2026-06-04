@@ -1,0 +1,65 @@
+name: 'Prepare TYPO3 tests'
+
+on:
+  workflow_call:
+    outputs:
+      has-acceptance-tests:
+        description: 'Whether acceptance tests are available'
+        value: ${{ jobs.prepare.outputs.has-acceptance-tests }}
+      has-functional-tests:
+        description: 'Whether functional tests are available'
+        value: ${{ jobs.prepare.outputs.has-functional-tests }}
+      has-unit-tests:
+        description: 'Whether unit tests are available'
+        value: ${{ jobs.prepare.outputs.has-unit-tests }}
+      test-command:
+        description: 'Base command to run tests (e.g. "composer" or "ddev composer")'
+        value: ${{ jobs.prepare.outputs.test-command }}
+      use-ddev:
+        description: 'Whether to use DDEV to run tests'
+        value: ${{ jobs.prepare.outputs.use-ddev }}
+
+jobs:
+  prepare:
+    name: 'Prepare test execution'
+    runs-on: ubuntu-latest
+
+    outputs:
+      has-acceptance-tests: ${{ steps.testsuites.outputs.acceptance }}
+      has-functional-tests: ${{ steps.testsuites.outputs.functional }}
+      has-unit-tests: ${{ steps.testsuites.outputs.unit }}
+      test-command: ${{ steps.context.outputs.command }}
+      use-ddev: ${{ steps.context.outputs.use-ddev }}
+
+    steps:
+      - name: 'Checkout'
+        uses: eliashaeussler/gha/.github/actions/checkout@0.4.9
+
+      - name: 'Lookup testsuites'
+        id: testsuites
+        run: |
+          commands="$(composer list --format json)"
+
+          function hasCommand() {
+            echo "$commands" | jq -r "if (.commands | map(select(.name == \"$1\")) | length) == 0 then \"false\" else \"true\" end"
+          }
+
+          echo "acceptance=$(hasCommand 'test:acceptance')" >> $GITHUB_OUTPUT
+          echo "functional=$(hasCommand 'test:functional')" >> $GITHUB_OUTPUT
+          echo "unit=$(hasCommand 'test:unit')" >> $GITHUB_OUTPUT
+
+      - name: 'Determine execution context'
+        id: context
+        env:
+          HAS_ACCEPTANCE_TESTS: ${{ steps.testsuites.outputs.acceptance }}
+        run: |
+          if [[ "$HAS_ACCEPTANCE_TESTS" == "true" ]]; then
+            command="ddev composer"
+            useDDEV="true"
+          else
+            command="composer"
+            useDDEV="false"
+          fi
+
+          echo "command=${command}" >> $GITHUB_OUTPUT
+          echo "use-ddev=${useDDEV}" >> $GITHUB_OUTPUT
