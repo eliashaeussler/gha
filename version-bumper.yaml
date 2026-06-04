@@ -14,7 +14,7 @@ filesToModify:
 
   # README code examples
   - <<: *file
-    path: 'README.md'
+    path: 'docs/*.md'
 
 releaseOptions:
   signTag: true
