@@ -321,6 +321,7 @@ steps:
     with:
       php-version: '8.5'
       ddev-version: '1.25.2'
+      start: false
 ```
 
 </details>

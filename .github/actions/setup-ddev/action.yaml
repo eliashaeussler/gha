@@ -6,6 +6,9 @@ inputs:
     default: latest
   php-version:
     description: 'PHP version to use'
+  start:
+    description: 'Whether to start DDEV after installation (defaults to "true")'
+    default: 'true'
 
 runs:
   using: composite
@@ -16,10 +19,17 @@ runs:
         version: ${{ inputs.ddev-version }}
         autostart: false
 
-    - name: 'Configure and start DDEV'
+    - name: 'Configure DDEV'
       env:
         DDEV_ARGS: ${{ case(inputs.php-version != '', format('--php-version={0}', inputs.php-version), '--auto') }}
-      run: |
-        ddev config $DDEV_ARGS
-        ddev start
+      run: ddev config $DDEV_ARGS
+      shell: bash
+
+    - name: 'Start DDEV'
+      if: ${{ inputs.start == 'true' }}
+      run: ddev start
+      shell: bash
+
+    - name: 'Show DDEV configuration'
+      run: ddev describe
       shell: bash
