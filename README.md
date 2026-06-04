@@ -470,7 +470,7 @@ jobs:
 ### [GitHub release](.github/workflows/github-release.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/extension-release.yaml@0.4.9
+uses: eliashaeussler/gha/.github/workflows/github-release.yaml@0.4.9
 ```
 
 <details>
@@ -482,7 +482,7 @@ jobs:
     secrets:
       RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
-    uses: eliashaeussler/gha/.github/workflows/extension-release.yaml@0.4.9
+    uses: eliashaeussler/gha/.github/workflows/github-release.yaml@0.4.9
     with:
       version: '1.0.0'
       files: 'release_1.0.0.zip'
@@ -531,10 +531,10 @@ jobs:
 
 </details>
 
-### [TYPO3 extension release](.github/workflows/extension-release.yaml)
+### [TYPO3 extension release](.github/workflows/typo3-extension-release.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/extension-release.yaml@0.4.9
+uses: eliashaeussler/gha/.github/workflows/typo3-extension-release.yaml@0.4.9
 ```
 
 <details>
@@ -546,7 +546,7 @@ jobs:
     secrets:
       TYPO3_API_TOKEN: ${{ secrets.TYPO3_API_TOKEN }}
 
-    uses: eliashaeussler/gha/.github/workflows/extension-release.yaml@0.4.9
+    uses: eliashaeussler/gha/.github/workflows/typo3-extension-release.yaml@0.4.9
     with:
       packaging-excludes-file: Build/packaging_exclude.php
 ```
