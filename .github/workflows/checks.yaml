@@ -50,18 +50,18 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.5.1
+        uses: eliashaeussler/gha/.github/actions/checkout@task/compatibility
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.5.1
+        uses: eliashaeussler/gha/.github/actions/setup-php@task/compatibility
         with:
           php-version: ${{ inputs.php-version }}
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.5.1
+        uses: eliashaeussler/gha/.github/actions/composer-install@task/compatibility
 
       - name: 'Perform Composer checks'
-        uses: eliashaeussler/gha/.github/actions/composer-checks@0.5.1
+        uses: eliashaeussler/gha/.github/actions/composer-checks@task/compatibility
 
   npm-checks:
     name: 'Perform npm checks'
@@ -71,22 +71,22 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.5.1
+        uses: eliashaeussler/gha/.github/actions/checkout@task/compatibility
 
       - name: 'Setup Node'
-        uses: eliashaeussler/gha/.github/actions/setup-node@0.5.1
+        uses: eliashaeussler/gha/.github/actions/setup-node@task/compatibility
         with:
           node-version: ${{ inputs.node-version }}
           cache: ${{ inputs.node-cache }}
           base-path: ${{ inputs.assets-path }}
 
       - name: 'Install npm packages'
-        uses: eliashaeussler/gha/.github/actions/npm-install@0.5.1
+        uses: eliashaeussler/gha/.github/actions/npm-install@task/compatibility
         with:
           base-path: ${{ inputs.assets-path }}
 
       - name: 'Perform npm checks'
-        uses: eliashaeussler/gha/.github/actions/npm-checks@0.5.1
+        uses: eliashaeussler/gha/.github/actions/npm-checks@task/compatibility
         with:
           base-path: ${{ inputs.assets-path }}
 
@@ -101,7 +101,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.5.1
+        uses: eliashaeussler/gha/.github/actions/checkout@task/compatibility
 
       - name: 'Run zizmor'
         id: zizmor
