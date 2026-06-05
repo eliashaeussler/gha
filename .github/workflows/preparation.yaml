@@ -16,7 +16,7 @@ jobs:
       continue: ${{ steps.continue.outputs.continue }}
 
     steps:
-      - name: 'Check if workflows is from fork PR'
+      - name: 'Check if workflow is from fork PR'
         id: is-fork
         uses: eliashaeussler/gha/.github/actions/is-fork@0.5.1
 
