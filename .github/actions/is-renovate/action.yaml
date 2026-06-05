@@ -17,15 +17,15 @@ runs:
       run: |
         if [[ "$EVENT_NAME" == "pull_request" ]]; then
           if [[ "$TRIGGERER" == "renovate[bot]" ]]; then
-            echo "is-renovate=true" >> $GITHUB_OUTPUT
+            echo "is-renovate=true" >> "$GITHUB_OUTPUT"
           else
-            echo "is-renovate=false" >> $GITHUB_OUTPUT
+            echo "is-renovate=false" >> "$GITHUB_OUTPUT"
           fi
         else
           if [[ "$ACTOR" == "renovate[bot]" ]]; then
-            echo "is-renovate=true" >> $GITHUB_OUTPUT
+            echo "is-renovate=true" >> "$GITHUB_OUTPUT"
           else
-            echo "is-renovate=false" >> $GITHUB_OUTPUT
+            echo "is-renovate=false" >> "$GITHUB_OUTPUT"
           fi
         fi
       shell: bash

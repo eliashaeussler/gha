@@ -35,7 +35,7 @@ runs:
           tools="${tools},composer:${COMPOSER_VERSION}"
         fi
 
-        echo "tools=${tools}" >> $GITHUB_OUTPUT
+        echo "tools=${tools}" >> "$GITHUB_OUTPUT"
       shell: bash
 
     - name: 'Setup PHP'

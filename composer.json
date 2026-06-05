@@ -20,10 +20,12 @@
 			"@check:style"
 		],
 		"check:style": [
+			"@check:style:actions",
 			"@check:style:composer",
 			"@check:style:editorconfig",
 			"@check:style:yaml"
 		],
+		"check:style:actions": "docker run --rm -v $(pwd):/repo --workdir /repo rhysd/actionlint:latest -color -verbose",
 		"check:style:composer": "@fix:composer --dry-run",
 		"check:style:editorconfig": "ec",
 		"check:style:yaml": "yaml-lint .",
