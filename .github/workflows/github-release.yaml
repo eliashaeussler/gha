@@ -72,6 +72,7 @@ jobs:
             done < <(find artifact-download -type f -print0)
           fi
 
-          url="$(gh release create "$VERSION" --generate-notes "$files")"
+          # shellcheck disable=SC2086
+          url="$(gh release create "$VERSION" --generate-notes $files)"
 
           echo "url=${url}" >> "$GITHUB_OUTPUT"
