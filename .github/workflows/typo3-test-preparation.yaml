@@ -53,9 +53,11 @@ jobs:
             echo "$commands" | jq -r "if (.commands | map(select(.name == \"$1\")) | length) == 0 then \"false\" else \"true\" end"
           }
 
-          echo "acceptance=$(hasCommand 'test:acceptance')" >> $GITHUB_OUTPUT
-          echo "functional=$(hasCommand 'test:functional')" >> $GITHUB_OUTPUT
-          echo "unit=$(hasCommand 'test:unit')" >> $GITHUB_OUTPUT
+          {
+            echo "acceptance=$(hasCommand 'test:acceptance')"
+            echo "functional=$(hasCommand 'test:functional')"
+            echo "unit=$(hasCommand 'test:unit')"
+          } >> "$GITHUB_OUTPUT"
 
       - name: 'Determine execution context'
         id: context
@@ -70,8 +72,8 @@ jobs:
             useDDEV="false"
           fi
 
-          echo "command=${command}" >> $GITHUB_OUTPUT
-          echo "use-ddev=${useDDEV}" >> $GITHUB_OUTPUT
+          echo "command=${command}" >> "$GITHUB_OUTPUT"
+          echo "use-ddev=${useDDEV}" >> "$GITHUB_OUTPUT"
 
       - name: 'Resolve class-loader compatibility'
         id: compatibility
@@ -107,5 +109,5 @@ jobs:
             fi
           fi
 
-          echo "compatible=${compatible}" >> $GITHUB_OUTPUT
+          echo "compatible=${compatible}" >> "$GITHUB_OUTPUT"
         shell: bash

@@ -53,8 +53,8 @@ jobs:
             EXTENSION_KEY="$(jq -r '.extra."typo3/cms"."extension-key"' composer.json)"
           fi
 
-          echo "key=${EXTENSION_KEY}" >> $GITHUB_OUTPUT
-          echo "artefact=${EXTENSION_KEY}_${EXTENSION_VERSION}.zip" >> $GITHUB_OUTPUT
+          echo "key=${EXTENSION_KEY}" >> "$GITHUB_OUTPUT"
+          echo "artefact=${EXTENSION_KEY}_${EXTENSION_VERSION}.zip" >> "$GITHUB_OUTPUT"
 
       - name: 'Check bundler'
         id: bundler
@@ -62,9 +62,9 @@ jobs:
           bundlerVersion="$(jq -r '."require-dev"."eliashaeussler/typo3-vendor-bundler" // empty' composer.json)"
 
           if [ -n "$bundlerVersion" ]; then
-            echo "enabled=true" >> $GITHUB_OUTPUT
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
           else
-            echo "enabled=false" >> $GITHUB_OUTPUT
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: 'Setup PHP'

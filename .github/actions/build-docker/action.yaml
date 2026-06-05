@@ -32,9 +32,9 @@ runs:
         DOCKERHUB_TOKEN: ${{ inputs.dockerhub-token }}
       run: |
         if [ -n "$DOCKERHUB_USERNAME" ] && [ -n "$DOCKERHUB_TOKEN" ]; then
-          echo "enabled=true" >> $GITHUB_OUTPUT
+          echo "enabled=true" >> "$GITHUB_OUTPUT"
         else
-          echo "enabled=false" >> $GITHUB_OUTPUT
+          echo "enabled=false" >> "$GITHUB_OUTPUT"
         fi
       shell: bash
 
@@ -45,9 +45,9 @@ runs:
         GHCR_TOKEN: ${{ inputs.ghcr-token }}
       run: |
         if [ -n "$GHCR_USERNAME" ] && [ -n "$GHCR_TOKEN" ]; then
-          echo "enabled=true" >> $GITHUB_OUTPUT
+          echo "enabled=true" >> "$GITHUB_OUTPUT"
         else
-          echo "enabled=false" >> $GITHUB_OUTPUT
+          echo "enabled=false" >> "$GITHUB_OUTPUT"
         fi
       shell: bash
 
@@ -60,15 +60,15 @@ runs:
         GHCR_ENABLED: ${{ steps.ghcr.outputs.enabled }}
       run: |
         if [ -n "$images" ]; then
-          echo "custom=${INPUT_IMAGES}" >> $GITHUB_OUTPUT
+          echo "custom=${INPUT_IMAGES}" >> "$GITHUB_OUTPUT"
         else
           if [[ "$DOCKERHUB_ENABLED" == "true" ]]; then
             image="$REPO_NAME"
-            echo "dockerhub=${image}" >> $GITHUB_OUTPUT
+            echo "dockerhub=${image}" >> "$GITHUB_OUTPUT"
           fi
           if [[ "$GHCR_ENABLED" == "true" ]]; then
             image="ghcr.io/${REPO_NAME}"
-            echo "ghcr=${image}" >> $GITHUB_OUTPUT
+            echo "ghcr=${image}" >> "$GITHUB_OUTPUT"
           fi
         fi
       shell: bash

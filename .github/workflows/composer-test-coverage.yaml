@@ -63,8 +63,8 @@ jobs:
           dir=$(dirname "$COVERAGE_FILE")
           file=$(basename "$COVERAGE_FILE")
 
-          echo "path=$dir" >> $GITHUB_OUTPUT
-          echo "file=$file" >> $GITHUB_OUTPUT
+          echo "path=$dir" >> "$GITHUB_OUTPUT"
+          echo "file=$file" >> "$GITHUB_OUTPUT"
 
       - name: 'Create coverage directory'
         env:

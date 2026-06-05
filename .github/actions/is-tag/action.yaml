@@ -23,15 +23,15 @@ runs:
         REF_NAME: ${{ inputs.tag-name }}
       run: |
         if [[ "$REF_TYPE" != "tag" ]]; then
-          echo "is-tag=false" >> $GITHUB_OUTPUT
-          echo "is-version=false" >> $GITHUB_OUTPUT
+          echo "is-tag=false" >> "$GITHUB_OUTPUT"
+          echo "is-version=false" >> "$GITHUB_OUTPUT"
         else
-          echo "is-tag=true" >> $GITHUB_OUTPUT
-          
+          echo "is-tag=true" >> "$GITHUB_OUTPUT"
+
           if [[ "$REF_NAME" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "is-version=true" >> $GITHUB_OUTPUT
+            echo "is-version=true" >> "$GITHUB_OUTPUT"
           else
-            echo "is-version=false" >> $GITHUB_OUTPUT
+            echo "is-version=false" >> "$GITHUB_OUTPUT"
           fi
         fi
       shell: bash
