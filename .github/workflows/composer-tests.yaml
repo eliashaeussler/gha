@@ -45,12 +45,12 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.5.0
+        uses: eliashaeussler/gha/.github/actions/checkout@0.5.1
         with:
           allowed-endpoints: ${{ inputs.allowed-endpoints }}
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.5.0
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.5.1
         with:
           php-version: ${{ inputs.php-version }}
           composer-version: ${{ inputs.composer-version }}
@@ -60,7 +60,7 @@ jobs:
         run: sudo /etc/init.d/mysql start
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.5.0
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.5.1
         with:
           dependencies: ${{ inputs.dependencies }}
           composer-options: >-
@@ -68,6 +68,6 @@ jobs:
             ${{ inputs.typo3-version && format('--with=typo3/cms-core:~{0}.0', inputs.typo3-version) }}
 
       - name: 'Run tests'
-        uses: eliashaeussler/gha/.github/actions/composer-tests@0.5.0
+        uses: eliashaeussler/gha/.github/actions/composer-tests@0.5.1
         with:
           command: ${{ inputs.command }}

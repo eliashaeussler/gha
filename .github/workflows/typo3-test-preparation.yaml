@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.5.0
+        uses: eliashaeussler/gha/.github/actions/checkout@0.5.1
 
       - name: 'Lookup testsuites'
         id: testsuites
