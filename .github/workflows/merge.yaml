@@ -32,12 +32,16 @@ jobs:
     if: ${{ github.ref_name != github.event.repository.default_branch }}
 
     outputs:
-      continue: ${{ steps.is-renovate.outputs.is-renovate == 'false' }}
+      continue: ${{ steps.is-renovate.outputs.is-renovate == 'false' && steps.is-fork.outputs.is-fork == 'false' }}
 
     steps:
       - name: 'Check if workflow is from Renovate'
         id: is-renovate
         uses: eliashaeussler/gha/.github/actions/is-renovate@0.5.1
+
+      - name: 'Check if workflow is from fork PR'
+        id: is-fork
+        uses: eliashaeussler/gha/.github/actions/is-fork@0.5.1
 
   merge:
     name: 'Merge current branch into default branch'
