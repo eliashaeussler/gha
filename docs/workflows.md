@@ -6,16 +6,16 @@ Collection of useful workflows for a various range of repository types.
 
 | Workflow                          | Reference                                                        |
 |-----------------------------------|------------------------------------------------------------------|
-| [Checks](#checks)                 | `eliashaeussler/gha/.github/workflows/checks.yaml@0.5.3`         |
-| [Crowdin](#crowdin)               | `eliashaeussler/gha/.github/workflows/crowdin.yaml@0.5.3`        |
-| [GitHub release](#github-release) | `eliashaeussler/gha/.github/workflows/github-release.yaml@0.5.3` |
-| [Merge branch](#merge-branch)     | `eliashaeussler/gha/.github/workflows/merge-branch.yaml@0.5.3`   |
-| [Preparation](#preparation)       | `eliashaeussler/gha/.github/workflows/preparation.yaml@0.5.3`    |
+| [Checks](#checks)                 | `eliashaeussler/gha/.github/workflows/checks.yaml@0.5.4`         |
+| [Crowdin](#crowdin)               | `eliashaeussler/gha/.github/workflows/crowdin.yaml@0.5.4`        |
+| [GitHub release](#github-release) | `eliashaeussler/gha/.github/workflows/github-release.yaml@0.5.4` |
+| [Merge branch](#merge-branch)     | `eliashaeussler/gha/.github/workflows/merge-branch.yaml@0.5.4`   |
+| [Preparation](#preparation)       | `eliashaeussler/gha/.github/workflows/preparation.yaml@0.5.4`    |
 
 ### [Checks](../.github/workflows/checks.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/checks.yaml@0.5.3
+uses: eliashaeussler/gha/.github/workflows/checks.yaml@0.5.4
 ```
 
 <details>
@@ -24,7 +24,7 @@ uses: eliashaeussler/gha/.github/workflows/checks.yaml@0.5.3
 ```yaml
 jobs:
   checks:
-    uses: eliashaeussler/gha/.github/workflows/checks.yaml@0.5.3
+    uses: eliashaeussler/gha/.github/workflows/checks.yaml@0.5.4
     with:
       # Composer
       composer: true
@@ -44,7 +44,7 @@ jobs:
 ### [Crowdin](../.github/workflows/crowdin.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/crowdin.yaml@0.5.3
+uses: eliashaeussler/gha/.github/workflows/crowdin.yaml@0.5.4
 ```
 
 <details>
@@ -56,7 +56,7 @@ jobs:
     secrets:
       CROWDIN_TOKEN: ${{ secrets.CROWDIN_TOKEN }}
 
-    uses: eliashaeussler/gha/.github/workflows/crowdin.yaml@0.5.3
+    uses: eliashaeussler/gha/.github/workflows/crowdin.yaml@0.5.4
     with:
       project-id: 12345
 ```
@@ -66,7 +66,7 @@ jobs:
 ### [GitHub release](../.github/workflows/github-release.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/github-release.yaml@0.5.3
+uses: eliashaeussler/gha/.github/workflows/github-release.yaml@0.5.4
 ```
 
 <details>
@@ -78,7 +78,7 @@ jobs:
     secrets:
       RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
-    uses: eliashaeussler/gha/.github/workflows/github-release.yaml@0.5.3
+    uses: eliashaeussler/gha/.github/workflows/github-release.yaml@0.5.4
     with:
       version: '1.0.0'
       files: 'release_1.0.0.zip'
@@ -89,7 +89,7 @@ jobs:
 ### [Merge branch](../.github/workflows/merge.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/merge.yaml@0.5.3
+uses: eliashaeussler/gha/.github/workflows/merge.yaml@0.5.4
 ```
 
 <details>
@@ -101,7 +101,7 @@ jobs:
     secrets:
       MERGE_TOKEN: ${{ secrets.MERGE_TOKEN }}
 
-    uses: eliashaeussler/gha/.github/workflows/merge.yaml@0.5.3
+    uses: eliashaeussler/gha/.github/workflows/merge.yaml@0.5.4
 ```
 
 </details>
@@ -109,7 +109,7 @@ jobs:
 ### [Preparation](../.github/workflows/preparation.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/preparation.yaml@0.5.3
+uses: eliashaeussler/gha/.github/workflows/preparation.yaml@0.5.4
 ```
 
 <details>
@@ -118,7 +118,7 @@ uses: eliashaeussler/gha/.github/workflows/preparation.yaml@0.5.3
 ```yaml
 jobs:
   prepare:
-    uses: eliashaeussler/gha/.github/workflows/preparation.yaml@0.5.3
+    uses: eliashaeussler/gha/.github/workflows/preparation.yaml@0.5.4
 
   other:
     needs: [prepare]
@@ -135,12 +135,12 @@ Collection of workflows related to Frontend assets.
 
 | Workflow                   | Reference                                                         |
 |----------------------------|-------------------------------------------------------------------|
-| [Asset integrity](#checks) | `eliashaeussler/gha/.github/workflows/asset-integrity.yaml@0.5.3` |
+| [Asset integrity](#checks) | `eliashaeussler/gha/.github/workflows/asset-integrity.yaml@0.5.4` |
 
 ### [Asset integrity](../.github/workflows/asset-integrity.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/asset-integrity.yaml@0.5.3
+uses: eliashaeussler/gha/.github/workflows/asset-integrity.yaml@0.5.4
 ```
 
 <details>
@@ -152,7 +152,7 @@ jobs:
     secrets:
       ASSETS_TOKEN: ${{ secrets.REBUILD_ASSETS_TOKEN }}
 
-    uses: eliashaeussler/gha/.github/workflows/asset-integrity.yaml@0.5.3
+    uses: eliashaeussler/gha/.github/workflows/asset-integrity.yaml@0.5.4
 
   other:
     needs: [asset-integrity]
@@ -169,13 +169,13 @@ Collection of workflows targeting Composer-based projects.
 
 | Workflow                                          | Reference                                                                |
 |---------------------------------------------------|--------------------------------------------------------------------------|
-| [Composer tests](#composer-tests)                 | `eliashaeussler/gha/.github/workflows/composer-tests.yaml@0.5.3`         |
-| [Composer test coverage](#composer-test-coverage) | `eliashaeussler/gha/.github/workflows/composer-test-coverage.yaml@0.5.3` |
+| [Composer tests](#composer-tests)                 | `eliashaeussler/gha/.github/workflows/composer-tests.yaml@0.5.4`         |
+| [Composer test coverage](#composer-test-coverage) | `eliashaeussler/gha/.github/workflows/composer-test-coverage.yaml@0.5.4` |
 
 ### [Composer tests](../.github/workflows/composer-tests.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/composer-tests.yaml@0.5.3
+uses: eliashaeussler/gha/.github/workflows/composer-tests.yaml@0.5.4
 ```
 
 <details>
@@ -184,7 +184,7 @@ uses: eliashaeussler/gha/.github/workflows/composer-tests.yaml@0.5.3
 ```yaml
 jobs:
   tests:
-    uses: eliashaeussler/gha/.github/workflows/composer-tests.yaml@0.5.3
+    uses: eliashaeussler/gha/.github/workflows/composer-tests.yaml@0.5.4
     with:
       php-version: '8.5'
       dependencies: 'highest'
@@ -196,7 +196,7 @@ jobs:
 ### [Composer test coverage](../.github/workflows/composer-test-coverage.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/composer-test-coverage.yaml@0.5.3
+uses: eliashaeussler/gha/.github/workflows/composer-test-coverage.yaml@0.5.4
 ```
 
 <details>
@@ -205,7 +205,7 @@ uses: eliashaeussler/gha/.github/workflows/composer-test-coverage.yaml@0.5.3
 ```yaml
 jobs:
   test-coverage:
-    uses: eliashaeussler/gha/.github/workflows/composer-test-coverage.yaml@0.5.3
+    uses: eliashaeussler/gha/.github/workflows/composer-test-coverage.yaml@0.5.4
     with:
       command: 'test:unit:coverage'
       coverage-driver: 'xdebug'
@@ -222,14 +222,14 @@ Collection of workflows targeting TYPO3-based projects.
 
 | Workflow                                    | Reference                                                                |
 |---------------------------------------------|--------------------------------------------------------------------------|
-| [Prepare TYPO3 tests](#prepare-typo3-tests) | `eliashaeussler/gha/.github/workflows/typo3-test-preparation.yaml@0.5.3` |
-| [TYPO3 tests](#typo3-tests)                 | `eliashaeussler/gha/.github/workflows/typo3-tests.yaml@0.5.3`            |
-| [TYPO3 test coverage](#typo3-test-coverage) | `eliashaeussler/gha/.github/workflows/typo3-test-coverage.yaml@0.5.3`    |
+| [Prepare TYPO3 tests](#prepare-typo3-tests) | `eliashaeussler/gha/.github/workflows/typo3-test-preparation.yaml@0.5.4` |
+| [TYPO3 tests](#typo3-tests)                 | `eliashaeussler/gha/.github/workflows/typo3-tests.yaml@0.5.4`            |
+| [TYPO3 test coverage](#typo3-test-coverage) | `eliashaeussler/gha/.github/workflows/typo3-test-coverage.yaml@0.5.4`    |
 
 ### [Prepare TYPO3 tests](../.github/workflows/typo3-test-preparation.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/typo3-test-preparation.yaml@0.5.3
+uses: eliashaeussler/gha/.github/workflows/typo3-test-preparation.yaml@0.5.4
 ```
 
 <details>
@@ -238,7 +238,7 @@ uses: eliashaeussler/gha/.github/workflows/typo3-test-preparation.yaml@0.5.3
 ```yaml
 jobs:
   prepare:
-    uses: eliashaeussler/gha/.github/workflows/typo3-test-preparation.yaml@0.5.3
+    uses: eliashaeussler/gha/.github/workflows/typo3-test-preparation.yaml@0.5.4
     with:
       typo3-version: '14.3'
 
@@ -255,7 +255,7 @@ jobs:
 ### [TYPO3 tests](../.github/workflows/typo3-tests.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/typo3-tests.yaml@0.5.3
+uses: eliashaeussler/gha/.github/workflows/typo3-tests.yaml@0.5.4
 ```
 
 <details>
@@ -264,7 +264,7 @@ uses: eliashaeussler/gha/.github/workflows/typo3-tests.yaml@0.5.3
 ```yaml
 jobs:
   tests:
-    uses: eliashaeussler/gha/.github/workflows/typo3-tests.yaml@0.5.3
+    uses: eliashaeussler/gha/.github/workflows/typo3-tests.yaml@0.5.4
     with:
       php-version: '8.5'
       typo3-version: '14.3'
@@ -276,7 +276,7 @@ jobs:
 ### [TYPO3 test coverage](../.github/workflows/typo3-test-coverage.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/typo3-test-coverage.yaml@0.5.3
+uses: eliashaeussler/gha/.github/workflows/typo3-test-coverage.yaml@0.5.4
 ```
 
 <details>
@@ -285,7 +285,7 @@ uses: eliashaeussler/gha/.github/workflows/typo3-test-coverage.yaml@0.5.3
 ```yaml
 jobs:
   test-coverage:
-    uses: eliashaeussler/gha/.github/workflows/typo3-test-coverage.yaml@0.5.3
+    uses: eliashaeussler/gha/.github/workflows/typo3-test-coverage.yaml@0.5.4
     with:
       coverage-file: '.Build/coverage/_merged/clover.xml'
 ```
@@ -295,7 +295,7 @@ jobs:
 ### [TYPO3 extension release](../.github/workflows/typo3-extension-release.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/typo3-extension-release.yaml@0.5.3
+uses: eliashaeussler/gha/.github/workflows/typo3-extension-release.yaml@0.5.4
 ```
 
 <details>
@@ -307,7 +307,7 @@ jobs:
     secrets:
       TYPO3_API_TOKEN: ${{ secrets.TYPO3_API_TOKEN }}
 
-    uses: eliashaeussler/gha/.github/workflows/typo3-extension-release.yaml@0.5.3
+    uses: eliashaeussler/gha/.github/workflows/typo3-extension-release.yaml@0.5.4
     with:
       packaging-excludes-file: Build/packaging_exclude.php
 ```
