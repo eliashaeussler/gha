@@ -54,6 +54,7 @@ jobs:
       - name: 'Create release'
         id: release
         env:
+          ADDITIONAL_FILES: ${{ inputs.files }}
           GH_TOKEN: ${{ secrets.RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
           VERSION: ${{ inputs.version }}
         run: |
