@@ -17,4 +17,5 @@ filesToModify:
     path: 'docs/*.md'
 
 releaseOptions:
+  commitMessage: '[RELEASE] Release of gha {%version%}'
   signTag: true
