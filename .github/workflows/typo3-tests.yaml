@@ -42,6 +42,12 @@ jobs:
 
     needs: [prepare]
 
+    env:
+      typo3DatabaseName: typo3
+      typo3DatabaseHost: 127.0.0.1
+      typo3DatabaseUsername: root
+      typo3DatabasePassword: root
+
     steps:
       - name: 'Checkout'
         uses: eliashaeussler/gha/.github/actions/checkout@0.5.0
@@ -60,6 +66,10 @@ jobs:
         with:
           ddev-version: ${{ inputs.ddev-version }}
           php-version: ${{ inputs.php-version }}
+
+      - name: 'Start MySQL'
+        if: ${{ needs.prepare.outputs.use-ddev == 'false' && needs.prepare.outputs.has-functional-tests == 'true' }}
+        run: sudo /etc/init.d/mysql start
 
       - name: 'Install Composer packages (without plugins)'
         uses: eliashaeussler/gha/.github/actions/composer-install@0.5.0
