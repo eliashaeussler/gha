@@ -42,7 +42,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@task/compatibility
+        uses: eliashaeussler/gha/.github/actions/checkout@0.5.2
 
       - name: 'Lookup testsuites'
         id: testsuites
