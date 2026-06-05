@@ -34,6 +34,12 @@ jobs:
 
     needs: [prepare]
 
+    env:
+      typo3DatabaseName: typo3
+      typo3DatabaseHost: 127.0.0.1
+      typo3DatabaseUsername: root
+      typo3DatabasePassword: root
+
     outputs:
       coverage-path: ${{ steps.coverage.outputs.path }}
       coverage-file: ${{ steps.coverage.outputs.file }}
@@ -55,6 +61,10 @@ jobs:
         uses: eliashaeussler/gha/.github/actions/setup-ddev@0.5.0
         with:
           ddev-version: ${{ inputs.ddev-version }}
+
+      - name: 'Start MySQL'
+        if: ${{ needs.prepare.outputs.use-ddev == 'false' && needs.prepare.outputs.has-functional-tests == 'true' }}
+        run: sudo /etc/init.d/mysql start
 
       - name: 'Install Composer packages'
         uses: eliashaeussler/gha/.github/actions/composer-install@0.5.0
