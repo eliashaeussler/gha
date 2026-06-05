@@ -60,9 +60,11 @@ jobs:
         run: |
           files=""
 
-          for file in $ADDITIONAL_FILES; do
-            files="${files} ${file}"
-          done
+          if [ -n "$ADDITIONAL_FILES" ]; then
+            for file in $ADDITIONAL_FILES; do
+              files="${files} ${file}"
+            done
+          fi
 
           if [ -d artifact-download ]; then
             while IFS= read -r -d '' file; do
