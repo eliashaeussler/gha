@@ -31,6 +31,9 @@ on:
       boot-mysql:
         description: 'Define whether to boot MySQL service'
         type: boolean
+      composer-options:
+        description: 'Additional options passed to "composer install"'
+        type: string
       allowed-endpoints:
         description: 'List of allowed outbound endpoints'
         type: string
@@ -67,8 +70,9 @@ jobs:
         with:
           dependencies: ${{ inputs.dependencies }}
           composer-options: >-
-            ${{ inputs.composer-version && format('--with=composer/composer:~{0}.0', inputs.composer-version) }}
-            ${{ inputs.typo3-version && format('--with=typo3/cms-core:~{0}.0', inputs.typo3-version) }}
+            ${{ inputs.composer-version && format('--with=composer/composer:~{0}.0', inputs.composer-version) || '' }}
+            ${{ inputs.typo3-version && format('--with=typo3/cms-core:~{0}.0', inputs.typo3-version) || '' }}
+            ${{ inputs.composer-options }}
           working-directory: ${{ inputs.working-directory }}
 
       - name: 'Run tests'
