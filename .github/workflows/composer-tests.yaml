@@ -21,6 +21,9 @@ on:
         description: 'Composer command to execute'
         default: test
         type: string
+      working-directory:
+        description: 'Overwrite working directory'
+        type: string
       os:
         description: 'Operating system on which to run the workflow (defaults to "Ubuntu")'
         default: Ubuntu
@@ -45,12 +48,12 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.6.0
+        uses: eliashaeussler/gha/.github/actions/checkout@feature/working-directory
         with:
           allowed-endpoints: ${{ inputs.allowed-endpoints }}
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.6.0
+        uses: eliashaeussler/gha/.github/actions/setup-php@feature/working-directory
         with:
           php-version: ${{ inputs.php-version }}
           composer-version: ${{ inputs.composer-version }}
@@ -60,14 +63,16 @@ jobs:
         run: sudo /etc/init.d/mysql start
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.6.0
+        uses: eliashaeussler/gha/.github/actions/composer-install@feature/working-directory
         with:
           dependencies: ${{ inputs.dependencies }}
           composer-options: >-
             ${{ inputs.composer-version && format('--with=composer/composer:~{0}.0', inputs.composer-version) }}
             ${{ inputs.typo3-version && format('--with=typo3/cms-core:~{0}.0', inputs.typo3-version) }}
+          working-directory: ${{ inputs.working-directory }}
 
       - name: 'Run tests'
-        uses: eliashaeussler/gha/.github/actions/composer-tests@0.6.0
+        uses: eliashaeussler/gha/.github/actions/composer-tests@feature/working-directory
         with:
           command: ${{ inputs.command }}
+          working-directory: ${{ inputs.working-directory }}
