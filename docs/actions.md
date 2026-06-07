@@ -6,17 +6,17 @@ Collection of actions related to VCS handling and to interact with GitHub.
 
 | Action                                                                    | Reference                                                     |
 |---------------------------------------------------------------------------|---------------------------------------------------------------|
-| [Assure version tag](#assure-version-tag)                                 | `eliashaeussler/gha/.github/actions/assure-version-tag@feature/working-directory` |
-| [Checkout](#checkout)                                                     | `eliashaeussler/gha/.github/actions/checkout@feature/working-directory`           |
-| [Check if workflow is from fork PR](#check-if-workflow-is-from-fork-pr)   | `eliashaeussler/gha/.github/actions/is-fork@feature/working-directory`            |
-| [Check if workflow is from Renovate](#check-if-workflow-is-from-renovate) | `eliashaeussler/gha/.github/actions/is-renovate@feature/working-directory`        |
-| [Check if workflow is from tag](#check-if-workflow-is-from-tag)           | `eliashaeussler/gha/.github/actions/is-tag@feature/working-directory`             |
-| [Deploy to GitHub Pages](#deploy-to-github-pages)                         | `eliashaeussler/gha/.github/actions/deploy-pages@feature/working-directory`       |
+| [Assure version tag](#assure-version-tag)                                 | `eliashaeussler/gha/.github/actions/assure-version-tag@0.6.1` |
+| [Checkout](#checkout)                                                     | `eliashaeussler/gha/.github/actions/checkout@0.6.1`           |
+| [Check if workflow is from fork PR](#check-if-workflow-is-from-fork-pr)   | `eliashaeussler/gha/.github/actions/is-fork@0.6.1`            |
+| [Check if workflow is from Renovate](#check-if-workflow-is-from-renovate) | `eliashaeussler/gha/.github/actions/is-renovate@0.6.1`        |
+| [Check if workflow is from tag](#check-if-workflow-is-from-tag)           | `eliashaeussler/gha/.github/actions/is-tag@0.6.1`             |
+| [Deploy to GitHub Pages](#deploy-to-github-pages)                         | `eliashaeussler/gha/.github/actions/deploy-pages@0.6.1`       |
 
 ### [Assure version tag](../.github/actions/assure-version-tag/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/assure-version-tag@feature/working-directory
+uses: eliashaeussler/gha/.github/actions/assure-version-tag@0.6.1
 ```
 
 <details>
@@ -25,7 +25,7 @@ uses: eliashaeussler/gha/.github/actions/assure-version-tag@feature/working-dire
 ```yaml
 steps:
   - name: 'Check tag'
-    uses: eliashaeussler/gha/.github/actions/assure-version-tag@feature/working-directory
+    uses: eliashaeussler/gha/.github/actions/assure-version-tag@0.6.1
 ```
 
 </details>
@@ -33,7 +33,7 @@ steps:
 ### [Checkout](../.github/actions/checkout/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/checkout@feature/working-directory
+uses: eliashaeussler/gha/.github/actions/checkout@0.6.1
 ```
 
 <details>
@@ -42,7 +42,7 @@ uses: eliashaeussler/gha/.github/actions/checkout@feature/working-directory
 ```yaml
 steps:
   - name: 'Checkout'
-    uses: eliashaeussler/gha/.github/actions/checkout@feature/working-directory
+    uses: eliashaeussler/gha/.github/actions/checkout@0.6.1
     with:
       fetch-depth: 0
       egress-policy: audit
@@ -53,7 +53,7 @@ steps:
 ### [Check if workflow is from fork PR](../.github/actions/is-fork/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/is-fork@feature/working-directory
+uses: eliashaeussler/gha/.github/actions/is-fork@0.6.1
 ```
 
 <details>
@@ -63,7 +63,7 @@ uses: eliashaeussler/gha/.github/actions/is-fork@feature/working-directory
 steps:
   - name: 'Check fork'
     id: is-fork
-    uses: eliashaeussler/gha/.github/actions/is-fork@feature/working-directory
+    uses: eliashaeussler/gha/.github/actions/is-fork@0.6.1
 
   - if: ${{ steps.is-fork.outputs.is-fork == 'true' }}
 ```
@@ -73,7 +73,7 @@ steps:
 ### [Check if workflow is from Renovate](../.github/actions/is-renovate/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/is-renovate@feature/working-directory
+uses: eliashaeussler/gha/.github/actions/is-renovate@0.6.1
 ```
 
 <details>
@@ -83,7 +83,7 @@ uses: eliashaeussler/gha/.github/actions/is-renovate@feature/working-directory
 steps:
   - name: 'Check Renovate'
     id: is-renovate
-    uses: eliashaeussler/gha/.github/actions/is-renovate@feature/working-directory
+    uses: eliashaeussler/gha/.github/actions/is-renovate@0.6.1
 
   - if: ${{ steps.is-renovate.outputs.is-renovate == 'true' }}
 ```
@@ -93,7 +93,7 @@ steps:
 ### [Check if workflow is from tag](../.github/actions/is-tag/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/is-tag@feature/working-directory
+uses: eliashaeussler/gha/.github/actions/is-tag@0.6.1
 ```
 
 <details>
@@ -103,7 +103,7 @@ uses: eliashaeussler/gha/.github/actions/is-tag@feature/working-directory
 steps:
   - name: 'Check tag'
     id: is-tag
-    uses: eliashaeussler/gha/.github/actions/is-tag@feature/working-directory
+    uses: eliashaeussler/gha/.github/actions/is-tag@0.6.1
 
   - if: ${{ steps.is-tag.outputs.is-version == 'true' }}
 ```
@@ -113,7 +113,7 @@ steps:
 ### [Deploy to GitHub Pages](../.github/actions/deploy-pages/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/deploy-pages@feature/working-directory
+uses: eliashaeussler/gha/.github/actions/deploy-pages@0.6.1
 ```
 
 <details>
@@ -122,7 +122,7 @@ uses: eliashaeussler/gha/.github/actions/deploy-pages@feature/working-directory
 ```yaml
 steps:
   - name: 'Deploy'
-    uses: eliashaeussler/gha/.github/actions/deploy-pages@feature/working-directory
+    uses: eliashaeussler/gha/.github/actions/deploy-pages@0.6.1
     with:
       build-command: 'docs:build'
       dist-path: '.build/docs'
@@ -138,14 +138,14 @@ Collection of actions used for various builds.
 
 | Action                                          | Reference                                               |
 |-------------------------------------------------|---------------------------------------------------------|
-| [Build Docker images](#build-docker-images)     | `eliashaeussler/gha/.github/actions/build-docker@feature/working-directory` |
-| [Build docs](#build-docs)                       | `eliashaeussler/gha/.github/actions/build-docs@feature/working-directory`   |
-| [Build PHAR](#build-phar)                       | `eliashaeussler/gha/.github/actions/build-phar@feature/working-directory`   |
+| [Build Docker images](#build-docker-images)     | `eliashaeussler/gha/.github/actions/build-docker@0.6.1` |
+| [Build docs](#build-docs)                       | `eliashaeussler/gha/.github/actions/build-docs@0.6.1`   |
+| [Build PHAR](#build-phar)                       | `eliashaeussler/gha/.github/actions/build-phar@0.6.1`   |
 
 ### [Build Docker images](../.github/actions/build-docker/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/build-docker@feature/working-directory
+uses: eliashaeussler/gha/.github/actions/build-docker@0.6.1
 ```
 
 <details>
@@ -154,7 +154,7 @@ uses: eliashaeussler/gha/.github/actions/build-docker@feature/working-directory
 ```yaml
 steps:
   - name: 'Build Docker'
-    uses: eliashaeussler/gha/.github/actions/build-docker@feature/working-directory
+    uses: eliashaeussler/gha/.github/actions/build-docker@0.6.1
     with:
       images: |
         eliashaeussler/my-fancy-project
@@ -169,7 +169,7 @@ steps:
 ### [Build docs](../.github/actions/build-docs/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/build-docs@feature/working-directory
+uses: eliashaeussler/gha/.github/actions/build-docs@0.6.1
 ```
 
 <details>
@@ -178,7 +178,7 @@ uses: eliashaeussler/gha/.github/actions/build-docs@feature/working-directory
 ```yaml
 steps:
   - name: 'Build docs'
-    uses: eliashaeussler/gha/.github/actions/build-docs@feature/working-directory
+    uses: eliashaeussler/gha/.github/actions/build-docs@0.6.1
     with:
       command: 'docs:build'
 ```
@@ -188,7 +188,7 @@ steps:
 ### [Build PHAR](../.github/actions/build-phar/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/build-phar@feature/working-directory
+uses: eliashaeussler/gha/.github/actions/build-phar@0.6.1
 ```
 
 <details>
@@ -197,7 +197,7 @@ uses: eliashaeussler/gha/.github/actions/build-phar@feature/working-directory
 ```yaml
 steps:
   - name: 'Build PHAR'
-    uses: eliashaeussler/gha/.github/actions/build-phar@feature/working-directory
+    uses: eliashaeussler/gha/.github/actions/build-phar@0.6.1
     with:
       target-file: my-fancy-project.phar
       build-dockerfile: true
@@ -215,15 +215,15 @@ Collection of useful actions for PHP- and Composer-based projects.
 
 | Action                                          | Reference                                                   |
 |-------------------------------------------------|-------------------------------------------------------------|
-| [Composer checks](#composer-checks)             | `eliashaeussler/gha/.github/actions/composer-checks@feature/working-directory`  |
-| [Composer install](#composer-install)           | `eliashaeussler/gha/.github/actions/composer-install@feature/working-directory` |
-| [Composer tests](#composer-tests)               | `eliashaeussler/gha/.github/actions/composer-tests@feature/working-directory`   |
-| [Setup PHP environment](#setup-php-environment) | `eliashaeussler/gha/.github/actions/setup-php@feature/working-directory`        |
+| [Composer checks](#composer-checks)             | `eliashaeussler/gha/.github/actions/composer-checks@0.6.1`  |
+| [Composer install](#composer-install)           | `eliashaeussler/gha/.github/actions/composer-install@0.6.1` |
+| [Composer tests](#composer-tests)               | `eliashaeussler/gha/.github/actions/composer-tests@0.6.1`   |
+| [Setup PHP environment](#setup-php-environment) | `eliashaeussler/gha/.github/actions/setup-php@0.6.1`        |
 
 ### [Composer checks](../.github/actions/composer-checks/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/composer-checks@feature/working-directory
+uses: eliashaeussler/gha/.github/actions/composer-checks@0.6.1
 ```
 
 <details>
@@ -232,7 +232,7 @@ uses: eliashaeussler/gha/.github/actions/composer-checks@feature/working-directo
 ```yaml
 steps:
   - name: 'Perform Composer checks'
-    uses: eliashaeussler/gha/.github/actions/composer-checks@feature/working-directory
+    uses: eliashaeussler/gha/.github/actions/composer-checks@0.6.1
 ```
 
 </details>
@@ -240,7 +240,7 @@ steps:
 ### [Composer install](../.github/actions/composer-install/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/composer-install@feature/working-directory
+uses: eliashaeussler/gha/.github/actions/composer-install@0.6.1
 ```
 
 <details>
@@ -249,7 +249,7 @@ uses: eliashaeussler/gha/.github/actions/composer-install@feature/working-direct
 ```yaml
 steps:
   - name: 'Install Composer packages'
-    uses: eliashaeussler/gha/.github/actions/composer-install@feature/working-directory
+    uses: eliashaeussler/gha/.github/actions/composer-install@0.6.1
     with:
       dependencies: 'locked'
       composer-options: '--no-dev'
@@ -260,7 +260,7 @@ steps:
 ### [Composer tests](../.github/actions/composer-tests/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/composer-tests@feature/working-directory
+uses: eliashaeussler/gha/.github/actions/composer-tests@0.6.1
 ```
 
 <details>
@@ -269,7 +269,7 @@ uses: eliashaeussler/gha/.github/actions/composer-tests@feature/working-director
 ```yaml
 steps:
   - name: 'Run Composer tests'
-    uses: eliashaeussler/gha/.github/actions/composer-tests@feature/working-directory
+    uses: eliashaeussler/gha/.github/actions/composer-tests@0.6.1
     with:
       command: 'test:unit'
 ```
@@ -279,7 +279,7 @@ steps:
 ### [Setup PHP environment](../.github/actions/setup-php/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/setup-php@feature/working-directory
+uses: eliashaeussler/gha/.github/actions/setup-php@0.6.1
 ```
 
 <details>
@@ -288,7 +288,7 @@ uses: eliashaeussler/gha/.github/actions/setup-php@feature/working-directory
 ```yaml
 steps:
   - name: 'Setup PHP'
-    uses: eliashaeussler/gha/.github/actions/setup-php@feature/working-directory
+    uses: eliashaeussler/gha/.github/actions/setup-php@0.6.1
     with:
       php-version: '8.5'
       ini-file: 'production'
@@ -306,14 +306,14 @@ Collection of useful actions for Node.js and npm.
 
 | Action                                            | Reference                                              |
 |---------------------------------------------------|--------------------------------------------------------|
-| [npm checks](#npm-checks)                         | `eliashaeussler/gha/.github/actions/npm-checks@feature/working-directory`  |
-| [npm install](#npm-install)                       | `eliashaeussler/gha/.github/actions/npm-install@feature/working-directory` |
-| [Setup node environment](#setup-node-environment) | `eliashaeussler/gha/.github/actions/setup-node@feature/working-directory`  |
+| [npm checks](#npm-checks)                         | `eliashaeussler/gha/.github/actions/npm-checks@0.6.1`  |
+| [npm install](#npm-install)                       | `eliashaeussler/gha/.github/actions/npm-install@0.6.1` |
+| [Setup node environment](#setup-node-environment) | `eliashaeussler/gha/.github/actions/setup-node@0.6.1`  |
 
 ### [npm checks](../.github/actions/npm-checks/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/npm-checks@feature/working-directory
+uses: eliashaeussler/gha/.github/actions/npm-checks@0.6.1
 ```
 
 <details>
@@ -322,7 +322,7 @@ uses: eliashaeussler/gha/.github/actions/npm-checks@feature/working-directory
 ```yaml
 steps:
   - name: 'Perform npm checks'
-    uses: eliashaeussler/gha/.github/actions/npm-checks@feature/working-directory
+    uses: eliashaeussler/gha/.github/actions/npm-checks@0.6.1
 ```
 
 </details>
@@ -330,7 +330,7 @@ steps:
 ### [npm install](../.github/actions/npm-install/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/npm-install@feature/working-directory
+uses: eliashaeussler/gha/.github/actions/npm-install@0.6.1
 ```
 
 <details>
@@ -339,7 +339,7 @@ uses: eliashaeussler/gha/.github/actions/npm-install@feature/working-directory
 ```yaml
 steps:
   - name: 'Install npm packages'
-    uses: eliashaeussler/gha/.github/actions/npm-install@feature/working-directory
+    uses: eliashaeussler/gha/.github/actions/npm-install@0.6.1
 ```
 
 </details>
@@ -347,7 +347,7 @@ steps:
 ### [Setup node environment](../.github/actions/setup-node/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/setup-node@feature/working-directory
+uses: eliashaeussler/gha/.github/actions/setup-node@0.6.1
 ```
 
 <details>
@@ -356,7 +356,7 @@ uses: eliashaeussler/gha/.github/actions/setup-node@feature/working-directory
 ```yaml
 steps:
   - name: 'Setup node'
-    uses: eliashaeussler/gha/.github/actions/setup-node@feature/working-directory
+    uses: eliashaeussler/gha/.github/actions/setup-node@0.6.1
     with:
       node-version: '24'
       cache: 'npm'
@@ -372,12 +372,12 @@ Collection of actions related to environment handling.
 
 | Action                    | Reference                                             |
 |---------------------------|-------------------------------------------------------|
-| [Setup DDEV](#setup-ddev) | `eliashaeussler/gha/.github/actions/setup-ddev@feature/working-directory` |
+| [Setup DDEV](#setup-ddev) | `eliashaeussler/gha/.github/actions/setup-ddev@0.6.1` |
 
 ### [Setup DDEV](../.github/actions/setup-ddev/action.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/actions/setup-ddev@feature/working-directory
+uses: eliashaeussler/gha/.github/actions/setup-ddev@0.6.1
 ```
 
 <details>
@@ -386,7 +386,7 @@ uses: eliashaeussler/gha/.github/actions/setup-ddev@feature/working-directory
 ```yaml
 steps:
   - name: 'Setup DDEV'
-    uses: eliashaeussler/gha/.github/actions/setup-ddev@feature/working-directory
+    uses: eliashaeussler/gha/.github/actions/setup-ddev@0.6.1
     with:
       php-version: '8.5'
       ddev-version: '1.25.2'
