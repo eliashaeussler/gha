@@ -77,6 +77,8 @@ jobs:
         uses: eliashaeussler/gha/.github/actions/checkout@0.6.2
         with:
           token: ${{ secrets.ASSETS_TOKEN }}
+          # Must be true, otherwise new commits cannot be pushed
+          persist-credentials: true
 
       - name: 'Setup Node'
         uses: eliashaeussler/gha/.github/actions/setup-node@0.6.2
