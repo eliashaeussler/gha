@@ -1,0 +1,21 @@
+name: 'Build assets'
+
+inputs:
+  command:
+    description: 'npm script to build assets'
+    default: build
+
+runs:
+  using: composite
+  steps:
+    - name: 'Setup Node'
+      uses: eliashaeussler/gha/.github/actions/setup-node@task/build-assets
+
+    - name: 'Install npm packages'
+      uses: eliashaeussler/gha/.github/actions/npm-install@task/build-assets
+
+    - name: 'Build assets'
+      env:
+        BUILD_COMMAND: ${{ inputs.command }}
+      run: npm run "$BUILD_COMMAND"
+      shell: bash
