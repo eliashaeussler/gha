@@ -48,7 +48,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.6.3
+        uses: eliashaeussler/gha/.github/actions/checkout@task/build-assets
         with:
           token: ${{ secrets.ASSETS_TOKEN }}
           fetch-depth: 2
@@ -74,19 +74,19 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.6.3
+        uses: eliashaeussler/gha/.github/actions/checkout@task/build-assets
         with:
           token: ${{ secrets.ASSETS_TOKEN }}
           # Must be true, otherwise new commits cannot be pushed
           persist-credentials: true
 
       - name: 'Setup Node'
-        uses: eliashaeussler/gha/.github/actions/setup-node@0.6.3
+        uses: eliashaeussler/gha/.github/actions/setup-node@task/build-assets
         with:
           base-path: ${{ inputs.base-path }}
 
       - name: 'Install npm packages'
-        uses: eliashaeussler/gha/.github/actions/npm-install@0.6.3
+        uses: eliashaeussler/gha/.github/actions/npm-install@task/build-assets
         with:
           base-path: ${{ inputs.base-path }}
 
@@ -98,7 +98,7 @@ jobs:
 
       - name: 'Check if workflow is from Renovate'
         id: is-renovate
-        uses: eliashaeussler/gha/.github/actions/is-renovate@0.6.3
+        uses: eliashaeussler/gha/.github/actions/is-renovate@task/build-assets
 
       - name: 'Fail on integrity mismatch'
         if: ${{ steps.is-renovate.outputs.is-renovate == 'false' }}
