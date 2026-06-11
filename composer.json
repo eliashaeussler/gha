@@ -6,7 +6,7 @@
 		"armin/editorconfig-cli": "^2.2",
 		"eliashaeussler/version-bumper": "^4.0",
 		"ergebnis/composer-normalize": "^2.52",
-		"symfony/yaml": "^7.4 || ^8.0"
+		"symfony/yaml": "^8.1"
 	},
 	"config": {
 		"allow-plugins": {
