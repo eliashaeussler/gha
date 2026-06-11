@@ -4,10 +4,11 @@
 
 Collection of actions related to VCS handling and to interact with GitHub.
 
-| Action                                                                    | Reference                                                     |
-|---------------------------------------------------------------------------|---------------------------------------------------------------|
+| Action                                                                    | Reference                                                                  |
+|---------------------------------------------------------------------------|----------------------------------------------------------------------------|
 | [Assure version tag](#assure-version-tag)                                 | `eliashaeussler/gha/.github/actions/assure-version-tag@main` |
 | [Checkout](#checkout)                                                     | `eliashaeussler/gha/.github/actions/checkout@main`           |
+| [Check if repository is private](#check-if-repository-is-private)         | `eliashaeussler/gha/.github/actions/is-private-repo@main`    |
 | [Check if workflow is from fork PR](#check-if-workflow-is-from-fork-pr)   | `eliashaeussler/gha/.github/actions/is-fork@main`            |
 | [Check if workflow is from Renovate](#check-if-workflow-is-from-renovate) | `eliashaeussler/gha/.github/actions/is-renovate@main`        |
 | [Check if workflow is from tag](#check-if-workflow-is-from-tag)           | `eliashaeussler/gha/.github/actions/is-tag@main`             |
@@ -46,6 +47,26 @@ steps:
     with:
       fetch-depth: 0
       egress-policy: audit
+```
+
+</details>
+
+### [Check if repository is private](../.github/actions/is-private-repo/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/is-private-repo@main
+```
+
+<details>
+<summary>Full example</summary>
+
+```yaml
+steps:
+  - name: 'Check visibility'
+    id: is-private
+    uses: eliashaeussler/gha/.github/actions/is-private-repo@main
+
+  - if: ${{ steps.is-private.outputs.is-private == 'true' }}
 ```
 
 </details>
