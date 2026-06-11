@@ -44,6 +44,9 @@ jobs:
       coverage-path: ${{ steps.coverage.outputs.path }}
       coverage-file: ${{ steps.coverage.outputs.file }}
 
+    permissions:
+      contents: read
+
     steps:
       - name: 'Checkout'
         uses: eliashaeussler/gha/.github/actions/checkout@main
@@ -141,6 +144,9 @@ jobs:
     runs-on: ubuntu-latest
 
     needs: [collect]
+
+    permissions:
+      contents: read
 
     steps:
       - name: 'Checkout'

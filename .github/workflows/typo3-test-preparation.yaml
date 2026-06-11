@@ -40,6 +40,9 @@ jobs:
       use-ddev: ${{ steps.context.outputs.use-ddev }}
       requires-compatibility-update: ${{ steps.compatibility.outputs.compatible == 'false' }}
 
+    permissions:
+      contents: read
+
     steps:
       - name: 'Checkout'
         uses: eliashaeussler/gha/.github/actions/checkout@main

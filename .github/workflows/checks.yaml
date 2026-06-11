@@ -48,6 +48,9 @@ jobs:
 
     if: ${{ inputs.composer }}
 
+    permissions:
+      contents: read
+
     steps:
       - name: 'Checkout'
         uses: eliashaeussler/gha/.github/actions/checkout@main
@@ -68,6 +71,9 @@ jobs:
     runs-on: ubuntu-latest
 
     if: ${{ inputs.npm }}
+
+    permissions:
+      contents: read
 
     steps:
       - name: 'Checkout'
@@ -97,6 +103,7 @@ jobs:
     if: ${{ inputs.repository }}
 
     permissions:
+      contents: read
       security-events: write
 
     steps:

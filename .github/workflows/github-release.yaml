@@ -24,9 +24,6 @@ on:
         description: 'HTML URL of the release'
         value: ${{ jobs.release.outputs.url }}
 
-permissions:
-  contents: write
-
 jobs:
   release:
     name: 'Create release'
@@ -34,6 +31,9 @@ jobs:
 
     outputs:
       url: ${{ steps.release.outputs.url }}
+
+    permissions:
+      contents: write
 
     steps:
       - name: 'Checkout'
