@@ -50,6 +50,9 @@ jobs:
     needs: [prepare]
     if: ${{ needs.prepare.outputs.continue == 'true' }}
 
+    permissions:
+      contents: read
+
     steps:
       - name: 'Checkout'
         uses: eliashaeussler/gha/.github/actions/checkout@main
