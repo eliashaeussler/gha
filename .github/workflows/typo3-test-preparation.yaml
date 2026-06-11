@@ -42,7 +42,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@task/build-assets
+        uses: eliashaeussler/gha/.github/actions/checkout@main
 
       - name: 'Lookup testsuites'
         id: testsuites

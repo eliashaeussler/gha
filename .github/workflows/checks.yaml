@@ -50,18 +50,18 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@task/build-assets
+        uses: eliashaeussler/gha/.github/actions/checkout@main
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@task/build-assets
+        uses: eliashaeussler/gha/.github/actions/setup-php@main
         with:
           php-version: ${{ inputs.php-version }}
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@task/build-assets
+        uses: eliashaeussler/gha/.github/actions/composer-install@main
 
       - name: 'Perform Composer checks'
-        uses: eliashaeussler/gha/.github/actions/composer-checks@task/build-assets
+        uses: eliashaeussler/gha/.github/actions/composer-checks@main
 
   npm-checks:
     name: 'Perform npm checks'
@@ -71,22 +71,22 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@task/build-assets
+        uses: eliashaeussler/gha/.github/actions/checkout@main
 
       - name: 'Setup Node'
-        uses: eliashaeussler/gha/.github/actions/setup-node@task/build-assets
+        uses: eliashaeussler/gha/.github/actions/setup-node@main
         with:
           node-version: ${{ inputs.node-version }}
           cache: ${{ inputs.node-cache }}
           base-path: ${{ inputs.assets-path }}
 
       - name: 'Install npm packages'
-        uses: eliashaeussler/gha/.github/actions/npm-install@task/build-assets
+        uses: eliashaeussler/gha/.github/actions/npm-install@main
         with:
           base-path: ${{ inputs.assets-path }}
 
       - name: 'Perform npm checks'
-        uses: eliashaeussler/gha/.github/actions/npm-checks@task/build-assets
+        uses: eliashaeussler/gha/.github/actions/npm-checks@main
         with:
           base-path: ${{ inputs.assets-path }}
 
@@ -101,7 +101,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@task/build-assets
+        uses: eliashaeussler/gha/.github/actions/checkout@main
 
       - name: 'Run zizmor'
         id: zizmor
