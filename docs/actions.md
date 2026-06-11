@@ -12,7 +12,6 @@ Collection of actions related to VCS handling and to interact with GitHub.
 | [Check if workflow is from fork PR](#check-if-workflow-is-from-fork-pr)   | `eliashaeussler/gha/.github/actions/is-fork@main`            |
 | [Check if workflow is from Renovate](#check-if-workflow-is-from-renovate) | `eliashaeussler/gha/.github/actions/is-renovate@main`        |
 | [Check if workflow is from tag](#check-if-workflow-is-from-tag)           | `eliashaeussler/gha/.github/actions/is-tag@main`             |
-| [Deploy to GitHub Pages](#deploy-to-github-pages)                         | `eliashaeussler/gha/.github/actions/deploy-pages@main`       |
 
 ### [Assure version tag](../.github/actions/assure-version-tag/action.yaml)
 
@@ -127,26 +126,6 @@ steps:
     uses: eliashaeussler/gha/.github/actions/is-tag@main
 
   - if: ${{ steps.is-tag.outputs.is-version == 'true' }}
-```
-
-</details>
-
-### [Deploy to GitHub Pages](../.github/actions/deploy-pages/action.yaml)
-
-```yaml
-uses: eliashaeussler/gha/.github/actions/deploy-pages@main
-```
-
-<details>
-<summary>Full example</summary>
-
-```yaml
-steps:
-  - name: 'Deploy'
-    uses: eliashaeussler/gha/.github/actions/deploy-pages@main
-    with:
-      build-command: 'docs:build'
-      dist-path: '.build/docs'
 ```
 
 </details>
@@ -412,6 +391,58 @@ steps:
       php-version: '8.5'
       ddev-version: '1.25.2'
       start: false
+```
+
+</details>
+
+---
+
+## 🚢 Deploy
+
+Collection of actions targeting deployment of applications.
+
+| Action                                                                    | Reference                                                                  |
+|---------------------------------------------------------------------------|----------------------------------------------------------------------------|
+| [Deploy application with Deployer](#deploy-application-with-deployer)     | `eliashaeussler/gha/.github/actions/deploy-app@main`         |
+| [Deploy to GitHub Pages](#deploy-to-github-pages)                         | `eliashaeussler/gha/.github/actions/deploy-pages@main`       |
+
+### [Deploy application with Deployer](../.github/actions/deploy-app/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/deploy-app@main
+```
+
+<details>
+<summary>Full example</summary>
+
+```yaml
+steps:
+  - name: 'Deploy'
+    uses: eliashaeussler/gha/.github/actions/deploy-app@main
+    with:
+      private-key: ${{ secrets.DEPLOYER_PRIVATE_KEY }}
+      known-hosts: ${{ secrets.DEPLOYER_KNOWN_HOSTS }}
+      deployer-version: '7.5.12'
+```
+
+</details>
+
+### [Deploy to GitHub Pages](../.github/actions/deploy-pages/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/deploy-pages@main
+```
+
+<details>
+<summary>Full example</summary>
+
+```yaml
+steps:
+  - name: 'Deploy'
+    uses: eliashaeussler/gha/.github/actions/deploy-pages@main
+    with:
+      build-command: 'docs:build'
+      dist-path: '.build/docs'
 ```
 
 </details>

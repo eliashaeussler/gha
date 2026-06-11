@@ -1,0 +1,30 @@
+name: 'Deploy application with Deployer'
+
+inputs:
+  private-key:
+    description: 'Private SSH key'
+    required: true
+  known-hosts:
+    description: 'Known hosts file'
+    required: true
+  command:
+    description: 'Deployer command (defaults to "production")'
+    default: production
+  deployer-version:
+    description: 'Explicit Deployer version to use (defaults to latest stable)'
+
+runs:
+  using: composite
+  steps:
+    - name: 'Deploy'
+      uses: deployphp/action@a1b46c204dbde25a32ed0d7bb6751ac3377ca1e9 # v1.0.26
+      env:
+        LANG: en_US.UTF-8
+        LANGUAGE: en_US.UTF-8
+        LC_CTYPE: en_US.UTF-8
+        LC_ALL: en_US.UTF-8
+      with:
+        private-key: ${{ inputs.private-key }}
+        known-hosts: ${{ inputs.known-hosts }}
+        dep: deploy ${{ inputs.command }}
+        deployer-version: ${{ inputs.deployer-version }}
