@@ -4,6 +4,9 @@ inputs:
   command:
     description: 'npm script to build assets'
     default: build
+  node-env:
+    description: 'Node environment (defaults to "production")'
+    default: production
 
 runs:
   using: composite
@@ -17,5 +20,6 @@ runs:
     - name: 'Build assets'
       env:
         BUILD_COMMAND: ${{ inputs.command }}
+        NODE_ENV: ${{ inputs.node-env }}
       run: npm run "$BUILD_COMMAND"
       shell: bash

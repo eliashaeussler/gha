@@ -180,7 +180,8 @@ steps:
   - name: 'Build assets'
     uses: eliashaeussler/gha/.github/actions/build-assets@0.7.0
     with:
-      command: 'build:prod'
+      command: 'dev'
+      node-env: 'development'
 ```
 
 </details>
