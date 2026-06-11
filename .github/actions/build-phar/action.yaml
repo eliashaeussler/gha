@@ -44,7 +44,7 @@ runs:
 
     - name: 'Import GPG key'
       if: ${{ inputs.gpg-key }}
-      uses: crazy-max/ghaction-import-gpg@2dc316deee8e90f13e1a351ab510b4d5bc0c82cd # v7
+      uses: crazy-max/ghaction-import-gpg@2dc316deee8e90f13e1a351ab510b4d5bc0c82cd # v7.0.0
       with:
         gpg_private_key: ${{ inputs.gpg-key }}
         passphrase: ${{ inputs.gpg-passphrase }}
@@ -57,7 +57,7 @@ runs:
       shell: bash
 
     - name: 'Upload artifact'
-      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
       with:
         name: phar
         path: |

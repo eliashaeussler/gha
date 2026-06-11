@@ -102,7 +102,7 @@ jobs:
 
       - name: 'Run acceptance tests'
         if: ${{ needs.prepare.outputs.has-acceptance-tests == 'true' }}
-        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4
+        uses: nick-fields/retry@ad984534de44a9489a53aefd81eb77f87c70dc60 # v4.0.0
         with:
           max_attempts: 3
           retry_on: error
@@ -112,7 +112,7 @@ jobs:
 
       - name: 'Save acceptance reports'
         if: ${{ needs.prepare.outputs.has-acceptance-tests == 'true' && failure() }}
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: acceptance-reports-${{ inputs.php-version }}-${{ inputs.typo3-version }}-${{ inputs.dependencies }}
           path: |
