@@ -110,12 +110,19 @@ jobs:
       - name: 'Checkout'
         uses: eliashaeussler/gha/.github/actions/checkout@main
 
+      - name: 'Check repo visibility'
+        id: visibility
+        uses: eliashaeussler/gha/.github/actions/is-private-repo@main
+
       - name: 'Run zizmor'
         id: zizmor
         uses: zizmorcore/zizmor-action@5f14fd08f7cf1cb1609c1e344975f152c7ee938d # v0.5.6
+        with:
+          advanced-security: ${{ steps.visibility.outputs.is-public == 'true' }}
+          annotations: ${{ steps.visibility.outputs.is-private == 'true' }}
 
       - name: 'Evaluate zizmor results'
-        if: ${{ inputs.fail-on-zizmor-findings }}
+        if: ${{ inputs.fail-on-zizmor-findings && steps.visibility.outputs.is-public == 'true' }}
         env:
           ZIZMOR_OUTPUT_FILE: ${{ steps.zizmor.outputs.output-file }}
         run: |

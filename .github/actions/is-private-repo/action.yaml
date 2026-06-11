@@ -1,0 +1,27 @@
+name: 'Check if repository is private'
+
+outputs:
+  is-private:
+    description: 'Describes whether current repository is private'
+    value: ${{ steps.is-private.outputs.is-private == 'true' }}
+  is-public:
+    description: 'Describes whether current repository is public'
+    value: ${{ steps.is-private.outputs.is-private == 'false' }}
+
+runs:
+  using: composite
+  steps:
+    - name: 'Check if repository is private'
+      id: is-private
+      env:
+        IS_PRIVATE: ${{ github.event.repository.private }}
+        VISIBILITY: ${{ github.event.repository.visibility }}
+      run: |
+        if [ -n "$IS_PRIVATE" ]]; then
+          echo "is-private=${IS_PRIVATE}" >> "$GITHUB_OUTPUT"
+        elif [[ "$VISIBILITY" == "public" ]]; then
+          echo "is-private=false" >> "$GITHUB_OUTPUT"
+        else
+          echo "is-private=true" >> "$GITHUB_OUTPUT"
+        fi
+      shell: bash
