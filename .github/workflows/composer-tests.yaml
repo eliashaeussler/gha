@@ -37,6 +37,13 @@ on:
       allowed-endpoints:
         description: 'List of allowed outbound endpoints'
         type: string
+      phpunit-phar-version:
+        description: 'The PHPUnit PHAR version to use (instead of Composer)'
+        type: string
+      phpunit-phar-flags:
+        description: 'Flags passed to PHPUnit PHAR execution'
+        default: --no-coverage
+        type: string
 
 jobs:
   test:
@@ -78,8 +85,28 @@ jobs:
             ${{ inputs.composer-options }}
           working-directory: ${{ inputs.working-directory }}
 
-      - name: 'Run tests'
+      - name: 'Run tests (using Composer)'
+        if: ${{ !inputs.phpunit-phar-version }}
         uses: eliashaeussler/gha/.github/actions/composer-tests@0.7.2
         with:
           command: ${{ inputs.command }}
           working-directory: ${{ inputs.working-directory }}
+
+      - name: 'Download PHPUnit PHAR'
+        if: ${{ inputs.phpunit-phar-version }}
+        env:
+          PHPUNIT_PHAR_VERSION: ${{ inputs.phpunit-phar-version }}
+        run: |
+          wget -O phpunit.phar "https://phar.phpunit.de/phpunit-${PHPUNIT_PHAR_VERSION}.phar"
+          wget -O phpunit.phar.asc "https://phar.phpunit.de/phpunit-${PHPUNIT_PHAR_VERSION}.phar.asc"
+          gpg --keyserver keys.openpgp.org --recv-keys 0x4AA394086372C20A
+          gpg --verify phpunit.phar.asc
+          chmod +x phpunit.phar
+
+      - name: 'Run tests (using PHPUnit PHAR)'
+        if: ${{ inputs.phpunit-phar-version }}
+        env:
+          PHPUNIT_PHAR_FLAGS: ${{ inputs.phpunit-phar-flags }}
+        run: |
+          # shellcheck disable=SC2068
+          ./phpunit.phar ${PHPUNIT_PHAR_FLAGS[@]}
