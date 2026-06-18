@@ -12,7 +12,7 @@ filesToModify:
   - <<: *file
     path: '.github/actions/**/action.yaml'
 
-  # README code examples
+  # Documentation code examples
   - <<: *file
     path: 'docs/*.md'
 
