@@ -17,7 +17,7 @@ runs:
   steps:
     - name: 'Build pages'
       if: ${{ inputs.build-command }}
-      uses: eliashaeussler/gha/.github/actions/build-assets@0.7.1
+      uses: eliashaeussler/gha/.github/actions/build-assets@0.7.2
       with:
         command: ${{ inputs.build-command }}
 

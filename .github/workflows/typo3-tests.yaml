@@ -34,7 +34,7 @@ jobs:
     permissions:
       contents: read
 
-    uses: eliashaeussler/gha/.github/workflows/typo3-test-preparation.yaml@0.7.1
+    uses: eliashaeussler/gha/.github/workflows/typo3-test-preparation.yaml@0.7.2
     with:
       typo3-version: ${{ inputs.typo3-version }}
 
@@ -55,19 +55,19 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.7.1
+        uses: eliashaeussler/gha/.github/actions/checkout@0.7.2
         with:
           egress-policy: ${{ case(needs.prepare.outputs.has-acceptance-tests == 'true', 'audit', 'block') }}
           allowed-endpoints: ${{ inputs.allowed-endpoints }}
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.7.1
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.7.2
         with:
           php-version: ${{ inputs.php-version }}
 
       - name: 'Setup DDEV'
         if: ${{ needs.prepare.outputs.use-ddev == 'true' }}
-        uses: eliashaeussler/gha/.github/actions/setup-ddev@0.7.1
+        uses: eliashaeussler/gha/.github/actions/setup-ddev@0.7.2
         with:
           ddev-version: ${{ inputs.ddev-version }}
           php-version: ${{ inputs.php-version }}
@@ -77,7 +77,7 @@ jobs:
         run: sudo /etc/init.d/mysql start
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.7.1
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.7.2
         with:
           dependencies: ${{ inputs.dependencies }}
           composer-options: >-
@@ -86,7 +86,7 @@ jobs:
 
       - name: 'Install Composer packages (compatibility update)'
         if: ${{ needs.prepare.outputs.requires-compatibility-update == 'true' }}
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.7.1
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.7.2
 
       - name: 'Run functional tests'
         if: ${{ needs.prepare.outputs.has-functional-tests == 'true' }}
