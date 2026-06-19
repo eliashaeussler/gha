@@ -39,7 +39,7 @@ runs:
         ignore-cache: true
 
     - name: 'Compile PHAR'
-      run: ./tools/box compile ${{ inputs.build-dockerfile && '--with-docker' }}
+      run: ./tools/box compile ${{ inputs.build-dockerfile && '--with-docker' || '' }}
       shell: bash
 
     - name: 'Import GPG key'
@@ -62,6 +62,6 @@ runs:
         name: phar
         path: |
           ${{ inputs.target-file }}
-          ${{ inputs.gpg-key && format('{0}.asc', inputs.target-file) }}
-          ${{ inputs.build-dockerfile && 'Dockerfile' }}
+          ${{ inputs.gpg-key && format('{0}.asc', inputs.target-file) || '' }}
+          ${{ inputs.build-dockerfile && 'Dockerfile' || '' }}
         if-no-files-found: error
