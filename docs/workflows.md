@@ -188,7 +188,7 @@ jobs:
     with:
       php-version: '8.5'
       dependencies: 'highest'
-      command: 'test:unit'
+      test-command: 'test:unit'
 ```
 
 </details>
@@ -207,7 +207,7 @@ jobs:
   test-coverage:
     uses: eliashaeussler/gha/.github/workflows/composer-test-coverage.yaml@0.7.4
     with:
-      command: 'test:unit:coverage'
+      test-command: 'test:unit:coverage'
       coverage-driver: 'xdebug'
       coverage-file: '.Build/coverage/_merged/clover.xml'
 ```
