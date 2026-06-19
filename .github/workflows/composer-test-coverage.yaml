@@ -3,9 +3,12 @@ name: 'Composer test coverage'
 on:
   workflow_call:
     inputs:
-      command:
+      test-command:
         description: 'Composer command to execute'
         default: 'test:coverage'
+        type: string
+      build-command:
+        description: 'Optional npm command to execute in order to prebuild assets'
         type: string
       coverage-driver:
         description: 'Coverage driver to install (defaults to "pcov")'
@@ -51,6 +54,12 @@ jobs:
         with:
           coverage: ${{ inputs.coverage-driver }}
 
+      - name: 'Build assets'
+        if: ${{ inputs.build-command }}
+        uses: eliashaeussler/gha/.github/actions/build-assets@0.7.4
+        with:
+          command: ${{ inputs.build-command }}
+
       - name: 'Start MySQL'
         if: ${{ inputs.boot-mysql }}
         run: sudo /etc/init.d/mysql start
@@ -77,7 +86,7 @@ jobs:
       - name: 'Run tests'
         uses: eliashaeussler/gha/.github/actions/composer-tests@0.7.4
         with:
-          command: ${{ inputs.command }}
+          command: ${{ inputs.test-command }}
 
       - name: 'Upload coverage artifact'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1

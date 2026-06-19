@@ -17,9 +17,12 @@ on:
         description: 'Dependency versions to install (defaults to "locked")'
         default: locked
         type: string
-      command:
+      test-command:
         description: 'Composer command to execute'
         default: test
+        type: string
+      build-command:
+        description: 'Optional npm command to execute in order to prebuild assets'
         type: string
       working-directory:
         description: 'Overwrite working directory'
@@ -71,6 +74,12 @@ jobs:
           php-version: ${{ inputs.php-version }}
           composer-version: ${{ inputs.composer-version }}
 
+      - name: 'Build assets'
+        if: ${{ inputs.build-command }}
+        uses: eliashaeussler/gha/.github/actions/build-assets@0.7.4
+        with:
+          command: ${{ inputs.build-command }}
+
       - name: 'Start MySQL'
         if: ${{ inputs.boot-mysql }}
         run: sudo /etc/init.d/mysql start
@@ -89,7 +98,7 @@ jobs:
         if: ${{ !inputs.phpunit-phar-version }}
         uses: eliashaeussler/gha/.github/actions/composer-tests@0.7.4
         with:
-          command: ${{ inputs.command }}
+          command: ${{ inputs.test-command }}
           working-directory: ${{ inputs.working-directory }}
 
       - name: 'Download PHPUnit PHAR'
