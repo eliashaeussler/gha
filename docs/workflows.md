@@ -8,6 +8,7 @@ Collection of useful workflows for a various range of repository types.
 |-----------------------------------|------------------------------------------------------------------|
 | [Checks](#checks)                 | `eliashaeussler/gha/.github/workflows/checks.yaml@0.8.0`         |
 | [Crowdin](#crowdin)               | `eliashaeussler/gha/.github/workflows/crowdin.yaml@0.8.0`        |
+| [DevSecOps](#devsecops)           | `eliashaeussler/gha/.github/workflows/devsecops.yaml@0.8.0`      |
 | [GitHub release](#github-release) | `eliashaeussler/gha/.github/workflows/github-release.yaml@0.8.0` |
 | [Merge branch](#merge-branch)     | `eliashaeussler/gha/.github/workflows/merge-branch.yaml@0.8.0`   |
 | [Preparation](#preparation)       | `eliashaeussler/gha/.github/workflows/preparation.yaml@0.8.0`    |
@@ -59,6 +60,27 @@ jobs:
     uses: eliashaeussler/gha/.github/workflows/crowdin.yaml@0.8.0
     with:
       project-id: 12345
+```
+
+</details>
+
+### [DevSecOps](../.github/workflows/devsecops.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/workflows/devsecops.yaml@0.8.0
+```
+
+<details>
+<summary>Full example</summary>
+
+```yaml
+jobs:
+  devsecops:
+    secrets:
+      DEVGUARD_TOKEN: ${{ secrets.DEVGUARD_TOKEN }}
+    uses: eliashaeussler/gha/.github/workflows/devsecops.yaml@0.8.0
+    with:
+      devguard-asset-name: 'my-org/projects/my-project/assets/my-repo'
 ```
 
 </details>

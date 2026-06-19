@@ -1,0 +1,48 @@
+name: 'DevSecOps'
+
+on:
+  workflow_call:
+    secrets:
+      DEVGUARD_TOKEN:
+        description: 'DevGuard API token'
+        required: true
+
+    inputs:
+      devguard-asset-name:
+        description: 'Asset name of the repository used in DevGuard'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  secret-scanning:
+    name: 'Secret scanning'
+
+    secrets:
+      devguard-token: ${{ secrets.DEVGUARD_TOKEN }}
+
+    uses: l3montree-dev/devguard-action/.github/workflows/secret-scanning.yml@d1d9b7b07722d87d656d3dff8835ccfd58024584 # v1.4.0
+    with:
+      asset-name: ${{ inputs.devguard-asset-name }}
+
+  dependency-scanning:
+    name: 'Dependency scanning'
+
+    secrets:
+      devguard-token: ${{ secrets.DEVGUARD_TOKEN }}
+
+    uses: l3montree-dev/devguard-action/.github/workflows/software-composition-analysis.yml@d1d9b7b07722d87d656d3dff8835ccfd58024584 # v1.4.0
+    with:
+      asset-name: ${{ inputs.devguard-asset-name }}
+
+  sast:
+    name: 'SAST'
+
+    secrets:
+      devguard-token: ${{ secrets.DEVGUARD_TOKEN }}
+
+    uses: l3montree-dev/devguard-action/.github/workflows/static-application-security-testing.yml@d1d9b7b07722d87d656d3dff8835ccfd58024584 # v1.4.0
+    with:
+      asset-name: ${{ inputs.devguard-asset-name }}
