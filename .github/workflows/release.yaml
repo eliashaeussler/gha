@@ -12,4 +12,4 @@ jobs:
     permissions:
       contents: write
 
-    uses: eliashaeussler/gha/.github/workflows/github-release.yaml@0.7.4
+    uses: eliashaeussler/gha/.github/workflows/github-release.yaml@0.8.0
