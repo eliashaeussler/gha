@@ -58,6 +58,7 @@ jobs:
         uses: eliashaeussler/gha/.github/actions/checkout@0.8.1
         with:
           token: ${{ secrets.MERGE_TOKEN }}
+          fetch-depth: 0
           # Must be true, otherwise new commits cannot be pushed
           persist-credentials: true
 
