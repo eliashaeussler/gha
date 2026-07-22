@@ -64,19 +64,19 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.8.1
+        uses: eliashaeussler/gha/.github/actions/checkout@0.8.2
         with:
           allowed-endpoints: ${{ inputs.allowed-endpoints }}
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.8.1
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.8.2
         with:
           php-version: ${{ inputs.php-version }}
           composer-version: ${{ inputs.composer-version }}
 
       - name: 'Build assets'
         if: ${{ inputs.build-command }}
-        uses: eliashaeussler/gha/.github/actions/build-assets@0.8.1
+        uses: eliashaeussler/gha/.github/actions/build-assets@0.8.2
         with:
           command: ${{ inputs.build-command }}
 
@@ -85,7 +85,7 @@ jobs:
         run: sudo /etc/init.d/mysql start
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.8.1
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.8.2
         with:
           dependencies: ${{ inputs.dependencies }}
           composer-options: >-
@@ -96,7 +96,7 @@ jobs:
 
       - name: 'Run tests (using Composer)'
         if: ${{ !inputs.phpunit-phar-version }}
-        uses: eliashaeussler/gha/.github/actions/composer-tests@0.8.1
+        uses: eliashaeussler/gha/.github/actions/composer-tests@0.8.2
         with:
           command: ${{ inputs.test-command }}
           working-directory: ${{ inputs.working-directory }}
