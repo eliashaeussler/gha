@@ -9,6 +9,12 @@
 				"eliashaeussler/gha"
 			],
 			"pinDigests": false
+		},
+		{
+			"matchFileNames": [
+				".github/**"
+			],
+			"automergeType": "pr"
 		}
 	]
 }
