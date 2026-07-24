@@ -31,7 +31,7 @@ jobs:
     if: ${{ startsWith(github.ref_name, 'renovate/') }}
 
     outputs:
-      continue: ${{ steps.is-renovate.outputs.is-renovate == 'false' && steps.is-fork.outputs.is-fork == 'false' }}
+      continue: ${{ steps.is-renovate.outputs.is-renovate == 'false' && steps.is-fork.outputs.is-fork == 'false' && steps.has-pr.outputs.has-pr == 'false' }}
 
     steps:
       - name: 'Check if workflow is from Renovate'
@@ -41,6 +41,10 @@ jobs:
       - name: 'Check if workflow is from fork PR'
         id: is-fork
         uses: eliashaeussler/gha/.github/actions/is-fork@0.9.0
+
+      - name: 'Check if PR exists for branch'
+        id: has-pr
+        uses: eliashaeussler/gha/.github/actions/has-pr@0.9.0
 
   merge:
     name: 'Merge Renovate branch into default branch'
