@@ -1,4 +1,4 @@
-name: 'Merge branch'
+name: 'Merge Renovate branch'
 
 on:
   workflow_call:
@@ -43,7 +43,7 @@ jobs:
         uses: eliashaeussler/gha/.github/actions/is-fork@0.8.3
 
   merge:
-    name: 'Merge current branch into default branch'
+    name: 'Merge Renovate branch into default branch'
     runs-on: ubuntu-latest
 
     needs: [prepare]

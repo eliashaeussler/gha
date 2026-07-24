@@ -4,14 +4,14 @@
 
 Collection of useful workflows for a various range of repository types.
 
-| Workflow                          | Reference                                                        |
-|-----------------------------------|------------------------------------------------------------------|
-| [Checks](#checks)                 | `eliashaeussler/gha/.github/workflows/checks.yaml@0.8.2`         |
-| [Crowdin](#crowdin)               | `eliashaeussler/gha/.github/workflows/crowdin.yaml@0.8.2`        |
-| [DevSecOps](#devsecops)           | `eliashaeussler/gha/.github/workflows/devsecops.yaml@0.8.2`      |
-| [GitHub release](#github-release) | `eliashaeussler/gha/.github/workflows/github-release.yaml@0.8.2` |
-| [Merge branch](#merge-branch)     | `eliashaeussler/gha/.github/workflows/merge-branch.yaml@0.8.2`   |
-| [Preparation](#preparation)       | `eliashaeussler/gha/.github/workflows/preparation.yaml@0.8.2`    |
+| Workflow                                        | Reference                                                        |
+|-------------------------------------------------|------------------------------------------------------------------|
+| [Checks](#checks)                               | `eliashaeussler/gha/.github/workflows/checks.yaml@0.8.2`         |
+| [Crowdin](#crowdin)                             | `eliashaeussler/gha/.github/workflows/crowdin.yaml@0.8.2`        |
+| [DevSecOps](#devsecops)                         | `eliashaeussler/gha/.github/workflows/devsecops.yaml@0.8.2`      |
+| [GitHub release](#github-release)               | `eliashaeussler/gha/.github/workflows/github-release.yaml@0.8.2` |
+| [Merge Renovate branch](#merge-renovate-branch) | `eliashaeussler/gha/.github/workflows/renovate-merge.yaml@0.8.2` |
+| [Preparation](#preparation)                     | `eliashaeussler/gha/.github/workflows/preparation.yaml@0.8.2`    |
 
 ### [Checks](../.github/workflows/checks.yaml)
 
@@ -108,10 +108,10 @@ jobs:
 
 </details>
 
-### [Merge branch](../.github/workflows/merge.yaml)
+### [Merge Renovate branch](../.github/workflows/renovate-merge.yaml)
 
 ```yaml
-uses: eliashaeussler/gha/.github/workflows/merge.yaml@0.8.2
+uses: eliashaeussler/gha/.github/workflows/renovate-merge.yaml@0.8.2
 ```
 
 <details>
@@ -123,7 +123,7 @@ jobs:
     secrets:
       MERGE_TOKEN: ${{ secrets.MERGE_TOKEN }}
 
-    uses: eliashaeussler/gha/.github/workflows/merge.yaml@0.8.2
+    uses: eliashaeussler/gha/.github/workflows/renovate-merge.yaml@0.8.2
 ```
 
 </details>
