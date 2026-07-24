@@ -4,14 +4,15 @@
 
 Collection of actions related to VCS handling and to interact with GitHub.
 
-| Action                                                                    | Reference                                                     |
-|---------------------------------------------------------------------------|---------------------------------------------------------------|
-| [Assure version tag](#assure-version-tag)                                 | `eliashaeussler/gha/.github/actions/assure-version-tag@0.9.0` |
-| [Checkout](#checkout)                                                     | `eliashaeussler/gha/.github/actions/checkout@0.9.0`           |
-| [Check if repository is private](#check-if-repository-is-private)         | `eliashaeussler/gha/.github/actions/is-private-repo@0.9.0`    |
-| [Check if workflow is from fork PR](#check-if-workflow-is-from-fork-pr)   | `eliashaeussler/gha/.github/actions/is-fork@0.9.0`            |
-| [Check if workflow is from Renovate](#check-if-workflow-is-from-renovate) | `eliashaeussler/gha/.github/actions/is-renovate@0.9.0`        |
-| [Check if workflow is from tag](#check-if-workflow-is-from-tag)           | `eliashaeussler/gha/.github/actions/is-tag@0.9.0`             |
+| Action                                                                          | Reference                                                     |
+|---------------------------------------------------------------------------------|---------------------------------------------------------------|
+| [Assure version tag](#assure-version-tag)                                       | `eliashaeussler/gha/.github/actions/assure-version-tag@0.9.0` |
+| [Checkout](#checkout)                                                           | `eliashaeussler/gha/.github/actions/checkout@0.9.0`           |
+| [Check if PR exists for current branch](#check-if-pr-exists-for-current-branch) | `eliashaeussler/gha/.github/actions/has-pr@0.9.0`             |
+| [Check if repository is private](#check-if-repository-is-private)               | `eliashaeussler/gha/.github/actions/is-private-repo@0.9.0`    |
+| [Check if workflow is from fork PR](#check-if-workflow-is-from-fork-pr)         | `eliashaeussler/gha/.github/actions/is-fork@0.9.0`            |
+| [Check if workflow is from Renovate](#check-if-workflow-is-from-renovate)       | `eliashaeussler/gha/.github/actions/is-renovate@0.9.0`        |
+| [Check if workflow is from tag](#check-if-workflow-is-from-tag)                 | `eliashaeussler/gha/.github/actions/is-tag@0.9.0`             |
 
 ### [Assure version tag](../.github/actions/assure-version-tag/action.yaml)
 
@@ -46,6 +47,26 @@ steps:
     with:
       fetch-depth: 0
       egress-policy: audit
+```
+
+</details>
+
+### [Check if PR exists for current branch](../.github/actions/has-pr/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/has-pr@0.9.0
+```
+
+<details>
+<summary>Full example</summary>
+
+```yaml
+steps:
+  - name: 'Check if PR exists'
+    id: has-pr
+    uses: eliashaeussler/gha/.github/actions/has-pr@0.9.0
+
+  - if: ${{ steps.has-pr.outputs.has-pr == 'true' }}
 ```
 
 </details>
