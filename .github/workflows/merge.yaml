@@ -28,8 +28,7 @@ jobs:
     name: 'Prepare workflow execution'
     runs-on: ubuntu-latest
 
-    # Environment variables cannot be referenced here
-    if: ${{ github.ref_name != github.event.repository.default_branch }}
+    if: ${{ startsWith(github.ref_name, 'renovate/') }}
 
     outputs:
       continue: ${{ steps.is-renovate.outputs.is-renovate == 'false' && steps.is-fork.outputs.is-fork == 'false' }}
