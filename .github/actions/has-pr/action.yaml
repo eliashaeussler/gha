@@ -1,0 +1,19 @@
+name: 'Check if PR exists for current branch'
+
+outputs:
+  has-pr:
+    description: 'Describes whether PR exists for current branch.'
+    value: ${{ steps.has-pr.outputs.has-pr }}
+
+runs:
+  using: composite
+  steps:
+    - name: 'Check if PR exists'
+      id: has-pr
+      run: |
+        if gh pr view >/dev/null 2>&1; then
+          echo "has-pr=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "has-pr=false" >> "$GITHUB_OUTPUT"
+        fi
+      shell: bash
