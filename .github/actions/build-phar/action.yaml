@@ -23,7 +23,7 @@ runs:
   using: composite
   steps:
     - name: 'Setup PHP'
-      uses: eliashaeussler/gha/.github/actions/setup-php@0.9.1
+      uses: eliashaeussler/gha/.github/actions/setup-php@task/endpoints
       with:
         php-version: ${{ inputs.php-version }}
         tools: phive
@@ -33,7 +33,7 @@ runs:
       shell: bash
 
     - name: 'Install Composer dependencies'
-      uses: eliashaeussler/gha/.github/actions/composer-install@0.9.1
+      uses: eliashaeussler/gha/.github/actions/composer-install@task/endpoints
       with:
         composer-options: '--no-dev'
         ignore-cache: true

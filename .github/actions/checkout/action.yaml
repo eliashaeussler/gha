@@ -25,6 +25,10 @@ runs:
         egress-policy: ${{ inputs.egress-policy }}
         token: ${{ inputs.token }}
         allowed-endpoints: >
+          *.lencr.org:443
+          *.lencr.org:80
+          *.microsoft.com:443
+          *.microsoft.com:80
           _http._tcp.azure.archive.ubuntu.com:443
           _http._tcp.deb.debian.org:443
           _http._tcp.packages.blackfire.io:443
@@ -54,10 +58,14 @@ runs:
           azure.archive.ubuntu.com:443
           azure.archive.ubuntu.com:80
           cdn.jsdelivr.net:443
+          client.wns.windows.com:443
           clients2.google.com:443
           clients2.google.com:80
           content-autofill.googleapis.com:443
           coveralls.io:443
+          crl.sectigo.com:443
+          curl.haxx.se:443
+          curl.se:443
           ddev.com:443
           ddev.github.io:443
           deb.debian.org:443
@@ -66,6 +74,7 @@ runs:
           dl.cloudsmith.io:443
           dl.google.com:443
           docs.typo3.org:443
+          downloads.php.net:443
           edgedl.me.gvt1.com:80
           esm.ubuntu.com:443
           extensions.typo3.org:443
@@ -73,10 +82,18 @@ runs:
           ghcr.io:443
           github.com:443
           google.com:443
+          incoming.telemetry.mozilla.org:443
+          ipv6.msftconnecttest.com:443
+          ipv6.msftncsi.com:443
+          keys.openpgp.org:11371
           keys.openpgp.org:443
+          login.live.com:443
           motd.ubuntu.com:443
           mtalk.google.com:443
           mtalk.google.com:5228
+          ocsp.digicert.com:80
+          ocsp.sectigo.com:443
+          ocsp.sectigo.com:80
           one.one.one.one:443
           optimizationguide-pa.googleapis.com:443
           packages.blackfire.io:443
@@ -95,6 +112,7 @@ runs:
           repo.packagist.org:443
           security.ubuntu.com:443
           setup-php.com:443
+          telemetry-incoming.r53-2.services.mozilla.com:443
           telemetry.sury.org:443
           update.googleapis.com:443
           update.traefik.io:443
