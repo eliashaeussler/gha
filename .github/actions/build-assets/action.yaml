@@ -12,10 +12,10 @@ runs:
   using: composite
   steps:
     - name: 'Setup Node'
-      uses: eliashaeussler/gha/.github/actions/setup-node@task/endpoints
+      uses: eliashaeussler/gha/.github/actions/setup-node@0.9.2
 
     - name: 'Install npm packages'
-      uses: eliashaeussler/gha/.github/actions/npm-install@task/endpoints
+      uses: eliashaeussler/gha/.github/actions/npm-install@0.9.2
 
     - name: 'Build assets'
       env:
