@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      modified: ${{ steps.check.outputs.modified }}
+      modified: ${{ steps.check.outputs.modified || 'false' }}
 
     permissions:
       contents: read
@@ -56,7 +56,12 @@ jobs:
           token: ${{ secrets.ASSETS_TOKEN }}
           fetch-depth: 2
 
+      - name: 'Check if commit is merge commit'
+        id: is-merge
+        uses: eliashaeussler/gha/.github/actions/is-merge-commit@0.9.2
+
       - name: 'Check modified assets'
+        if: ${{ steps.is-merge.outputs.is-merge == 'false' }}
         id: check
         run: |
           if git diff --name-only ${{ github.sha }}~1 ${{ github.sha }} | grep -q "^${BASE_PATH}/"; then
