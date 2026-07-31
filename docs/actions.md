@@ -9,6 +9,7 @@ Collection of actions related to VCS handling and to interact with GitHub.
 | [Assure version tag](#assure-version-tag)                                       | `eliashaeussler/gha/.github/actions/assure-version-tag@0.9.2` |
 | [Checkout](#checkout)                                                           | `eliashaeussler/gha/.github/actions/checkout@0.9.2`           |
 | [Check if PR exists for current branch](#check-if-pr-exists-for-current-branch) | `eliashaeussler/gha/.github/actions/has-pr@0.9.2`             |
+| [Check if commit is a merge commit](#check-if-commit-is-a-merge-commit)         | `eliashaeussler/gha/.github/actions/is-merge-commit@0.9.2`    |
 | [Check if repository is private](#check-if-repository-is-private)               | `eliashaeussler/gha/.github/actions/is-private-repo@0.9.2`    |
 | [Check if workflow is from fork PR](#check-if-workflow-is-from-fork-pr)         | `eliashaeussler/gha/.github/actions/is-fork@0.9.2`            |
 | [Check if workflow is from Renovate](#check-if-workflow-is-from-renovate)       | `eliashaeussler/gha/.github/actions/is-renovate@0.9.2`        |
@@ -67,6 +68,26 @@ steps:
     uses: eliashaeussler/gha/.github/actions/has-pr@0.9.2
 
   - if: ${{ steps.has-pr.outputs.has-pr == 'true' }}
+```
+
+</details>
+
+### [Check if commit is a merge commit](../.github/actions/is-merge-commit/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/is-merge-commit@0.9.2
+```
+
+<details>
+<summary>Full example</summary>
+
+```yaml
+steps:
+  - name: 'Check if commit is a merge commit'
+    id: is-merge
+    uses: eliashaeussler/gha/.github/actions/is-merge-commit@0.9.2
+
+  - if: ${{ steps.is-merge.outputs.is-merge == 'true' }}
 ```
 
 </details>
