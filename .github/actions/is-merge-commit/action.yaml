@@ -1,0 +1,29 @@
+name: 'Check if commit is a merge commit'
+
+inputs:
+  commit-sha:
+    description: 'SHA of the commit to check (defaults to HEAD)'
+    default: ${{ github.sha }}
+
+outputs:
+  is-merge:
+    description: 'Describes whether the given commit is a merge commit'
+    value: ${{ steps.is-merge.outputs.is-merge }}
+
+runs:
+  using: composite
+  steps:
+    - name: 'Check if commit is a merge commit'
+      id: is-merge
+      env:
+        COMMIT_SHA: ${{ inputs.commit-sha }}
+      run: |
+        parents=$(git rev-list --parents -n 1 "$COMMIT_SHA")
+        set -- $parents
+
+        if [ $# -gt 2 ]; then
+          echo "is-merge=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "is-merge=false" >> "$GITHUB_OUTPUT"
+        fi
+      shell: bash
