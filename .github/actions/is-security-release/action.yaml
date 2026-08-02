@@ -1,0 +1,23 @@
+name: 'Check if release contains security fixes'
+
+inputs:
+  release-version:
+    description: 'Version of the release (defaults to tag name)'
+    default: ${{ github.ref_name }}
+
+outputs:
+  is-security:
+    description: 'Describes whether given release contains security fixes'
+    value: ${{ steps.is-security.outputs.is-security }}
+
+runs:
+  using: composite
+  steps:
+    - name: 'Check for security release'
+      id: is-security
+      env:
+        RELEASE_VERSION: ${{ inputs.release-version }}
+      run: |
+        IS_SECURITY="$(gh release view "$RELEASE_VERSION" --json body -q '.body | contains("Security fixes")')"
+        echo "is-security=${IS_SECURITY}" >> "$GITHUB_OUTPUT"
+      shell: bash
