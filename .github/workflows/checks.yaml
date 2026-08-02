@@ -53,18 +53,18 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.9.3
+        uses: eliashaeussler/gha/.github/actions/checkout@0.9.4
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@0.9.3
+        uses: eliashaeussler/gha/.github/actions/setup-php@0.9.4
         with:
           php-version: ${{ inputs.php-version }}
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@0.9.3
+        uses: eliashaeussler/gha/.github/actions/composer-install@0.9.4
 
       - name: 'Perform Composer checks'
-        uses: eliashaeussler/gha/.github/actions/composer-checks@0.9.3
+        uses: eliashaeussler/gha/.github/actions/composer-checks@0.9.4
 
   npm-checks:
     name: 'Perform npm checks'
@@ -77,22 +77,22 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.9.3
+        uses: eliashaeussler/gha/.github/actions/checkout@0.9.4
 
       - name: 'Setup Node'
-        uses: eliashaeussler/gha/.github/actions/setup-node@0.9.3
+        uses: eliashaeussler/gha/.github/actions/setup-node@0.9.4
         with:
           node-version: ${{ inputs.node-version }}
           cache: ${{ inputs.node-cache }}
           base-path: ${{ inputs.assets-path }}
 
       - name: 'Install npm packages'
-        uses: eliashaeussler/gha/.github/actions/npm-install@0.9.3
+        uses: eliashaeussler/gha/.github/actions/npm-install@0.9.4
         with:
           base-path: ${{ inputs.assets-path }}
 
       - name: 'Perform npm checks'
-        uses: eliashaeussler/gha/.github/actions/npm-checks@0.9.3
+        uses: eliashaeussler/gha/.github/actions/npm-checks@0.9.4
         with:
           base-path: ${{ inputs.assets-path }}
 
@@ -108,11 +108,11 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.9.3
+        uses: eliashaeussler/gha/.github/actions/checkout@0.9.4
 
       - name: 'Check repo visibility'
         id: visibility
-        uses: eliashaeussler/gha/.github/actions/is-private-repo@0.9.3
+        uses: eliashaeussler/gha/.github/actions/is-private-repo@0.9.4
 
       - name: 'Run zizmor'
         id: zizmor
