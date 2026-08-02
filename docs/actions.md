@@ -4,16 +4,17 @@
 
 Collection of actions related to VCS handling and to interact with GitHub.
 
-| Action                                                                          | Reference                                                     |
-|---------------------------------------------------------------------------------|---------------------------------------------------------------|
-| [Assure version tag](#assure-version-tag)                                       | `eliashaeussler/gha/.github/actions/assure-version-tag@0.9.3` |
-| [Checkout](#checkout)                                                           | `eliashaeussler/gha/.github/actions/checkout@0.9.3`           |
-| [Check if PR exists for current branch](#check-if-pr-exists-for-current-branch) | `eliashaeussler/gha/.github/actions/has-pr@0.9.3`             |
-| [Check if commit is a merge commit](#check-if-commit-is-a-merge-commit)         | `eliashaeussler/gha/.github/actions/is-merge-commit@0.9.3`    |
-| [Check if repository is private](#check-if-repository-is-private)               | `eliashaeussler/gha/.github/actions/is-private-repo@0.9.3`    |
-| [Check if workflow is from fork PR](#check-if-workflow-is-from-fork-pr)         | `eliashaeussler/gha/.github/actions/is-fork@0.9.3`            |
-| [Check if workflow is from Renovate](#check-if-workflow-is-from-renovate)       | `eliashaeussler/gha/.github/actions/is-renovate@0.9.3`        |
-| [Check if workflow is from tag](#check-if-workflow-is-from-tag)                 | `eliashaeussler/gha/.github/actions/is-tag@0.9.3`             |
+| Action                                                                                | Reference                                                      |
+|---------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| [Assure version tag](#assure-version-tag)                                             | `eliashaeussler/gha/.github/actions/assure-version-tag@0.9.3`  |
+| [Checkout](#checkout)                                                                 | `eliashaeussler/gha/.github/actions/checkout@0.9.3`            |
+| [Check if PR exists for current branch](#check-if-pr-exists-for-current-branch)       | `eliashaeussler/gha/.github/actions/has-pr@0.9.3`              |
+| [Check if commit is a merge commit](#check-if-commit-is-a-merge-commit)               | `eliashaeussler/gha/.github/actions/is-merge-commit@0.9.3`     |
+| [Check if repository is private](#check-if-repository-is-private)                     | `eliashaeussler/gha/.github/actions/is-private-repo@0.9.3`     |
+| [Check if workflow is from fork PR](#check-if-workflow-is-from-fork-pr)               | `eliashaeussler/gha/.github/actions/is-fork@0.9.3`             |
+| [Check if workflow is from Renovate](#check-if-workflow-is-from-renovate)             | `eliashaeussler/gha/.github/actions/is-renovate@0.9.3`         |
+| [Check if release contains security fixes](#check-if-release-contains-security-fixes) | `eliashaeussler/gha/.github/actions/is-security-release@0.9.3` |
+| [Check if workflow is from tag](#check-if-workflow-is-from-tag)                       | `eliashaeussler/gha/.github/actions/is-tag@0.9.3`              |
 
 ### [Assure version tag](../.github/actions/assure-version-tag/action.yaml)
 
@@ -148,6 +149,26 @@ steps:
     uses: eliashaeussler/gha/.github/actions/is-renovate@0.9.3
 
   - if: ${{ steps.is-renovate.outputs.is-renovate == 'true' }}
+```
+
+</details>
+
+### [Check if release contains security fixes](../.github/actions/is-security-release/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/is-security-release@0.9.3
+```
+
+<details>
+<summary>Full example</summary>
+
+```yaml
+steps:
+  - name: 'Check for security release'
+    id: is-security
+    uses: eliashaeussler/gha/.github/actions/is-security-release@0.9.3
+
+  - if: ${{ steps.is-security.outputs.is-security == 'true' }}
 ```
 
 </details>
