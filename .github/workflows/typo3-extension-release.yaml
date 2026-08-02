@@ -152,10 +152,30 @@ jobs:
           php-version: ${{ inputs.php-version }}
           tools: typo3/tailor
 
+      - name: 'Check for security release'
+        id: is-security
+        uses: eliashaeussler/gha/.github/actions/is-security-release@0.9.3
+        with:
+          release-version: ${{ inputs.extension-version }}
+
+      - name: 'Build release comment'
+        id: release-comment
+        env:
+          IS_SECURITY: ${{ steps.is-security.outputs.is-security }}
+          RELEASE_URL: ${{ needs.release.outputs.url }}
+        run: |
+          RELEASE_COMMENT="See release notes at ${RELEASE_URL}"
+
+          if [ "$IS_SECURITY" = "true" ]; then
+            RELEASE_COMMENT="This is a security release! ${RELEASE_COMMENT}"
+          fi
+
+          echo "comment=${RELEASE_COMMENT}" >> "$GITHUB_OUTPUT"
+
       - name: 'Publish to TER'
         env:
           RELEASE_ARTEFACT: ${{ steps.download.outputs.download-path }}/${{ needs.artefact.outputs.extension-artefact-file }}
-          RELEASE_COMMENT: See release notes at ${{ needs.release.outputs.url }}
+          RELEASE_COMMENT: ${{ steps.release-comment.outputs.comment }}
         run: |
           php ~/.composer/vendor/bin/tailor ter:publish \
             --comment "$RELEASE_COMMENT" \
