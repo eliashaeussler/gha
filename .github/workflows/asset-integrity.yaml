@@ -51,14 +51,14 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.9.4
+        uses: eliashaeussler/gha/.github/actions/checkout@1.0.0
         with:
           token: ${{ secrets.ASSETS_TOKEN }}
           fetch-depth: 2
 
       - name: 'Check if commit is merge commit'
         id: is-merge
-        uses: eliashaeussler/gha/.github/actions/is-merge-commit@0.9.4
+        uses: eliashaeussler/gha/.github/actions/is-merge-commit@1.0.0
 
       - name: 'Check modified assets'
         if: ${{ steps.is-merge.outputs.is-merge == 'false' }}
@@ -85,19 +85,19 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@0.9.4
+        uses: eliashaeussler/gha/.github/actions/checkout@1.0.0
         with:
           token: ${{ secrets.ASSETS_TOKEN }}
           # Must be true, otherwise new commits cannot be pushed
           persist-credentials: true
 
       - name: 'Setup Node'
-        uses: eliashaeussler/gha/.github/actions/setup-node@0.9.4
+        uses: eliashaeussler/gha/.github/actions/setup-node@1.0.0
         with:
           base-path: ${{ inputs.base-path }}
 
       - name: 'Install npm packages'
-        uses: eliashaeussler/gha/.github/actions/npm-install@0.9.4
+        uses: eliashaeussler/gha/.github/actions/npm-install@1.0.0
         with:
           base-path: ${{ inputs.base-path }}
 
@@ -109,7 +109,7 @@ jobs:
 
       - name: 'Check if workflow is from Renovate'
         id: is-renovate
-        uses: eliashaeussler/gha/.github/actions/is-renovate@0.9.4
+        uses: eliashaeussler/gha/.github/actions/is-renovate@1.0.0
 
       - name: 'Fail on integrity mismatch'
         if: ${{ steps.is-renovate.outputs.is-renovate == 'false' }}
