@@ -1,0 +1,14 @@
+.github/workflows/devsecops.yaml
+  h_a1c258d8beeba3 26,28,36,38,46,48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "6ef3dc806ecf952e102d97350ca82c604bee0c0e",
+  "prompts": {},
+  "humans": {
+    "h_a1c258d8beeba3": {
+      "author": "Elias Häußler <elias@haeussler.dev>"
+    }
+  }
+}
