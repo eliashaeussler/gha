@@ -1,0 +1,52 @@
+.github/actions/assure-version-tag/action.yaml
+  h_a1c258d8beeba3 13
+.github/actions/build-assets/action.yaml
+  h_a1c258d8beeba3 15,18
+.github/actions/build-phar/action.yaml
+  h_a1c258d8beeba3 26,36
+.github/actions/deploy-pages/action.yaml
+  h_a1c258d8beeba3 20
+.github/workflows/asset-integrity.yaml
+  h_a1c258d8beeba3 54,61,88,95,100,112
+.github/workflows/checks.yaml
+  h_a1c258d8beeba3 56,59,64,67,80,83,90,95,111,115
+.github/workflows/ci.yaml
+  h_a1c258d8beeba3 17,29
+.github/workflows/composer-test-coverage.yaml
+  h_a1c258d8beeba3 48,53,59,68,87,110
+.github/workflows/composer-tests.yaml
+  h_a1c258d8beeba3 67,72,79,88,99
+.github/workflows/crowdin.yaml
+  h_a1c258d8beeba3 36
+.github/workflows/github-release.yaml
+  h_a1c258d8beeba3 40,43
+.github/workflows/preparation.yaml
+  h_a1c258d8beeba3 21
+.github/workflows/release.yaml
+  h_a1c258d8beeba3 15
+.github/workflows/renovate-merge.yaml
+  h_a1c258d8beeba3 39,43,47,61
+.github/workflows/typo3-extension-release.yaml
+  h_a1c258d8beeba3 45,48,74,81,122,141,150,157
+.github/workflows/typo3-test-coverage.yaml
+  h_a1c258d8beeba3 29,52,58,64,73,153
+.github/workflows/typo3-test-preparation.yaml
+  h_a1c258d8beeba3 48
+.github/workflows/typo3-tests.yaml
+  h_a1c258d8beeba3 37,58,64,70,80,89
+docs/actions.md
+  h_a1c258d8beeba3 9-17,22,31,39,48,59,69,79,89,99,109,119,129,139,149,159,169,179,189,204-206,211,220,235,244,255,264,282-285,290,299,307,316,327,336,346,355,373-375,380,389,397,406,414,423,439,444,453,470-471,476,485,497,506
+docs/workflows.md
+  h_a1c258d8beeba3 9-14,19,28,48,60,70,81,91,103,114,126,134,143,160,165,177,194-195,200,209,221,230,247-249,254,263,280,289,301,310,320,332
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "cd9d7395b05159994d09371388e4f804fafd82c2",
+  "prompts": {},
+  "humans": {
+    "h_a1c258d8beeba3": {
+      "author": "Elias Häußler <elias@haeussler.dev>"
+    }
+  }
+}
