@@ -23,9 +23,9 @@ jobs:
     secrets:
       devguard-token: ${{ secrets.DEVGUARD_TOKEN }}
 
-    uses: l3montree-dev/devguard-action/.github/workflows/secret-scanning.yml@d1d9b7b07722d87d656d3dff8835ccfd58024584 # v1.4.0
+    uses: l3montree-dev/devguard-ci-components/.github/workflows/secret-scanning.yml@82dfa35cc97fbae089ae39ba2f96297cfc271ddf # v1.12.0
     with:
-      asset-name: ${{ inputs.devguard-asset-name }}
+      devguard-asset-name: ${{ inputs.devguard-asset-name }}
 
   dependency-scanning:
     name: 'Dependency scanning'
@@ -33,9 +33,9 @@ jobs:
     secrets:
       devguard-token: ${{ secrets.DEVGUARD_TOKEN }}
 
-    uses: l3montree-dev/devguard-action/.github/workflows/software-composition-analysis.yml@d1d9b7b07722d87d656d3dff8835ccfd58024584 # v1.4.0
+    uses: l3montree-dev/devguard-ci-components/.github/workflows/software-composition-analysis.yml@82dfa35cc97fbae089ae39ba2f96297cfc271ddf # v1.12.0
     with:
-      asset-name: ${{ inputs.devguard-asset-name }}
+      devguard-asset-name: ${{ inputs.devguard-asset-name }}
 
   sast:
     name: 'SAST'
@@ -43,6 +43,6 @@ jobs:
     secrets:
       devguard-token: ${{ secrets.DEVGUARD_TOKEN }}
 
-    uses: l3montree-dev/devguard-action/.github/workflows/static-application-security-testing.yml@d1d9b7b07722d87d656d3dff8835ccfd58024584 # v1.4.0
+    uses: l3montree-dev/devguard-ci-components/.github/workflows/static-application-security-testing.yml@82dfa35cc97fbae089ae39ba2f96297cfc271ddf # v1.12.0
     with:
-      asset-name: ${{ inputs.devguard-asset-name }}
+      devguard-asset-name: ${{ inputs.devguard-asset-name }}
