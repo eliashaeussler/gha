@@ -23,7 +23,7 @@ jobs:
     secrets:
       devguard-token: ${{ secrets.DEVGUARD_TOKEN }}
 
-    uses: l3montree-dev/devguard-ci-components/.github/workflows/secret-scanning.yml@82dfa35cc97fbae089ae39ba2f96297cfc271ddf # v1.12.0
+    uses: l3montree-dev/devguard-ci-components/.github/workflows/secret-scanning.yml@22c5b452f173f1f34902375d4f2a56f694f01fef # v1.12.1
     with:
       devguard-asset-name: ${{ inputs.devguard-asset-name }}
 
@@ -33,7 +33,7 @@ jobs:
     secrets:
       devguard-token: ${{ secrets.DEVGUARD_TOKEN }}
 
-    uses: l3montree-dev/devguard-ci-components/.github/workflows/software-composition-analysis.yml@82dfa35cc97fbae089ae39ba2f96297cfc271ddf # v1.12.0
+    uses: l3montree-dev/devguard-ci-components/.github/workflows/software-composition-analysis.yml@22c5b452f173f1f34902375d4f2a56f694f01fef # v1.12.1
     with:
       devguard-asset-name: ${{ inputs.devguard-asset-name }}
 
@@ -43,6 +43,6 @@ jobs:
     secrets:
       devguard-token: ${{ secrets.DEVGUARD_TOKEN }}
 
-    uses: l3montree-dev/devguard-ci-components/.github/workflows/static-application-security-testing.yml@82dfa35cc97fbae089ae39ba2f96297cfc271ddf # v1.12.0
+    uses: l3montree-dev/devguard-ci-components/.github/workflows/static-application-security-testing.yml@22c5b452f173f1f34902375d4f2a56f694f01fef # v1.12.1
     with:
       devguard-asset-name: ${{ inputs.devguard-asset-name }}
