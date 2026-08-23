@@ -1,0 +1,15 @@
+.github/actions/setup-git/action.yaml
+  h_a1c258d8beeba3 10-11,24-33
+  h_a1c258d8beeba3 34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "5ee005b21e9b6b56d975c1d9244be44640a9c778",
+  "prompts": {},
+  "humans": {
+    "h_a1c258d8beeba3": {
+      "author": "Elias Häußler <elias@haeussler.dev>"
+    }
+  }
+}
