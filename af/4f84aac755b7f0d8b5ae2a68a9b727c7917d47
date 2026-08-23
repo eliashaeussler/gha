@@ -1,0 +1,22 @@
+docs/actions.md
+  h_a1c258d8beeba3 18,197-212
+  h_a1c258d8beeba3 213-216
+.github/workflows/renovate-merge.yaml
+  h_a1c258d8beeba3 59
+.github/actions/setup-git/action.yaml
+  h_a1c258d8beeba3 1-18
+.github/workflows/auto-release.yaml
+  h_a1c258d8beeba3 8-9,12-14,16,55-72,79-80
+  h_a1c258d8beeba3 35,47,81
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "af4f84aac755b7f0d8b5ae2a68a9b727c7917d47",
+  "prompts": {},
+  "humans": {
+    "h_a1c258d8beeba3": {
+      "author": "Elias Häußler <elias@haeussler.dev>"
+    }
+  }
+}
