@@ -5,12 +5,15 @@ on:
     - cron: '17 1 * * *'
 
 jobs:
-  release:
-    name: 'Create release'
+  evaluate:
+    name: 'Evaluate release requirements'
     runs-on: ubuntu-latest
 
+    outputs:
+      continue: ${{ steps.breaking-changes.outputs.found == 'false' && steps.renovate-updates.outputs.found == 'true' }}
+
     permissions:
-      contents: write
+      contents: read
 
     steps:
       - name: 'Checkout'
@@ -29,7 +32,7 @@ jobs:
       - name: 'Search for breaking changes'
         id: breaking-changes
         env:
-          LAST_TAG: ${{ steps.last-version.outputs.tag-name }}"
+          LAST_TAG: ${{ steps.last-version.outputs.tag-name }}
         run: |
           if git log "${LAST_TAG}..HEAD" --format='%s' | grep -q '^\[!!!\]'; then
             echo "found=true" >> "$GITHUB_OUTPUT"
@@ -41,7 +44,7 @@ jobs:
         if: ${{ steps.breaking-changes.outputs.found == 'false' }}
         id: renovate-updates
         env:
-          LAST_TAG: ${{ steps.last-version.outputs.tag-name }}"
+          LAST_TAG: ${{ steps.last-version.outputs.tag-name }}
         run: |
           if git log "${LAST_TAG}..HEAD" --format='%an' | grep -q 'renovate\[bot\]'; then
             echo "found=true" >> "$GITHUB_OUTPUT"
@@ -49,16 +52,34 @@ jobs:
             echo "found=false" >> "$GITHUB_OUTPUT"
           fi
 
+  release:
+    name: 'Create release'
+    runs-on: ubuntu-latest
+
+    needs: [evaluate]
+    if: ${{ needs.evaluate.outputs.continue == 'true' }}
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: 'Checkout'
+        uses: eliashaeussler/gha/.github/actions/checkout@1.0.2
+        with:
+          fetch-depth: 0
+          # Must be true, otherwise new commits cannot be pushed
+          persist-credentials: true
+
       - name: 'Setup PHP'
-        if: ${{ steps.breaking-changes.outputs.found == 'false' && steps.renovate-updates.outputs.found == 'true' }}
         uses: eliashaeussler/gha/.github/actions/setup-php@1.0.2
 
       - name: 'Install Composer packages'
-        if: ${{ steps.breaking-changes.outputs.found == 'false' && steps.renovate-updates.outputs.found == 'true' }}
         uses: eliashaeussler/gha/.github/actions/composer-install@1.0.2
 
+      - name: 'Prepare Git environment'
+        uses: eliashaeussler/gha/.github/actions/setup-git@1.0.2
+
       - name: 'Bump version'
-        if: ${{ steps.breaking-changes.outputs.found == 'false' && steps.renovate-updates.outputs.found == 'true' }}
         run: |
           composer bump-version --release
           git push --follow-tags
