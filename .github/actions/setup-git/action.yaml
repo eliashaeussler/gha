@@ -27,7 +27,7 @@ runs:
       env:
         SIGNING_KEY: ${{ inputs.signing-key }}
       run: |
-        git config --global --unset gpg.format
+        git config --global --unset gpg.format || true
         git config --global user.signingkey "$SIGNING_KEY"
         git config --global commit.gpgsign true
         git config --global tag.gpgSign true
