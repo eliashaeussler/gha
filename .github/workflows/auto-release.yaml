@@ -3,6 +3,7 @@ name: Auto-release
 on:
   schedule:
     - cron: '17 1 * * *'
+  workflow_dispatch:
 
 jobs:
   evaluate:
