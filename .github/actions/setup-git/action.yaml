@@ -7,6 +7,8 @@ inputs:
   commit-author-email:
     description: 'Author email used for Git commits'
     default: 'elias@haeussler.dev'
+  signing-key:
+    description: 'Optional GPG key ID used to sign commits and tags'
 
 runs:
   using: composite
@@ -18,4 +20,15 @@ runs:
       run: |
         git config user.email "$COMMIT_AUTHOR_EMAIL"
         git config user.name "$COMMIT_AUTHOR_NAME"
+      shell: bash
+
+    - name: 'Configure Git signing key'
+      if: ${{ inputs.signing-key }}
+      env:
+        SIGNING_KEY: ${{ inputs.signing-key }}
+      run: |
+        git config --global --unset gpg.format
+        git config --global user.signingkey "$SIGNING_KEY"
+        git config --global commit.gpgsign true
+        git config --global tag.gpgSign true
       shell: bash
