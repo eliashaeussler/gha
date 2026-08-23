@@ -76,14 +76,17 @@ jobs:
       - name: 'Install Composer packages'
         uses: eliashaeussler/gha/.github/actions/composer-install@1.0.2
 
-      - name: 'Prepare Git environment'
-        uses: eliashaeussler/gha/.github/actions/setup-git@1.0.2
-
       - name: 'Import GPG key'
+        id: gpg-key
         uses: crazy-max/ghaction-import-gpg@2dc316deee8e90f13e1a351ab510b4d5bc0c82cd # v7.0.0
         with:
           gpg_private_key: ${{ secrets.AUTO_RELEASE_GPG_KEY }}
           passphrase: ${{ secrets.AUTO_RELEASE_GPG_PASSPHRASE }}
+
+      - name: 'Prepare Git environment'
+        uses: eliashaeussler/gha/.github/actions/setup-git@1.0.2
+        with:
+          signing-key: ${{ steps.gpg-key.outputs.keyid }}
 
       - name: 'Bump version'
         run: |
