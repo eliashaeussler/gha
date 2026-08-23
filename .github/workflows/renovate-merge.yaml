@@ -7,19 +7,7 @@ on:
         description: 'GitHub token used to merge branches'
         required: true
 
-    inputs:
-      commit-author-name:
-        description: 'Author name used for the merge commit'
-        default: 'Elias Häußler'
-        type: string
-      commit-author-email:
-        description: 'Author email used for the merge commit'
-        default: 'elias@haeussler.dev'
-        type: string
-
 env:
-  COMMIT_AUTHOR_NAME: ${{ inputs.commit-author-name }}
-  COMMIT_AUTHOR_EMAIL: ${{ inputs.commit-author-email }}
   CURRENT_BRANCH: ${{ github.ref_name }}
   DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
 
@@ -66,9 +54,7 @@ jobs:
           persist-credentials: true
 
       - name: 'Prepare Git environment'
-        run: |
-          git config user.email "$COMMIT_AUTHOR_EMAIL"
-          git config user.name "$COMMIT_AUTHOR_NAME"
+        uses: eliashaeussler/gha/.github/actions/setup-git@1.0.2
 
       - name: 'Merge changes into default branch'
         run: |

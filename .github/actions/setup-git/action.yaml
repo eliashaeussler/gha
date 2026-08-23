@@ -1,0 +1,21 @@
+name: 'Setup Git environment'
+
+inputs:
+  commit-author-name:
+    description: 'Author name used for Git commits'
+    default: 'Elias Häußler'
+  commit-author-email:
+    description: 'Author email used for Git commits'
+    default: 'elias@haeussler.dev'
+
+runs:
+  using: composite
+  steps:
+    - name: 'Configure Git user'
+      env:
+        COMMIT_AUTHOR_NAME: ${{ inputs.commit-author-name }}
+        COMMIT_AUTHOR_EMAIL: ${{ inputs.commit-author-email }}
+      run: |
+        git config user.email "$COMMIT_AUTHOR_EMAIL"
+        git config user.name "$COMMIT_AUTHOR_NAME"
+      shell: bash

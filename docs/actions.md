@@ -15,6 +15,7 @@ Collection of actions related to VCS handling and to interact with GitHub.
 | [Check if workflow is from Renovate](#check-if-workflow-is-from-renovate)             | `eliashaeussler/gha/.github/actions/is-renovate@1.0.2`         |
 | [Check if release contains security fixes](#check-if-release-contains-security-fixes) | `eliashaeussler/gha/.github/actions/is-security-release@1.0.2` |
 | [Check if workflow is from tag](#check-if-workflow-is-from-tag)                       | `eliashaeussler/gha/.github/actions/is-tag@1.0.2`              |
+| [Setup Git environment](#setup-git-environment)                                       | `eliashaeussler/gha/.github/actions/setup-git@1.0.2`           |
 
 ### [Assure version tag](../.github/actions/assure-version-tag/action.yaml)
 
@@ -189,6 +190,26 @@ steps:
     uses: eliashaeussler/gha/.github/actions/is-tag@1.0.2
 
   - if: ${{ steps.is-tag.outputs.is-version == 'true' }}
+```
+
+</details>
+
+### [Setup Git environment](../.github/actions/setup-git/action.yaml)
+
+```yaml
+uses: eliashaeussler/gha/.github/actions/setup-git@1.0.2
+```
+
+<details>
+<summary>Full example</summary>
+
+```yaml
+steps:
+  - name: 'Setup Git'
+    uses: eliashaeussler/gha/.github/actions/setup-git@1.0.2
+    with:
+      commit-author-name: 'John Doe'
+      commit-author-email: 'john.doe@example.org'
 ```
 
 </details>
