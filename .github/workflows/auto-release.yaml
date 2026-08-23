@@ -61,7 +61,7 @@ jobs:
     if: ${{ needs.evaluate.outputs.continue == 'true' }}
 
     permissions:
-      contents: write
+      contents: read
 
     steps:
       - name: 'Checkout'
@@ -70,6 +70,7 @@ jobs:
           fetch-depth: 0
           # Must be true, otherwise new commits cannot be pushed
           persist-credentials: true
+          token: ${{ secrets.AUTO_RELEASE_TOKEN }}
 
       - name: 'Setup PHP'
         uses: eliashaeussler/gha/.github/actions/setup-php@1.1.0
