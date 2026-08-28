@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@1.1.1
+        uses: eliashaeussler/gha/.github/actions/checkout@1.1.2
         with:
           fetch-depth: 0
           # Must be true, otherwise new commits cannot be pushed
@@ -65,7 +65,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@1.1.1
+        uses: eliashaeussler/gha/.github/actions/checkout@1.1.2
         with:
           fetch-depth: 0
           # Must be true, otherwise new commits cannot be pushed
@@ -73,10 +73,10 @@ jobs:
           token: ${{ secrets.AUTO_RELEASE_TOKEN }}
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setup-php@1.1.1
+        uses: eliashaeussler/gha/.github/actions/setup-php@1.1.2
 
       - name: 'Install Composer packages'
-        uses: eliashaeussler/gha/.github/actions/composer-install@1.1.1
+        uses: eliashaeussler/gha/.github/actions/composer-install@1.1.2
 
       - name: 'Import GPG key'
         id: gpg-key
@@ -86,7 +86,7 @@ jobs:
           passphrase: ${{ secrets.AUTO_RELEASE_GPG_PASSPHRASE }}
 
       - name: 'Prepare Git environment'
-        uses: eliashaeussler/gha/.github/actions/setup-git@1.1.1
+        uses: eliashaeussler/gha/.github/actions/setup-git@1.1.2
         with:
           signing-key: ${{ steps.gpg-key.outputs.keyid }}
 
