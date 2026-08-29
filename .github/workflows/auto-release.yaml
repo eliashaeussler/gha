@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '17 1 * * *'
   workflow_dispatch:
+    inputs:
+      dryRun:
+        description: 'Do not push new version'
+        default: false
+        type: boolean
 
 jobs:
   evaluate:
@@ -97,26 +102,22 @@ jobs:
           signing-key: ${{ steps.gpg-key.outputs.keyid }}
 
       - name: 'Bump version'
-        id: release
-        run: |
-          {
-            echo 'output=<<EOF'
-            composer bump-version --release
-            echo 'EOF'
-          } >> "$GITHUB_OUTPUT"
-
-          git push --follow-tags
-
-      - name: 'Display summary'
         env:
-          RELEASE_OUTPUT: ${{ steps.release.outputs.output }}
+          DRY_RUN: ${{ github.event.inputs.dryRun }}
         run: |
-          tagName="$(git describe --tags --abbrev=0 --match '[0-9]*.[0-9]*.[0-9]*' HEAD)"
+          output="$(composer bump-version --release)"
+
+          echo "### 📦 Release result" >> "$GITHUB_STEP_SUMMARY"
+
+          if [ "$DRY_RUN" = "true" ]; then
+            echo "ℹ️ Bumped release, but did not push to main branch, because dry-run is enabled." >> "$GITHUB_STEP_SUMMARY"
+          else
+            git push --follow-tags
+            echo "✅ Bumped release and pushed to main branch." >> "$GITHUB_STEP_SUMMARY"
+          fi
 
           {
-            echo "### 📦 Result for version \`${tagName}\`"
-            echo "✅ Bumped release and pushed to main branch."
             echo '```'
-            echo "$RELEASE_OUTPUT"
+            echo "$output"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
