@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: 'Check if workflow is from fork PR'
         id: is-fork
-        uses: eliashaeussler/gha/.github/actions/is-fork@1.1.3
+        uses: eliashaeussler/gha/.github/actions/is-fork@1.1.4
 
       - name: 'Check whether to continue current workflow execution'
         id: continue
