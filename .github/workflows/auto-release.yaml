@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       dryRun:
-        description: 'Do not push new version'
+        description: 'Dry Run: Do not push new version'
         default: false
         type: boolean
 
