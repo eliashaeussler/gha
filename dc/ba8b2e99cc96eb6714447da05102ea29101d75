@@ -1,0 +1,14 @@
+.github/workflows/auto-release.yaml
+  h_a1c258d8beeba3 107,109
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "dcba8b2e99cc96eb6714447da05102ea29101d75",
+  "prompts": {},
+  "humans": {
+    "h_a1c258d8beeba3": {
+      "author": "Elias Häußler <elias@haeussler.dev>"
+    }
+  }
+}
