@@ -114,7 +114,7 @@ jobs:
           else
             git push --follow-tags
             echo "✅ Bumped release and pushed to main branch." >> "$GITHUB_STEP_SUMMARY"
-            echo "[&raquo; View release]($(gh release view --json url -q '.url'))" >> "$GITHUB_STEP_SUMMARY"
+            echo "[&raquo; View release]($(gh repo view --json latestRelease -q '.latestRelease.url'))" >> "$GITHUB_STEP_SUMMARY"
           fi
 
           {
