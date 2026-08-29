@@ -104,8 +104,10 @@ jobs:
       - name: 'Bump version'
         env:
           DRY_RUN: ${{ github.event.inputs.dryRun }}
+          COMMAND_OPTIONS: ${{ github.event.inputs.dryRun && '--dry-run' || '' }}
         run: |
-          output="$(composer bump-version --release)"
+          # shellcheck disable=SC2086
+          output="$(composer bump-version --release $COMMAND_OPTIONS)"
 
           echo "### 📦 Release result" >> "$GITHUB_STEP_SUMMARY"
 
