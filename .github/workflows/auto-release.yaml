@@ -29,6 +29,7 @@ jobs:
         run: |
           lastTag="$(git describe --tags --abbrev=0 --match '[0-9]*.[0-9]*.[0-9]*' HEAD)"
           echo "tag-name=${lastTag}" >> "$GITHUB_OUTPUT"
+          echo "### 🕵️‍♂️ Evaluation result for \`${lastTag}..HEAD\`" >> "$GITHUB_STEP_SUMMARY"
 
       - name: 'Search for breaking changes'
         id: breaking-changes
@@ -37,6 +38,8 @@ jobs:
         run: |
           if git log "${LAST_TAG}..HEAD" --format='%s' | grep -q '^\[!!!\]'; then
             echo "found=true" >> "$GITHUB_OUTPUT"
+            echo "> [!IMPORTANT]" >> "$GITHUB_STEP_SUMMARY"
+            echo "> Skipped release, because it contains breaking changes." >> "$GITHUB_STEP_SUMMARY"
           else
             echo "found=false" >> "$GITHUB_OUTPUT"
           fi
@@ -49,8 +52,11 @@ jobs:
         run: |
           if git log "${LAST_TAG}..HEAD" --format='%an' | grep -q 'renovate\[bot\]'; then
             echo "found=true" >> "$GITHUB_OUTPUT"
+            echo "✅ Dependency updates found, ready to create a new release." >> "$GITHUB_STEP_SUMMARY"
           else
             echo "found=false" >> "$GITHUB_OUTPUT"
+            echo "> [!IMPORTANT]" >> "$GITHUB_STEP_SUMMARY"
+            echo "> Skipped release, because it does not contain dependency updates." >> "$GITHUB_STEP_SUMMARY"
           fi
 
   release:
@@ -91,6 +97,26 @@ jobs:
           signing-key: ${{ steps.gpg-key.outputs.keyid }}
 
       - name: 'Bump version'
+        id: release
         run: |
-          composer bump-version --release
+          {
+            echo 'output=<<EOF'
+            composer bump-version --release
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+
           git push --follow-tags
+
+      - name: 'Display summary'
+        env:
+          RELEASE_OUTPUT: ${{ steps.release.outputs.output }}
+        run: |
+          tagName="$(git describe --tags --abbrev=0 --match '[0-9]*.[0-9]*.[0-9]*' HEAD)"
+
+          {
+            echo "### 📦 Result for version \`${tagName}\`"
+            echo "✅ Bumped release and pushed to main branch."
+            echo '```'
+            echo "$RELEASE_OUTPUT"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
