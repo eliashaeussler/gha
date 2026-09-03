@@ -36,7 +36,7 @@ jobs:
         uses: eliashaeussler/gha/.github/actions/checkout@1.1.4
 
       - name: 'Upload sources'
-        uses: crowdin/github-action@e4a6c1338b4063c77d46a81875265f9e8bd76f95 # v3.0.0
+        uses: crowdin/github-action@71fdb8814261dd703be4ca7c6450d21b1868da4b # v3.0.1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
