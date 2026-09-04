@@ -24,15 +24,15 @@ jobs:
     steps:
       - name: 'Check if workflow is from Renovate'
         id: is-renovate
-        uses: eliashaeussler/gha/.github/actions/is-renovate@1.1.4
+        uses: eliashaeussler/gha/.github/actions/is-renovate@1.1.5
 
       - name: 'Check if workflow is from fork PR'
         id: is-fork
-        uses: eliashaeussler/gha/.github/actions/is-fork@1.1.4
+        uses: eliashaeussler/gha/.github/actions/is-fork@1.1.5
 
       - name: 'Check if PR exists for branch'
         id: has-pr
-        uses: eliashaeussler/gha/.github/actions/has-pr@1.1.4
+        uses: eliashaeussler/gha/.github/actions/has-pr@1.1.5
 
   merge:
     name: 'Merge Renovate branch into default branch'
@@ -46,7 +46,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@1.1.4
+        uses: eliashaeussler/gha/.github/actions/checkout@1.1.5
         with:
           token: ${{ secrets.MERGE_TOKEN }}
           fetch-depth: 0
@@ -54,7 +54,7 @@ jobs:
           persist-credentials: true
 
       - name: 'Prepare Git environment'
-        uses: eliashaeussler/gha/.github/actions/setup-git@1.1.4
+        uses: eliashaeussler/gha/.github/actions/setup-git@1.1.5
 
       - name: 'Merge changes into default branch'
         run: |
