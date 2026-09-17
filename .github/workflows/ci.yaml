@@ -26,6 +26,6 @@ jobs:
       contents: read
       security-events: write
 
-    uses: eliashaeussler/gha/.github/workflows/checks.yaml1.1.109
+    uses: eliashaeussler/gha/.github/workflows/checks.yaml@1.1.10
     with:
       npm: false
