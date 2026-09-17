@@ -55,13 +55,13 @@ jobs:
         env:
           LAST_TAG: ${{ steps.last-version.outputs.tag-name }}
         run: |
-          if git log "${LAST_TAG}..HEAD" --format='%an' | grep -q 'renovate\[bot\]'; then
+          if git log "${LAST_TAG}..HEAD" --format='%an' -- . ':!composer.*' | grep -q 'renovate\[bot\]'; then
             echo "found=true" >> "$GITHUB_OUTPUT"
-            echo "✅ Dependency updates found, ready to create a new release." >> "$GITHUB_STEP_SUMMARY"
+            echo "✅ Relevant dependency updates found, ready to create a new release." >> "$GITHUB_STEP_SUMMARY"
           else
             echo "found=false" >> "$GITHUB_OUTPUT"
             echo "> [!IMPORTANT]" >> "$GITHUB_STEP_SUMMARY"
-            echo "> Skipped release, because it does not contain dependency updates." >> "$GITHUB_STEP_SUMMARY"
+            echo "> Skipped release, because it does not contain relevant dependency updates." >> "$GITHUB_STEP_SUMMARY"
           fi
 
   release:
