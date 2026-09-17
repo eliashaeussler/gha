@@ -1,0 +1,15 @@
+docs/workflows.md
+  h_a1c258d8beeba3 159-160
+  h_a1c258d8beeba3 158
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "b9afc6def899ec8294006d393a66314bb16be206",
+  "prompts": {},
+  "humans": {
+    "h_a1c258d8beeba3": {
+      "author": "Elias Häußler <elias@haeussler.dev>"
+    }
+  }
+}
