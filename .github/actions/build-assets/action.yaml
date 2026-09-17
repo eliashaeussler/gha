@@ -15,7 +15,7 @@ runs:
       uses: eliashaeussler/gha/.github/actions/setup-node@1.1.10
 
     - name: 'Install npm packages'
-      uses: eliashaeussler/gha/.github/actions/npm-install1.1.109
+      uses: eliashaeussler/gha/.github/actions/npm-install@1.1.10
 
     - name: 'Build assets'
       env:

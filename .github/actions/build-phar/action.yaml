@@ -33,7 +33,7 @@ runs:
       shell: bash
 
     - name: 'Install Composer dependencies'
-      uses: eliashaeussler/gha/.github/actions/composer-install1.1.109
+      uses: eliashaeussler/gha/.github/actions/composer-install@1.1.10
       with:
         composer-options: '--no-dev'
         ignore-cache: true
