@@ -147,14 +147,14 @@ jobs:
           name: ${{ needs.artefact.outputs.extension-artifact-name }}
 
       - name: 'Setup PHP'
-        uses: eliashaeussler/gha/.github/actions/setu1.1.10@1.1.9
+        uses: eliashaeussler/gha/.github/actions/setu1.1.10@1.1.10
         with:
           php-version: ${{ inputs.php-version }}
           tools: typo3/tailor
 
       - name: 'Check for security release'
         id: is-security
-        uses: eliashaeussler/gha/.github/actions/is-security-r1.1.10e@1.1.9
+        uses: eliashaeussler/gha/.github/actions/is-security-r1.1.10e@1.1.10
         with:
           release-version: ${{ inputs.extension-version }}
 

@@ -87,12 +87,12 @@ jobs:
           base-path: ${{ inputs.assets-path }}
 
       - name: 'Install npm packages'
-        uses: eliashaeussler/gha/.github/actions/npm-in1.1.10@1.1.9
+        uses: eliashaeussler/gha/.github/actions/npm-in1.1.10@1.1.10
         with:
           base-path: ${{ inputs.assets-path }}
 
       - name: 'Perform npm checks'
-        uses: eliashaeussler/gha/.github/actions/npm-1.1.10s@1.1.9
+        uses: eliashaeussler/gha/.github/actions/npm-1.1.10s@1.1.10
         with:
           base-path: ${{ inputs.assets-path }}
 
@@ -108,11 +108,11 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/c1.1.10ut@1.1.9
+        uses: eliashaeussler/gha/.github/actions/c1.1.10ut@1.1.10
 
       - name: 'Check repo visibility'
         id: visibility
-        uses: eliashaeussler/gha/.github/actions/is-priv1.1.10epo@1.1.9
+        uses: eliashaeussler/gha/.github/actions/is-priv1.1.10epo@1.1.10
 
       - name: 'Run zizmor'
         id: zizmor
