@@ -155,9 +155,9 @@ jobs:
 
 Collection of workflows related to Frontend assets.
 
-| Workflow                   | Reference                                                         |
-|----------------------------|-------------------------------------------------------------------|
-| [Asset integrity](#checks) | `eliashaeussler/gha/.github/workflows/asset-integrity.yaml@1.1.10` |
+| Workflow                            | Reference                                                         |
+|-------------------------------------|-------------------------------------------------------------------|
+| [Asset integrity](#asset-integrity) | `eliashaeussler/gha/.github/workflows/asset-integrity.yaml@1.1.10` |
 
 ### [Asset integrity](../.github/workflows/asset-integrity.yaml)
 
