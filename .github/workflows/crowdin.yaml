@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: 'Checkout'
-        uses: eliashaeussler/gha/.github/actions/checkout@1.1.11
+        uses: eliashaeussler/gha/.github/actions/checkout@1.1.12
 
       - name: 'Upload sources'
         uses: crowdin/github-action@0d5670f539973aea2f01abce61a8989934df0025 # v3.0.2
