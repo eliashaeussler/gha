@@ -1,0 +1,14 @@
+.github/actions/checkout/action.yaml
+  h_a1c258d8beeba3 111
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "37ee0e06f327ee1f0a0f0167cba19459459e1e56",
+  "prompts": {},
+  "humans": {
+    "h_a1c258d8beeba3": {
+      "author": "Elias Häußler <elias@haeussler.dev>"
+    }
+  }
+}
