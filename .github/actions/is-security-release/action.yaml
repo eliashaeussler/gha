@@ -4,6 +4,9 @@ inputs:
   release-version:
     description: 'Version of the release (defaults to tag name)'
     default: ${{ github.ref_name }}
+  token:
+    description: 'GitHub token'
+    default: ${{ github.token }}
 
 outputs:
   is-security:
@@ -17,6 +20,7 @@ runs:
       id: is-security
       env:
         RELEASE_VERSION: ${{ inputs.release-version }}
+        GH_TOKEN: ${{ inputs.token }}
       run: |
         IS_SECURITY="$(gh release view "$RELEASE_VERSION" --json body -q '.body | contains("Security fixes")')"
         echo "is-security=${IS_SECURITY}" >> "$GITHUB_OUTPUT"
