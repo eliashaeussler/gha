@@ -36,7 +36,27 @@ jobs:
           echo "tag-name=${lastTag}" >> "$GITHUB_OUTPUT"
           echo "### 🕵️‍♂️ Evaluation result for \`${lastTag}..HEAD\`" >> "$GITHUB_STEP_SUMMARY"
 
+      - name: 'Check minimum release interval'
+        id: release-interval
+        env:
+          LAST_TAG: ${{ steps.last-version.outputs.tag-name }}
+          MIN_INTERVAL_DAYS: '3'
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          lastTagTs="$(git log -1 --format=%ct "${LAST_TAG}")"
+          ageDays=$(( ( $(date +%s) - lastTagTs ) / 86400 ))
+
+          # Manually triggered runs are not restricted by the interval
+          if [ "$EVENT_NAME" != "workflow_dispatch" ] && [ "$ageDays" -lt "$MIN_INTERVAL_DAYS" ]; then
+            echo "too-recent=true" >> "$GITHUB_OUTPUT"
+            echo "> [!IMPORTANT]" >> "$GITHUB_STEP_SUMMARY"
+            echo "> Skipped release, because the last release (\`${LAST_TAG}\`) is only ${ageDays} day(s) old (minimum: ${MIN_INTERVAL_DAYS} days)." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "too-recent=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: 'Search for breaking changes'
+        if: ${{ steps.release-interval.outputs.too-recent == 'false' }}
         id: breaking-changes
         env:
           LAST_TAG: ${{ steps.last-version.outputs.tag-name }}
@@ -50,7 +70,7 @@ jobs:
           fi
 
       - name: 'Search for merged Renovate updates'
-        if: ${{ steps.breaking-changes.outputs.found == 'false' }}
+        if: ${{ steps.release-interval.outputs.too-recent == 'false' && steps.breaking-changes.outputs.found == 'false' }}
         id: renovate-updates
         env:
           LAST_TAG: ${{ steps.last-version.outputs.tag-name }}
