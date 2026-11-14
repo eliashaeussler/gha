@@ -1,0 +1,20 @@
+.github/workflows/auto-release.yaml
+  s_7b3484690f5e50::t_8459e407943387 73
+  s_7b3484690f5e50::t_456b812a942743 39-57,59
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a99ceeae13ae35f95b4ab82b5a46c4717a36f9e3",
+  "prompts": {},
+  "sessions": {
+    "s_7b3484690f5e50": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f7006183-083c-47e4-a54d-e813503a8a01",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Elias Häußler <elias@haeussler.dev>"
+    }
+  }
+}
